@@ -113,4 +113,18 @@
 		</plugins>
 	</build>
 
+	<distributionManagement>
+		<repository>
+			<id>GitHub</id>
+			<name>GitHub Taranion Apache Maven Packages</name>
+			<url>https://maven.pkg.github.com/taranion/rpgframework</url>
+			<uniqueVersion>false</uniqueVersion>
+		</repository>
+		<snapshotRepository>
+			<id>google</id>
+			<url>https://rpgframework-maven-repository.appspot.com/</url>
+			<uniqueVersion>false</uniqueVersion>
+		</snapshotRepository>
+	</distributionManagement>
+
 </project>
