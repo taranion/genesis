@@ -22,4 +22,4 @@ jobs:
         GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GCLOUD_PWD_TOKEN: ${{ secrets.GCLOUD_PWD_TOKEN }}
-      run: mvn -s settings.xml -B deploy
+      run: cd Genesis ;  ./gradlew build
