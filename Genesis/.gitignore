@@ -7,3 +7,5 @@ build
 /logs/
 /plugins/
 /bin/
+/.settings/
+/.classpath
