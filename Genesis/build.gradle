@@ -24,16 +24,16 @@ repositories {
 }
 
 dependencies {
-    compile "org.apache.logging.log4j:log4j-api:2.11.0"
-    compile "org.apache.logging.log4j:log4j-core:2.11.0"
-    compile "org.prelle:javafx-extensions:4.0.5"
-    compile "de.rpgframework:rpgframework-core:4.0.0-SNAPSHOT"
-    runtime "de.rpgframework:rpgframework-chars:4.0.0-SNAPSHOT"
+    implementation "org.apache.logging.log4j:log4j-api:2.11.0"
+    implementation "org.apache.logging.log4j:log4j-core:2.11.0"
+    implementation "org.prelle:javafx-extensions:4.0.6"
+    implementation "de.rpgframework:rpgframework-core:4.0.0-SNAPSHOT"
+    implementation "de.rpgframework:rpgframework-chars:4.0.0-SNAPSHOT"
     runtimeOnly "org.prelle:simple-persist:3.0.1"
 }
 
 javafx {
-    version = '13'
+    version = '14-ea+2'
     modules = ['javafx.controls', 'javafx.media', 'javafx.web', 'javafx.fxml']
 }
 
@@ -42,7 +42,8 @@ targetCompatibility = 11
 
 version='5.1.0'
 
-mainClassName = "${ext.appModuleName}/${ext.appMainClass}"
+//mainClassName = "${ext.appModuleName}/${ext.appMainClass}"
+mainClassName = "${ext.appMainClass}"
 
 def defaultEncoding = 'UTF-8'
 [compileJava, compileTestJava]*.options*.encoding = defaultEncoding
@@ -52,7 +53,7 @@ jar {
         attributes( 
           'Main-Class': mainClassName,
           'Implementation-Vendor': 'Stefan Prelle',
-          'Implementation-Version': version
+          'Implementation-Version': archiveVersion
           )
     }
 }
