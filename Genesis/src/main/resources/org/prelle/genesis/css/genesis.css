@@ -1,0 +1,204 @@
+
+
+.root {
+    -fx-base: white;
+    -fx-background-color: rgb(244,244,244);
+	-fx-font-family: "Segoe UI";
+	-fx-font-weight: 200;
+	-fx-font-size: 11pt;
+    textcolor-primary  : rgba(0,0,0, 1);
+    textcolor-show     : rgba(0,0,0, 0.8);
+    textcolor-secondary: rgba(0,0,0, 0.6);
+    textcolor-highlight-primary  : rgba(255,0,0, 1);
+    textcolor-highlight-show     : rgba(255,0,0, 0.8);
+    textcolor-highlight-secondary: rgba(255,0,0, 0.6);
+    areacolor-content  : white;
+    areacolor-action   : derive( rgb(244,244,244), -50%);
+    areacolor-context  : derive( rgb(244,244,244), -50%);
+}
+
+
+.color-secondary {
+	-fx-text-fill: textcolor-secondary;
+}
+
+.navigation-area {
+	-fx-background-image: url('../images/Genesis.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: bottom center;
+}
+
+.spinner {
+  -fx-background-color: transparent;
+}
+
+.selection-border {
+	-fx-border-width: 0;
+	-fx-background-color: derive( rgb(244,244,244), -10%);
+}
+
+.highlighted {
+	-fx-border-width: 0;
+	-fx-background-color: -fx-accent;
+}
+
+/*******************************************************************************************
+ * Tab panes
+ *******************************************************************************************/
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-opacity: 0;
+    -fx-background-color: transparent;
+}
+.tab-pane:top * .tab-header-area {
+	-fx-background-color: transparent;
+	-fx-background-insets: 0;
+	-fx-padding: 0;
+}
+.tab-pane *.tab-header-background {
+    -fx-effect: null;
+}
+
+
+.tab-pane {
+	-fx-tab-min-width: 100px;
+	-fx-tab-min-height: 6em;
+	-fx-tab-max-height: 6em;
+}
+
+.tab {
+	-fx-background-color: transparent;
+	-fx-background-insets: -1;
+	-fx-border-width: 0;
+}
+.tab          .tab-label { -fx-alignment:CENTER; -fx-text-fill: textcolor-primary; -fx-font-size: 200%; -fx-font-weight: bold; }
+.tab:selected .tab-label { -fx-text-fill: textcolor-highlight-primary; -fx-padding: 0 4em 0 4em; }
+
+.tab-label {
+	-fx-background-color: transparent;
+}
+
+
+
+
+/*******************************************************************************************
+ * Text styles
+ *******************************************************************************************/
+.section-head {
+	-fx-text-fill: textcolor-highlight-primary;
+}
+.section-head {
+	-fx-font-size: 20pt;
+}
+.color-heading {
+	-fx-text-fill: textcolor-highlight-primary;
+}
+.heading1 {
+  	-fx-font-weight: bold;
+  	-fx-font-size:150%;
+    -fx-padding:0;
+ 	-fx-background-color: dark;
+	-fx-padding: 0.5em;
+	-fx-alignment: center;
+	-fx-font-weight: lighter;
+}
+
+.list-section-head {
+	-fx-text-fill: textcolor-highlight-primary;
+	-fx-border-width: 0 0 2 0;
+	-fx-border-style: solid;
+	-fx-font-size: 20pt;
+}
+.list-entry-title {
+	-fx-text-fill: textcolor-primary;
+	-fx-font-size: 20pt;
+	-fx-font-weight: lighter;
+}
+
+
+.list-view {
+	-fx-padding: 0.3em;
+	-fx-border-style: none;
+	-fx-background-color: transparent;
+}
+
+.player-list-entry {
+	-fx-background-color: derive(white, -25%);
+	-fx-effect           : dropshadow(gaussian, rgba(0, 0, 0, 0.65), 10, 0.0, 10, 10);
+}
+
+.tiled-list-cell:selected {
+	-fx-background-color: lightgreen;
+}
+.tiled-list-cell {
+	-fx-background-color: areacolor-content;
+	-fx-effect           : dropshadow(gaussian, rgba(0, 0, 0, 0.65), 10, 0.0, 10, 10);
+}
+
+.tiled-list-cell:hover {
+	-fx-background-color: red;
+}
+
+.label-note {
+	-fx-font-size: small;
+}
+
+
+.startscreen-button {
+	-fx-content-display: top;
+}
+
+/*
+.button {
+	-fx-background-color: transparent;
+}
+*/
+
+.tile-pane {
+	-fx-background-color: transparent;
+}
+
+.scroll-pane {
+	-fx-background-color: transparent;
+}
+
+.hbox {
+	-fx-background-color: transparent;
+}
+
+.vbox {
+	-fx-background-color: transparent;
+}
+.scroll-pane > .viewport {
+   -fx-background-color: transparent;
+}
+
+.action-area-icon .font-icon-text {
+	-fx-fill: white;
+}
+
+.internal-window-button .font-icon-text {
+	-fx-fill: white;
+}
+.internal-window-button {
+	-fx-text-fill: white;
+	-fx-font-size: 110%;
+	-fx-border-width: 0px ;
+	-fx-border-style: none;
+	-fx-border-color: white;
+	-fx-padding: 2px;
+	-fx-font-family: "Segoe UI Symbol";
+}
+
+.print-page-cell:even {
+	-fx-background-color: pink;
+	-fx-text-fill: red;
+}
+.print-page-cell:odd {
+	-fx-background-color: blue;
+	-fx-text-fill: cyan;
+}
+
+
+.icon {
+    -fx-font-family: 'Segoe MDL2 Assets';
+}

@@ -1,0 +1,116 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>org.prelle.rpgframework</groupId>
+	<artifactId>genesis-master</artifactId>
+	<version>6.0.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>Genesis Master Build</name>
+	<url>http://www.rpgframework.de/</url>
+	<licenses>
+		<license>
+			<name>GNU lesser general public license 2.1</name>
+			<url>https://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt</url>
+		</license>
+	</licenses>
+
+	<modules>
+		<module>Genesis</module>
+		<module>Genesis-Plugin</module>
+	</modules>
+
+	<developers>
+		<developer>
+			<name>Stefan Prelle</name>
+			<email>stefan@prelle.org</email>
+			<timezone>GMT+1</timezone>
+			<roles>
+				<role>Lead developer</role>
+			</roles>
+		</developer>
+	</developers>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<log4j.version>2.11.1</log4j.version>
+		<maven.compiler.target>11</maven.compiler.target>
+		<maven.compiler.source>11</maven.compiler.source>
+		<openjfx.version>14-ea+2</openjfx.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-api</artifactId>
+				<version>${log4j.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-core</artifactId>
+				<version>${log4j.version}</version>
+				<scope>runtime</scope>
+			</dependency>
+			<dependency>
+				<groupId>de.rpgframework</groupId>
+				<artifactId>rpgframework-core</artifactId>
+				<version>4.0.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>de.rpgframework</groupId>
+				<artifactId>rpgframework-chars</artifactId>
+				<version>4.0.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>org.openjfx</groupId>
+				<artifactId>javafx-base</artifactId>
+				<version>${openjfx.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.openjfx</groupId>
+				<artifactId>javafx-graphics</artifactId>
+				<version>${openjfx.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.openjfx</groupId>
+				<artifactId>javafx-controls</artifactId>
+				<version>${openjfx.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.openjfx</groupId>
+				<artifactId>javafx-swing</artifactId>
+				<version>${openjfx.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.openjfx</groupId>
+				<artifactId>javafx-media</artifactId>
+				<version>${openjfx.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.prelle</groupId>
+				<artifactId>javafx-extensions</artifactId>
+				<version>4.0.6</version>
+			</dependency>
+			<dependency>
+				<groupId>org.prelle</groupId>
+				<artifactId>simple-persist</artifactId>
+				<version>3.0.1</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
