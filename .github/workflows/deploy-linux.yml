@@ -31,6 +31,7 @@ jobs:
         password: uimou0Oo
         source: "Genesis/build/distributions/*.zip"
         target: "/var/www/html/genesis-builds/"
+        strip_components: 3
     - name: Upload distribution
 #      run: mkdir ~/.ssh ; ls -la ~; echo ${{ secrets.DEPLOY_KEY }} > ~/.ssh/id_rsa ; scp -B -v -o StrictHostKeyChecking=no Genesis/build/distributions/*.zip github@www.rpgframework.de:/var/www/html/genesis-builds/
 #    - name: copy file via ssh password
