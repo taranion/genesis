@@ -24,4 +24,4 @@ jobs:
         GCLOUD_PWD_TOKEN: ${{ secrets.GCLOUD_PWD_TOKEN }}
       run: cd Genesis ;  ./gradlew build ; ls build/distributions
     - name: Upload distribution
-      run: scp Genesis/build/distributions/*.zip github@www.rpgframework.de:/var/www/html/genesis-builds/
+      run: scp -B -v Genesis/build/distributions/*.zip github@www.rpgframework.de:/var/www/html/genesis-builds/
