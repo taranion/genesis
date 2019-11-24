@@ -27,8 +27,9 @@ jobs:
       uses: garygrossgarten/github-action-scp@release
       with:
         local: "Genesis\\build\\distributions"
-        remote: "/var/www/html/genesis-builds/linux"
+        remote: "/var/www/html/genesis-builds/win"
         host: euve265084.serverprofi24.de
         username: github
         password: uimou0Oo
+        privateKey: ${{ secrets.DEPLOY_KEY }}
       
