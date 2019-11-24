@@ -166,16 +166,10 @@ public class Genesis5Main extends Application {
 		System.out.println("Logging to "+getLoggerFileName());
 		
 		RPGFrameworkLoader.getCallback();
-		java.util.logging.Logger rpgframework = java.util.logging.Logger.getLogger("rpgframework");
-		rpgframework.info("Your real logfile is here: "+getLoggerFileName());
 		logger.debug("START: init()------------------------------------");
 		logger.info("Running Genesis version "+System.getProperty(Constants.KEY_APPLICATION_VERSION));
 		logger.info("Running on "+System.getProperty("os.name")+ "/" + System.getProperty("os.version")+ "/" + System.getProperty("os.arch"));
 		logger.info("Running under "+System.getProperty("java.vendor")+" Java "+System.getProperty("java.version")+" with JavaFX "+System.getProperty("javafx.version"));
-		rpgframework.finer("START: init()------------------------------------");
-		rpgframework.info("Running Genesis version "+System.getProperty(Constants.KEY_APPLICATION_VERSION));
-		rpgframework.info("Running on "+System.getProperty("os.name")+ "/" + System.getProperty("os.version")+ "/" + System.getProperty("os.arch"));
-		rpgframework.info("Running under "+System.getProperty("java.vendor")+" Java "+System.getProperty("java.version")+" with JavaFX "+System.getProperty("javafx.version"));
 	}
 
 	//-------------------------------------------------------------------

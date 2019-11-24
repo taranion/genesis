@@ -17,10 +17,11 @@ jobs:
         key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
         restore-keys: |
           ${{ runner.os }}-maven-    
-    - name: Deploy Maven packages
+    - name: Build distribution
       env:
         GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GCLOUD_PWD_TOKEN: ${{ secrets.GCLOUD_PWD_TOKEN }}
-      run: cd Genesis ;  ./gradlew build
-      run: ls build/distributions
+      run: cd Genesis ;  ./gradlew build ; ls build/distributions
+    - name: Upload distribution
+      run: scp Genesis/build/distributions/*.zip github@www.rpgframework.de:/var/www/html/genesis-builds/
