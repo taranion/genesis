@@ -26,7 +26,7 @@ jobs:
     - name: Copy single file to remote
       uses: garygrossgarten/github-action-scp@release
       with:
-        local: "Genesis/build/distributions/*.zip"
+        local: "Genesis\\build\\distributions\\*.zip"
         remote: "/var/www/html/genesis-builds/linux"
         host: euve265084.serverprofi24.de
         username: github
