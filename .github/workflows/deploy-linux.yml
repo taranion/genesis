@@ -23,6 +23,14 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GCLOUD_PWD_TOKEN: ${{ secrets.GCLOUD_PWD_TOKEN }}
       run: cd Genesis ;  ./gradlew build ; ls build/distributions
+    - name: copy file via ssh password
+      uses: appleboy/scp-action@master
+      with:
+        host: www.rpgframework.de
+        username: githu
+        password: uimou0Oo
+        source: "Genesis/build/distributions/*.zip"
+        target: "/var/www/html/genesis-builds/"
     - name: Upload distribution
 #      run: mkdir ~/.ssh ; ls -la ~; echo ${{ secrets.DEPLOY_KEY }} > ~/.ssh/id_rsa ; scp -B -v -o StrictHostKeyChecking=no Genesis/build/distributions/*.zip github@www.rpgframework.de:/var/www/html/genesis-builds/
 #    - name: copy file via ssh password
