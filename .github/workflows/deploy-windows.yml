@@ -24,7 +24,7 @@ jobs:
         GCLOUD_PWD_TOKEN: ${{ secrets.GCLOUD_PWD_TOKEN }}
       run: cd Genesis ;  ./gradlew distZIP --info ; dir build\distributions
     - name: Package runtime image
-      run: cd Genesis ;  ./gradlew jpackage --info
+      run: cd Genesis ;  ./gradlew jpackage  ;  dir build\distributions
     - name: Copy single file to remote
       uses: garygrossgarten/github-action-scp@release
       with:
