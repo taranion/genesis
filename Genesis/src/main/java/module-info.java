@@ -1,4 +1,6 @@
 module genesis {
+	exports org.prelle.genesis;
+	
 	requires org.apache.logging.log4j;
 	requires de.rpgframework.core;
 	requires javafx.graphics;
