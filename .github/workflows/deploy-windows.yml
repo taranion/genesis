@@ -17,12 +17,14 @@ jobs:
         key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
         restore-keys: |
           ${{ runner.os }}-maven-    
-    - name: Deploy Maven packages
+    - name: Package JAR distribution
       env:
         GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GCLOUD_PWD_TOKEN: ${{ secrets.GCLOUD_PWD_TOKEN }}
-      run: cd Genesis ;  ./gradlew distZIP ; dir build\distributions
+      run: cd Genesis ;  ./gradlew distZIP --info ; dir build\distributions
+    - name: Package runtime image
+      run: cd Genesis ;  ./gradlew jpackage --info
     - name: Copy single file to remote
       uses: garygrossgarten/github-action-scp@release
       with:
