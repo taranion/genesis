@@ -23,9 +23,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GCLOUD_PWD_TOKEN: ${{ secrets.GCLOUD_PWD_TOKEN }}
       run: cd Genesis ;  ./gradlew distZIP --info ; dir build\distributions
-    - name: Package runtime image
-      run: cd Genesis ;  ./gradlew jpackage -D"download.jpackage"=true ;  rm -r build\jpackage\Genesis
-    - name: Copy single file to remote
+    - name: Deploy ZIP
       uses: garygrossgarten/github-action-scp@release
       with:
         local: "Genesis\\build\\distributions"
@@ -34,6 +32,8 @@ jobs:
         username: github
         password: uimou0Oo
         privateKey: ${{ secrets.DEPLOY_KEY }}
+    - name: Package runtime image
+      run: cd Genesis ;  ./gradlew jpackage -D"download.jpackage"=true ; dir build\jpackage
     - name: Deploy MSI
       uses: garygrossgarten/github-action-scp@release
       with:
