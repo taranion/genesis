@@ -24,7 +24,7 @@ jobs:
         GCLOUD_PWD_TOKEN: ${{ secrets.GCLOUD_PWD_TOKEN }}
       run: cd Genesis ;  ./gradlew distZIP --info ; dir build\distributions
     - name: Package runtime image
-      run: cd Genesis ;  ./gradlew jpackage  ;  dir build\jpackage
+      run: cd Genesis ;  ./gradlew jpackage -D"download.jpackage"=true ;  rm -r build\jpackage\Genesis
     - name: Copy single file to remote
       uses: garygrossgarten/github-action-scp@release
       with:
@@ -37,7 +37,7 @@ jobs:
     - name: Deploy MSI
       uses: garygrossgarten/github-action-scp@release
       with:
-        local: "Genesis\\build\\jpackage\\*.msi"
+        local: "Genesis\\build\\jpackage"
         remote: "/var/www/html/genesis-builds/win"
         host: euve265084.serverprofi24.de
         username: github
