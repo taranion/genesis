@@ -1,0 +1,76 @@
+;This file will be executed next to the application bundle image
+;I.e. current directory will contain folder Genesis with application files
+[Setup]
+AppId={{GenesisApp}}
+AppName=Genesis
+AppVersion=4.1.0
+;AppVerName=Genesis 2018.04.01
+AppPublisher=Stefan Prelle
+AppComments=Genesis
+AppCopyright=Copyright (C) 2019
+AppPublisherURL=http://www.rpgframework.de/
+AppSupportURL=http://jira.rpgframework.de/genesis/
+;AppUpdatesURL=http://java.com/
+DefaultDirName={localappdata}\Genesis
+DisableStartupPrompt=No
+DisableDirPage=No
+DisableProgramGroupPage=No
+DisableReadyPage=Yes
+DisableFinishedPage=Yes
+DisableWelcomePage=Yes
+DefaultGroupName=RPGFramework
+;Optional License
+LicenseFile=
+;WinXP or above
+MinVersion=0,5.1
+#OutputBaseFilename=Genesis-2018-04-01
+Compression=lzma
+SolidCompression=yes
+PrivilegesRequired=lowest
+SetupIconFile=Genesis\Genesis.ico
+UninstallDisplayIcon={app}\Genesis.ico
+UninstallDisplayName=Genesis
+WizardImageStretch=No
+WizardSmallImageFile=Genesis-setup-icon.bmp
+ArchitecturesInstallIn64BitMode=x64
+
+
+[Languages]
+Name: "english"; MessagesFile: "compiler:Default.isl"
+
+[Files]
+Source: "Genesis\Genesis.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Genesis\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+
+[Icons]
+Name: "{group}\Genesis"; Filename: "{app}\Genesis.exe"; IconFilename: "{app}\Genesis.ico"; Check: returnTrue()
+Name: "{commondesktop}\Genesis"; Filename: "{app}\Genesis.exe";  IconFilename: "{app}\Genesis.ico"; Check: returnTrue()
+
+
+[Run]
+Filename: "{app}\Genesis.exe"; Parameters: "-Xappcds:generatecache"; Check: returnFalse()
+Filename: "{app}\Genesis.exe"; Description: "{cm:LaunchProgram,Genesis}"; Flags: nowait postinstall skipifsilent; Check: returnTrue()
+Filename: "{app}\Genesis.exe"; Parameters: "-install -svcName ""Genesis"" -svcDesc ""A RPG character management software"" -mainExe ""Genesis.exe""  "; Check: returnFalse()
+
+[UninstallRun]
+Filename: "{app}\Genesis.exe "; Parameters: "-uninstall -svcName Genesis -stopOnUninstall"; Check: returnFalse()
+
+[Code]
+function returnTrue(): Boolean;
+begin
+  Result := True;
+end;
+
+function returnFalse(): Boolean;
+begin
+  Result := False;
+end;
+
+function InitializeSetup(): Boolean;
+begin
+// Possible future improvements:
+//   if version less or same => just launch app
+//   if upgrade => check if same app is running and wait for it to exit
+//   Add pack200/unpack200 support?
+  Result := True;
+end;

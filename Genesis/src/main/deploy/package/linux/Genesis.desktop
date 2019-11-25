@@ -1,0 +1,15 @@
+[Desktop Entry]
+Name=Genesis
+GenericName=RPG Character Management
+Comment=A RPG character management software
+Comment[de]=Eine Software zur Verwaltung von Rollenspiel-Charakteren
+Exec=startGenesis.jar
+TryExec=startGenesis.jar
+Icon=xsane
+Terminal=true
+Type=Application
+Keywords=Genesis;RPG;Roleplaying
+Keywords[de]=Genesis;RPG;Rollenspiel
+Categories=Game;
+StartupNotify=true
+

@@ -1,0 +1,1 @@
+java -Dglass.win.uiScale=96dpi -jar startGenesis.jar

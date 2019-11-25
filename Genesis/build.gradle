@@ -2,7 +2,7 @@ plugins {
     id 'application'
     id 'eclipse'
     id 'org.openjfx.javafxplugin' version '0.0.8'
-    id 'org.beryx.jlink' version '2.16.0'
+    id 'org.beryx.jlink' version '2.16.4'
     id "de.undercouch.download" version "4.0.0"
 }
 
@@ -30,6 +30,7 @@ dependencies {
     implementation "de.rpgframework:rpgframework-core:4.0.0-SNAPSHOT"
     implementation "de.rpgframework:rpgframework-chars:4.0.0-SNAPSHOT"
     runtimeOnly "org.prelle:simple-persist:3.0.1"
+    runtimeOnly "com.sun.mail:javax.mail:1.6.0"
 }
 
 javafx {
@@ -99,15 +100,15 @@ jlink {
         //   OR
         //
         // explicitly configure the below property:
-        //jpackageHome = '/opt/jdk-14'
+        jpackageHome = '/opt/jdk-14'
         //jpackageHome = "C:/Users/Stefan/workspaces/RPGFramework/Applications/Genesis/Genesis/build/download/jdk-14"
         //
         //   OR
         //
         // download and extract a JDK that contains the jpackage tool by setting the system property 'download.jpackage':
-        if(Boolean.getBoolean('download.jpackage')) {
+        //if(Boolean.getBoolean('download.jpackage')) {
             jpackageHome = downloadJPackage()
-        }
+        //}
 
         if(os.macOsX) {
             installerOptions = [
