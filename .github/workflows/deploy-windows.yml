@@ -22,7 +22,9 @@ jobs:
         GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GCLOUD_PWD_TOKEN: ${{ secrets.GCLOUD_PWD_TOKEN }}
-      run: cd Genesis ;  ./gradlew distZIP jpackage ; dir build\distributions
+      run: cd Genesis ;  ./gradlew distZIP ; dir build\distributions
+    - name: Deploy Maven packages
+      run: cd Genesis ;  ./gradlew jpackage --debug
     - name: Copy single file to remote
       uses: garygrossgarten/github-action-scp@release
       with:

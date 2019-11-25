@@ -23,6 +23,12 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GCLOUD_PWD_TOKEN: ${{ secrets.GCLOUD_PWD_TOKEN }}
       run: cd Genesis ;  ./gradlew distZIP jpackage ; ls build/distributions
+    - name: Build installer
+      env:
+        GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GCLOUD_PWD_TOKEN: ${{ secrets.GCLOUD_PWD_TOKEN }}
+      run: cd Genesis ;  ./gradlew jpackage --debug
     - name: Upload distribution
       uses: appleboy/scp-action@master
       with:
