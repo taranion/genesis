@@ -164,6 +164,12 @@ public class Genesis5Main extends Application {
 		try {
 			if (!Files.exists(logDir))
 				Files.createDirectories(logDir);
+			else if (!Files.isWritable(logDir)) {
+				logDir  = Paths.get(System.getProperty("user.home"), "genesis-logs");
+				System.setProperty("logdir", String.valueOf(logDir.toAbsolutePath()));
+				if (!Files.exists(logDir))
+					Files.createDirectories(logDir);
+			}
 		} catch (AccessDeniedException e) {
 			System.out.println("Cannot create log directory "+logDir);
 			logDir  = Paths.get(System.getProperty("user.home"), "genesis-logs");
