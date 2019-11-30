@@ -36,7 +36,7 @@ jobs:
     - name: Deploy MSI
       uses: garygrossgarten/github-action-scp@release
       with:
-        local: "Genesis\\build\\jpackage\\*.MSI"
+        local: "Genesis\\build\\jpackage\\*.msi"
         remote: "/var/www/html/genesis-builds/win"
         host: euve265084.serverprofi24.de
         username: github
@@ -49,6 +49,4 @@ jobs:
         host: euve265084.serverprofi24.de
         username: github
         password: ${{ secrets.DEPLOY_PASSWORD }}
-#        password: uimou0Oo
-#        privateKey: ${{ secrets.DEPLOY_KEY }}
       
