@@ -25,26 +25,22 @@ jobs:
       run: cd Genesis ;  ./gradlew distZIP --info ; dir build\distributions
     - name: Deploy ZIP
       uses: garygrossgarten/github-action-scp@release
-      env:
-        DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
       with:
         local: "Genesis\\build\\distributions"
         remote: "/var/www/html/genesis-builds/win"
         host: euve265084.serverprofi24.de
         username: github
-        privateKey: $DEPLOY_KEY
+        password: ${{ secrets.DEPLOY_PASSWORD }}
     - name: Package runtime image
       run: cd Genesis ;  ./gradlew jpackage -D"download.jpackage"=true ; dir build\jpackage
     - name: Deploy MSI
       uses: garygrossgarten/github-action-scp@release
-      env:
-        DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
       with:
         local: "Genesis\\build\\jpackage\\*.MSI"
         remote: "/var/www/html/genesis-builds/win"
         host: euve265084.serverprofi24.de
         username: github
-        privateKey: ${{ secrets.DEPLOY_KEY }}
+        password: ${{ secrets.DEPLOY_PASSWORD }}
     - name: Deploy EXE
       uses: garygrossgarten/github-action-scp@release
       with:
@@ -52,6 +48,7 @@ jobs:
         remote: "/var/www/html/genesis-builds/win"
         host: euve265084.serverprofi24.de
         username: github
-        password: uimou0Oo
-        privateKey: ${{ secrets.DEPLOY_KEY }}
+        password: ${{ secrets.DEPLOY_PASSWORD }}
+#        password: uimou0Oo
+#        privateKey: ${{ secrets.DEPLOY_KEY }}
       
