@@ -4,6 +4,7 @@ import java.awt.SplashScreen;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.AccessDeniedException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -160,8 +161,16 @@ public class Genesis5Main extends Application {
 		System.setProperty("logdir", String.valueOf(logDir.toAbsolutePath()));
 		System.out.println("use logdir "+logDir.toAbsolutePath());
 		// Ensure log directory exists
-		if (!Files.exists(logDir))
-			Files.createDirectories(logDir);
+		try {
+			if (!Files.exists(logDir))
+				Files.createDirectories(logDir);
+		} catch (AccessDeniedException e) {
+			System.out.println("Cannot create log directory "+logDir);
+			logDir  = Paths.get(System.getProperty("user.home"), "genesis-logs");
+			System.setProperty("logdir", String.valueOf(logDir.toAbsolutePath()));
+			if (!Files.exists(logDir))
+				Files.createDirectories(logDir);
+		}
 
 		logger = LogManager.getLogger("genesis");
 		System.out.println("Logging to "+getLoggerFileName());
