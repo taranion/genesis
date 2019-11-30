@@ -22,6 +22,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.core.Appender;
 import org.apache.logging.log4j.core.appender.RollingFileAppender;
+import org.prelle.genesis.screens.MainScreen;
 import org.prelle.javafx.AlertType;
 import org.prelle.javafx.ModernUI;
 import org.prelle.javafx.ScreenManager;
@@ -408,10 +409,10 @@ public class Genesis5Main extends Application {
 		//		OnlineActivityWizard wizard = new OnlineActivityWizard(this);
 		//		manager.show(wizard);
 
-//		MainScreen mainScr = new MainScreen(cfgGenesis);
-//		logger.debug("----------Call show() on ScreenManager");
-//		manager.navigateTo(mainScr);
-//		mainScr.refresh();
+		MainScreen mainScr = new MainScreen(cfgGenesis);
+		logger.debug("----------Call show() on ScreenManager");
+		manager.navigateTo(mainScr);
+		mainScr.refresh();
 
 		Scene scene = new Scene(manager);
 		stage.setScene(scene);
@@ -424,7 +425,7 @@ public class Genesis5Main extends Application {
 		/*
 		 * Move window to secondary monitor
 		 */
-		logger.debug(Constants.PREFKEY_FULLSCREEN+" = "+pref.getBoolean(Constants.PREFKEY_FULLSCREEN, false));
+		logger.debug(Constants.PREFKEY_FULLSCREEN+" = "+pref.getBoolean(Constants.PREFKEY_FULLSCREEN, true));
 		stage.setFullScreen(pref.getBoolean(Constants.PREFKEY_FULLSCREEN, false));
 		if ((Boolean)cfgSecondaryScreen.getValue()) {
 			for (Screen screen : Screen.getScreens()) {

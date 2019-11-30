@@ -16,10 +16,10 @@
         </Console>
     </Appenders>
     <Loggers>
-        <Logger name="xml" level="info" />
-        <Root level="debug" additivity="false">
+        <Root level="info" additivity="false">
             <appender-ref ref="console" />
             <appender-ref ref="fileLogger" />
         </Root>
+        <Logger name="xml" level="warn" />
     </Loggers>
 </Configuration>

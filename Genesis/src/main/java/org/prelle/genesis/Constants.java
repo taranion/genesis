@@ -20,7 +20,6 @@ public interface Constants {
 	public final static String PREFKEY_LAST_RELEASE_NOTES = "lastRelShown";
 
 	public final static String PREFIX = "org/prelle/genesis";
-	public final static ResourceBundle RES = ResourceBundle.getBundle(PREFIX+"/i18n/genesis");
-
+	public final static ResourceBundle RES = ResourceBundle.getBundle(Genesis5Main.class.getName());
 
 }

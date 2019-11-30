@@ -9,4 +9,6 @@ module genesis {
 	requires org.apache.logging.log4j.core;
 	requires java.prefs;
 	requires java.desktop;
+	requires de.rpgframework.chars;
+	requires de.rpgframework.javafx;
 }
