@@ -29,6 +29,8 @@ dependencies {
     implementation "org.prelle:javafx-extensions:4.0.6"
     implementation "de.rpgframework:rpgframework-core:4.0.0-SNAPSHOT"
     implementation "de.rpgframework:rpgframework-chars:4.0.0-SNAPSHOT"
+    implementation "de.rpgframework:rpgframework-javafx:4.0.0-SNAPSHOT"
+    implementation "de.rpgframework:rpgframework-products:4.0.0-SNAPSHOT"
     runtimeOnly "org.prelle:simple-persist:3.0.1"
     runtimeOnly "com.sun.mail:javax.mail:1.6.0"
 }
