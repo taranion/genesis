@@ -33,6 +33,8 @@ jobs:
         password: ${{ secrets.DEPLOY_PASSWORD }}
     - name: Package runtime image
       run: cd Genesis ;  ./gradlew jpackage -D"download.jpackage"=true ; dir build\jpackage
+    - name: Dir
+      run: dir Genesis\build\jpackage
     - name: Deploy MSI
       uses: garygrossgarten/github-action-scp@release
       with:
