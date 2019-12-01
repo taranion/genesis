@@ -22,13 +22,13 @@ jobs:
         GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GCLOUD_PWD_TOKEN: ${{ secrets.GCLOUD_PWD_TOKEN }}
-        VERSION: $(cat version.txt)]
+        VERSION: $(cat Genesis\version.txt)]
       run: |
         cd Genesis
         ./gradlew distZIP --info
         dir build\distributions
         echo version=$VERSION
-        set
+        Get-ChildItem Env:
     - name: Deploy ZIP
       uses: garygrossgarten/github-action-scp@release
       with:
