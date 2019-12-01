@@ -22,7 +22,6 @@ jobs:
         GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GCLOUD_PWD_TOKEN: ${{ secrets.GCLOUD_PWD_TOKEN }}
-      env:
         VERSION: $(cat version.txt)]
       run: |
         cd Genesis
