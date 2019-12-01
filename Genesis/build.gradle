@@ -10,7 +10,7 @@ plugins {
 ext {
     appName = "Genosis"
     appLauncher = "Genesis"
-    appPackaging = "Genesos"
+    appPackaging = "RPGFramework"
     appModuleName = "genesis"
     appMainClass = "genesis/org.prelle.genesis.Genesis5Main"
     profile = findProperty('profile') ?: 'development'    
@@ -43,7 +43,7 @@ javafx {
 sourceCompatibility = 11
 targetCompatibility = 11
 
-version='6.0.0'
+version=rootProject.file('version.txt').text.trim()
 
 //mainClassName = "${ext.appModuleName}/${ext.appMainClass}"
 mainClassName = "${ext.appMainClass}"
