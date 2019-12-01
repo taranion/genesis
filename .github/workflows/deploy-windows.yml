@@ -46,8 +46,8 @@ jobs:
       env:
         VERSION: $(cat version.txt)]
       with:
-        local: $(echo Genesis\build\jpackage\Genesis-$VERSION.msi)
-        remote: /var/www/html/genesis-builds/win/Genesis.msi
+        local: Genesis\build\jpackage\Genesis-$VERSION.msi
+        remote: /var/www/html/genesis-builds/win/Genesis-$VERSION.msi
         host: euve265084.serverprofi24.de
         username: github
         password: ${{ secrets.DEPLOY_PASSWORD }}
