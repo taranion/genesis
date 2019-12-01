@@ -27,7 +27,8 @@ jobs:
         cd Genesis
         ./gradlew distZIP --info
         dir build\distributions
-        echo $VERSION
+        echo version=$VERSION
+        set
     - name: Deploy ZIP
       uses: garygrossgarten/github-action-scp@release
       with:
