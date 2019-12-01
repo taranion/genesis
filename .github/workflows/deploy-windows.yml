@@ -43,12 +43,10 @@ jobs:
     - name: Dir
       run: dir Genesis\build\jpackage
     - name: Deploy MSI
-      uses: garygrossgarten/github-action-scp@release
-      env:
-        VERSION: $(cat Genesis\version.txt)]
+      uses: tonyranieri/action-scp@master
       with:
-        local: Genesis\build\jpackage\Genesis-$VERSION.msi
-        remote: /var/www/html/genesis-builds/win/Genesis-$VERSION.msi
+        source: "Genesis\\build\\jpackage\\Genesis-*.msi"
+        destination: /var/www/html/genesis-builds/win/
         host: euve265084.serverprofi24.de
         username: github
         password: ${{ secrets.DEPLOY_PASSWORD }}
@@ -57,7 +55,7 @@ jobs:
       with:
         local: "Genesis\\build\\jpackage\\*.exe"
         remote: "/var/www/html/genesis-builds/win"
-        host: euve265084.serverprofi24.de
-        username: github
-        password: ${{ secrets.DEPLOY_PASSWORD }}
+        hostname: euve265084.serverprofi24.de
+        user: github
+        key: ${{ secrets.DEPLOY_KEY }}
       
