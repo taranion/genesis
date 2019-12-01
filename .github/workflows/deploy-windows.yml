@@ -28,7 +28,7 @@ jobs:
         ./gradlew distZIP --info
         dir build\distributions
         echo version=$VERSION
-        echo "::set-env name=VERSION::$(cat Genesis\version.txt)"
+        echo "::set-env name=VERSION::$(cat version.txt)"
         Get-ChildItem Env:VERSION
     - name: Deploy ZIP
       uses: garygrossgarten/github-action-scp@release
@@ -45,7 +45,7 @@ jobs:
     - name: Deploy MSI
       uses: garygrossgarten/github-action-scp@release
       env:
-        VERSION: $(cat version.txt)]
+        VERSION: $(cat Genesis\version.txt)]
       with:
         local: Genesis\build\jpackage\Genesis-$VERSION.msi
         remote: /var/www/html/genesis-builds/win/Genesis-$VERSION.msi
