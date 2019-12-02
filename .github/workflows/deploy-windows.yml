@@ -33,12 +33,13 @@ jobs:
         echo versionA=$VERSION
         echo versionB=%VERSION%
         echo versionC=$env:VERSION
-        dir version.txt
+        echo versionC=${{VERSION}}
+        echo versionC=${{env.VERSION}}
         echo ::set-env name=VERSION::$(cat version.txt)
         echo versionD=$VERSION
         echo versionE=%VERSION%
         echo versionF=$env:VERSION
-        echo versionG=$env.VERSION
+        echo versionG=${{VERSION}}
         echo versionH=${{env.VERSION}}
       
     - name: Deploy ZIP
