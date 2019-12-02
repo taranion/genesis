@@ -17,12 +17,15 @@ jobs:
         key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
         restore-keys: |
           ${{ runner.os }}-maven-    
+        
+    - name: Set version
+      run: echo ::set-env name=VERSION::$(cat Genesis\version.txt)
+
     - name: Package JAR distribution
       env:
         GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GCLOUD_PWD_TOKEN: ${{ secrets.GCLOUD_PWD_TOKEN }}
-        VERSION: ${{ cat Genesis\version.txt }}
       run: |
         cd Genesis
         ./gradlew distZIP --info
@@ -37,7 +40,7 @@ jobs:
         echo versionF=$env:VERSION
         echo versionG=$env:VERSION
         echo versionH=${env:VERSION}
-        
+      
     - name: Deploy ZIP
       uses: garygrossgarten/github-action-scp@release
       with:
