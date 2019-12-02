@@ -42,10 +42,10 @@ jobs:
         echo "versionA=$VERSION"
         echo "versionB=%VERSION%"
         echo "versionC=$env:VERSION"
-        echo ::set-env name=VERSION::$(cat version.txt)
-        echo versionD=$VERSION
-        echo versionE=%VERSION%
-        echo versionF=$env:VERSION
+        echo "::set-env name=VERSION::$(cat version.txt)"
+        echo "versionD=$VERSION"
+        echo "versionE=%VERSION%"
+        echo "versionF=$env:VERSION"
       
     - name: Deploy ZIP
       uses: garygrossgarten/github-action-scp@release
@@ -67,7 +67,7 @@ jobs:
     - name: Deploy MSI
       uses: garygrossgarten/github-action-scp@release
       with:
-        local: Genesis\build\jpackage\%env:VERSION%.msi
+        local: "Genesis\\build\\jpackage\\$VERSION.msi"
         remote: /var/www/html/genesis-builds/win/Genesis-6.0.0.msi
         host: euve265084.serverprofi24.de
         username: github
