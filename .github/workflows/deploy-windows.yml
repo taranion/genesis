@@ -38,8 +38,8 @@ jobs:
         echo versionD=$VERSION
         echo versionE=%VERSION%
         echo versionF=$env:VERSION
-        echo versionG=$env:VERSION
-        echo versionH=${env:VERSION}
+        echo versionG=$env.VERSION
+        echo versionH=${{env.VERSION}}
       
     - name: Deploy ZIP
       uses: garygrossgarten/github-action-scp@release
