@@ -22,19 +22,19 @@ jobs:
         GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GCLOUD_PWD_TOKEN: ${{ secrets.GCLOUD_PWD_TOKEN }}
-        VERSION: 6.1.2
+        VERSION: $(cat Genesis\version.txt)
       run: |
         cd Genesis
         ./gradlew distZIP --info
         dir build\distributions
         echo versionA=$VERSION
         echo versionB=%VERSION%
-        echo versionC=${VERSION}
+        echo versionC=$env:VERSION
         dir version.txt
         SET /P VERSION=<version.txt
         echo versionD=$VERSION
         echo versionE=%VERSION%
-        echo versionF=${VERSION}
+        echo versionF=$env:VERSION
         echo versionG=$env:VERSION
         echo versionH=${env:VERSION}
         
@@ -58,7 +58,7 @@ jobs:
     - name: Deploy MSI
       uses: garygrossgarten/github-action-scp@release
       with:
-        local: Genesis\build\jpackage\%VERSION%.msi
+        local: Genesis\build\jpackage\%env:VERSION%.msi
         remote: /var/www/html/genesis-builds/win/Genesis-6.0.0.msi
         host: euve265084.serverprofi24.de
         username: github
