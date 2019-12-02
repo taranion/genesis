@@ -24,9 +24,9 @@ jobs:
       run: echo $VERSION
 
     - name: Set env
-      run: echo ::set-env name=GITHUB_SHA_SHORT::$(echo Hallo)
+      run: echo "::set-env name=GITHUB_SHA_SHORT::$(echo Hallo)"
     - name: Test
-      run: echo $GITHUB_SHA_SHORT
+      run: echo "$GITHUB_SHA_SHORT"
 
     - name: Package JAR distribution
       env:
@@ -39,9 +39,9 @@ jobs:
         echo $GITHUB_SHA_SHORT
         ./gradlew distZIP --info
         dir build\distributions
-        echo versionA=$VERSION
-        echo versionB=%VERSION%
-        echo versionC=$env:VERSION
+        echo "versionA=$VERSION"
+        echo "versionB=%VERSION%"
+        echo "versionC=$env:VERSION"
         echo ::set-env name=VERSION::$(cat version.txt)
         echo versionD=$VERSION
         echo versionE=%VERSION%
