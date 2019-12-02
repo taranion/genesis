@@ -1,4 +1,4 @@
-package org.prelle.genesis.jfx.common;
+package org.prelle.genesis.page;
 
 import java.text.DateFormat;
 import java.util.Date;

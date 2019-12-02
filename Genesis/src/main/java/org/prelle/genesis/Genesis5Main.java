@@ -35,6 +35,7 @@ import de.rpgframework.RPGFramework;
 import de.rpgframework.RPGFrameworkConstants;
 import de.rpgframework.RPGFrameworkInitCallback;
 import de.rpgframework.RPGFrameworkLoader;
+import de.rpgframework.ResourceI18N;
 import de.rpgframework.boot.StandardBootSteps;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -314,12 +315,7 @@ public class Genesis5Main extends Application {
 						VBox box = new VBox(10);
 						box.setStyle("-fx-padding: 1em");
 						Label lblIntro = new Label();
-						try {
-							lblIntro.setText(RES.getString("bootstepOption."+id));
-						} catch (MissingResourceException e1) {
-							logger.error("Missing key "+e1.getKey()+" in "+RES.getBaseBundleName());
-							lblIntro.setText("bootstepOption."+id);
-						}
+						lblIntro.setText(ResourceI18N.get(RES, "bootstepOption."+id));
 						lblIntro.setWrapText(true);
 						lblIntro.setStyle("-fx-font-size: 150%");
 						box.getChildren().add(lblIntro);
@@ -366,7 +362,6 @@ public class Genesis5Main extends Application {
 				};
 				RPGFrameworkLoader.setCallback(callback);
 				RPGFramework framework = RPGFrameworkLoader.getInstance();
-				framework.addBootStep(StandardBootSteps.FRAMEWORK_PLUGINS);
 				framework.addBootStep(StandardBootSteps.ROLEPLAYING_SYSTEMS);
 				framework.addBootStep(StandardBootSteps.PRODUCT_DATA);
 				framework.addBootStep(StandardBootSteps.CHARACTERS);
@@ -464,23 +459,7 @@ public class Genesis5Main extends Application {
 		//         */
 		//        ReturnReleaseNotesNotification releaseNotify = new ReturnReleaseNotesNotification();
 		//        notifyPreloader(releaseNotify);
-		if (releaseNotes!=null) {
-			logger.error("Cannot show release notes");
-//			WebView editor = new WebView();
-//			editor.getEngine().loadContent(releaseNotes);
-//			VBox box = new VBox(editor);
-//			manager.showAlertAndCall(AlertType.NOTIFICATION, "Release Notes", box);
-		}
-
-		// Java Check
-		if (!checkJavaVersion()) {
-			logger.warn("Java too old");
-			manager.showAlertAndCall(
-					AlertType.ERROR,
-					"Java version",
-					"The Java version you are using is too old and may lead to unforseen effects.\nPlease ensure that you use at least Java 8.0u65");
-		}
-//		mainScr.greet();
+		mainScr.greet();
 	}
 
 	//--------------------------------------------------------------------

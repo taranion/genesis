@@ -146,6 +146,7 @@ public class MainScreen extends ManagedScreen implements BabylonEventListener {
 	public void refresh() {
 		logger.info("refresh()-----------------------------------------------");
 		pgCharacters.refresh();
+		scSettings.refresh();
 	}
 
 	//-------------------------------------------------------------------

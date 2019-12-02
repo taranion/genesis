@@ -3,6 +3,7 @@ module genesis {
 	
 	requires org.apache.logging.log4j;
 	requires de.rpgframework.core;
+	requires javafx.base;
 	requires javafx.graphics;
 	requires javafx.controls;
 	requires javafx.extensions;

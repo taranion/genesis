@@ -7,9 +7,9 @@ import java.util.ResourceBundle;
 
 import org.prelle.genesis.ExternalTools;
 import org.prelle.genesis.Genesis5Main;
-import org.prelle.genesis.jfx.common.LicensePage;
-import org.prelle.genesis.jfx.common.PluginsPage;
 import org.prelle.genesis.page.ExternalToolsPage;
+import org.prelle.genesis.page.LicensePage;
+import org.prelle.genesis.page.PluginsPage;
 import org.prelle.javafx.ManagedScreen;
 
 import javafx.scene.control.Label;
@@ -82,4 +82,9 @@ public class SettingsScreen extends ManagedScreen {
 //		btnAbout   .setOnAction(event -> showPage(pgAbout));
 	}
 
+	//-------------------------------------------------------------------
+	public void refresh() {
+//		logger.info("refresh()-----------------------------------------------");
+		pgPlugins.refresh();
+	}
 }
