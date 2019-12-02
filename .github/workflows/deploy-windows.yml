@@ -34,7 +34,7 @@ jobs:
         echo versionB=%VERSION%
         echo versionC=$env:VERSION
         dir version.txt
-        SET /P VERSION=<version.txt
+        echo ::set-env name=VERSION::$(cat version.txt)
         echo versionD=$VERSION
         echo versionE=%VERSION%
         echo versionF=$env:VERSION
