@@ -29,6 +29,7 @@ jobs:
         dir build\distributions
         echo versionA=$VERSION
         echo versionB=%VERSION%
+        dir version.txt
         SET /P VERSION=<version.txt
         echo versionC=$VERSION
         echo versionD=%VERSION%
@@ -54,7 +55,7 @@ jobs:
     - name: Deploy MSI
       uses: garygrossgarten/github-action-scp@release
       with:
-        local: Genesis\build\jpackage\$(cat version.txt).msi"
+        local: Genesis\build\jpackage\%VERSION%.msi
         remote: /var/www/html/genesis-builds/win/Genesis-6.0.0.msi
         host: euve265084.serverprofi24.de
         username: github
