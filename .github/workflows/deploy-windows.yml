@@ -22,18 +22,21 @@ jobs:
         GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GCLOUD_PWD_TOKEN: ${{ secrets.GCLOUD_PWD_TOKEN }}
-        VERSION: $(cat Genesis\version.txt)
+        VERSION: 6.1.2
       run: |
         cd Genesis
         ./gradlew distZIP --info
         dir build\distributions
         echo versionA=$VERSION
         echo versionB=%VERSION%
+        echo versionC=${VERSION}
         dir version.txt
         SET /P VERSION=<version.txt
-        echo versionC=$VERSION
-        echo versionD=%VERSION%
-        echo versionE=$env:VERSION
+        echo versionD=$VERSION
+        echo versionE=%VERSION%
+        echo versionF=${VERSION}
+        echo versionG=$env:VERSION
+        echo versionH=${env:VERSION}
         
     - name: Deploy ZIP
       uses: garygrossgarten/github-action-scp@release
