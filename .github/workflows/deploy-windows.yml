@@ -47,7 +47,7 @@ jobs:
     - name: Deploy MSI
       uses: garygrossgarten/github-action-scp@release
       with:
-        local: "Genesis\\build\\jpackage\\Genesis-6.0.0.msi"
+        local: "Genesis\\build\\jpackage\\Genesis-.*.msi"
         remote: /var/www/html/genesis-builds/win/Genesis-6.0.0.msi
         host: euve265084.serverprofi24.de
         username: github
@@ -55,8 +55,8 @@ jobs:
     - name: Deploy EXE
       uses: garygrossgarten/github-action-scp@release
       with:
-        local: "Genesis\\build\\jpackage\\*.exe"
-        remote: "/var/www/html/genesis-builds/win"
+        local: "Genesis\\build\\jpackage\\Genesis-6.0.0.exe"
+        remote: "/var/www/html/genesis-builds/win/"
         host: euve265084.serverprofi24.de
         user: github
         key: ${{ secrets.DEPLOY_KEY }}
