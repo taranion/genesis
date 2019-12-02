@@ -21,6 +21,11 @@ jobs:
     - name: Set version
       run: echo ::set-env name=VERSION::$(cat Genesis\version.txt)
 
+    - name: Set env
+      run: echo ::set-env name=GITHUB_SHA_SHORT::$(echo Hallo)
+    - name: Test
+      run: echo $GITHUB_SHA_SHORT
+
     - name: Package JAR distribution
       env:
         GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
@@ -28,19 +33,16 @@ jobs:
         GCLOUD_PWD_TOKEN: ${{ secrets.GCLOUD_PWD_TOKEN }}
       run: |
         cd Genesis
+        echo $GITHUB_SHA_SHORT
         ./gradlew distZIP --info
         dir build\distributions
         echo versionA=$VERSION
         echo versionB=%VERSION%
         echo versionC=$env:VERSION
-        echo versionC=${{VERSION}}
-        echo versionC=${{env.VERSION}}
         echo ::set-env name=VERSION::$(cat version.txt)
         echo versionD=$VERSION
         echo versionE=%VERSION%
         echo versionF=$env:VERSION
-        echo versionG=${{VERSION}}
-        echo versionH=${{env.VERSION}}
       
     - name: Deploy ZIP
       uses: garygrossgarten/github-action-scp@release
