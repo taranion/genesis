@@ -19,14 +19,14 @@ jobs:
           ${{ runner.os }}-maven-    
         
     - name: Set version
-      run: echo ::set-env name=VERSION::$(cat Genesis\version.txt)
+      run: echo "::set-env name=VERSION::$(cat Genesis\version.txt)"
     - name: get version
       run: echo $VERSION
 
     - name: Set env
       run: echo "::set-env name=GITHUB_SHA_SHORT::$(echo Hallo)"
     - name: Test
-      run: echo "$GITHUB_SHA_SHORT"
+      run: echo $GITHUB_SHA_SHORT
 
     - name: Package JAR distribution
       env:
@@ -43,9 +43,9 @@ jobs:
         echo "versionB=%VERSION%"
         echo "versionC=$env:VERSION"
         echo "::set-env name=VERSION::$(cat version.txt)"
-        echo "versionD=$VERSION"
-        echo "versionE=%VERSION%"
-        echo "versionF=$env:VERSION"
+        echo versionD=$VERSION
+        echo versionE=%VERSION%
+        echo versionF=$env:VERSION
       
     - name: Deploy ZIP
       uses: garygrossgarten/github-action-scp@release
@@ -68,7 +68,7 @@ jobs:
       uses: garygrossgarten/github-action-scp@release
       with:
         local: "Genesis\\build\\jpackage\\$VERSION.msi"
-        remote: /var/www/html/genesis-builds/win/Genesis-6.0.0.msi
+        remote: /var/www/html/genesis-builds/win/Genesis-$VERSION.msi
         host: euve265084.serverprofi24.de
         username: github
         password: ${{ secrets.DEPLOY_PASSWORD }}
