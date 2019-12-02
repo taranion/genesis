@@ -28,14 +28,15 @@ jobs:
         ./gradlew distZIP --info
         dir build\distributions
         echo versionA=$VERSION
-        echo "::set-env name=VERSION::"$(cat version.txt)
-        echo versionB=$VERSION
+        echo versionB=%VERSION%
         set VERSION=$(cat version.txt)
         set-env name=VERSION::6.0.1
         echo versionC=$VERSION
+        echo versionC=%VERSION%
         Get-ChildItem Env:VERSION
         echo versionD=$VERSION
         echo versionE=$env:VERSION
+        echo versionF=$%VERSION%
         
     - name: Deploy ZIP
       uses: garygrossgarten/github-action-scp@release
