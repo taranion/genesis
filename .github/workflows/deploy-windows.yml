@@ -29,7 +29,7 @@ jobs:
         dir build\distributions
         echo versionA=$VERSION
         echo versionB=%VERSION%
-        set VERSION=$(cat version.txt)
+        SET /P VERSION=<version.txt
         echo versionC=$VERSION
         echo versionD=%VERSION%
         echo versionE=$env:VERSION
