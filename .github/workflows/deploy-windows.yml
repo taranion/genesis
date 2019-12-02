@@ -30,7 +30,7 @@ jobs:
         echo versionA=$VERSION
         echo "::set-env name=VERSION::"$(cat version.txt)
         echo versionB=$VERSION
-        set VERSION=$(cat version.txt)
+        VERSION=$(cat version.txt)
         echo versionC=$VERSION
         Get-ChildItem Env:VERSION
         echo versionD=$VERSION
@@ -55,7 +55,7 @@ jobs:
     - name: Deploy MSI
       uses: garygrossgarten/github-action-scp@release
       with:
-        local: "Genesis\\build\\jpackage\\*.msi"
+        local: Genesis\build\jpackage\$(cat version.txt).msi"
         remote: /var/www/html/genesis-builds/win/Genesis-6.0.0.msi
         host: euve265084.serverprofi24.de
         username: github
