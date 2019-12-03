@@ -130,7 +130,7 @@ jlink {
 //            imageOptions = ['--icon src/main/deploy/package/windows/Genesis.ico']
         } else {
         	resourceDir= file("src/main/deploy/package/linux")
-            installerType = 'rpm' // 'rpm'
+            installerType = 'rpm,deb' // 'rpm'
             installerOptions = [
                 '--linux-menu-group', 'RPGFramework', 
                 '--linux-app-category', 'Game',
