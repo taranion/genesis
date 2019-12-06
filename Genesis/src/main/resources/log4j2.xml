@@ -21,5 +21,7 @@
             <appender-ref ref="fileLogger" />
         </Root>
         <Logger name="xml" level="warn" />
+        <Logger name="babylon.chars" level="info" />
+        <Logger name="splittermond" level="info" />
     </Loggers>
 </Configuration>

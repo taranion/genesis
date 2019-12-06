@@ -73,13 +73,13 @@ public class PluginsPage extends ManagedScreenPage {
 		TableColumn<RulePlugin<?>, String> colName    = new TableColumn<RulePlugin<?>, String>(ResourceI18N.get(RES, "column.name"));
 		TableColumn<RulePlugin<?>, String> colVersion = new TableColumn<RulePlugin<?>, String>(ResourceI18N.get(RES, "column.version"));
 		TableColumn<RulePlugin<?>, String> colAuthor  = new TableColumn<RulePlugin<?>, String>(ResourceI18N.get(RES, "column.author"));
-		TableColumn<RulePlugin<?>, String> colIssues  = new TableColumn<RulePlugin<?>, String>(ResourceI18N.get(RES, "column.issues"));
+//		TableColumn<RulePlugin<?>, String> colIssues  = new TableColumn<RulePlugin<?>, String>(ResourceI18N.get(RES, "column.issues"));
 		TableColumn<RulePlugin<?>, PluginState> colState  = new TableColumn<RulePlugin<?>, PluginState>(ResourceI18N.get(RES, "column.state"));
 
 		colName.setCellValueFactory( new PropertyValueFactory<>("ReadableName"));
 		colAuthor.setCellValueFactory( cdf -> new SimpleStringProperty(cdf.getValue().getClass().getPackage().getImplementationVendor()));
 		colVersion.setCellValueFactory( cdf -> new SimpleStringProperty(cdf.getValue().getClass().getPackage().getImplementationVersion()));
-		colIssues.setCellValueFactory( cdf -> new SimpleStringProperty(cdf.getValue().getClass().getProtectionDomain().getCodeSource()+""));
+//		colIssues.setCellValueFactory( cdf -> new SimpleStringProperty(cdf.getValue().getClass().getProtectionDomain().getCodeSource()+""));
 		colState.setCellValueFactory( cdf -> {
 			PluginDescriptor descr = CharacterProviderLoader.getPluginDescriptor(cdf.getValue());
 			if (descr==null)
@@ -87,7 +87,7 @@ public class PluginsPage extends ManagedScreenPage {
 			return new SimpleObjectProperty<PluginState>(descr.state);
 		});
 		TableView<RulePlugin<?>> table = new TableView<RulePlugin<?>>();
-		table.getColumns().addAll(colName,  colVersion, colAuthor, colIssues, colState);
+		table.getColumns().addAll(colName,  colVersion, colAuthor, colState);
 		
 		tablesBySystem.put(system, table);
 		return table;
