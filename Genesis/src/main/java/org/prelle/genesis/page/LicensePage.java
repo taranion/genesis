@@ -58,7 +58,7 @@ public class LicensePage extends ManagedScreenPage {
 		}
 	}
 
-	private static ResourceBundle GUICOMMON = Constants.RES;
+	private static ResourceBundle GUICOMMON = ResourceBundle.getBundle(LicensePage.class.getName());;
 
 	private final static Logger logger = LogManager.getLogger("gui");
 	private final static DateFormat FORMAT = DateFormat.getDateInstance(DateFormat.MEDIUM);

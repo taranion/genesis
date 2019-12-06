@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import org.prelle.genesis.ExternalTools;
 import org.prelle.genesis.Genesis5Main;
 import org.prelle.genesis.page.ExternalToolsPage;
+import org.prelle.genesis.page.GenesisConfigurationPage;
 import org.prelle.genesis.page.LicensePage;
 import org.prelle.genesis.page.PluginsPage;
 import org.prelle.javafx.ManagedScreen;
@@ -25,7 +26,7 @@ public class SettingsScreen extends ManagedScreen {
 
 	private ExternalTools external;
 	
-//	private GenesisConfigurationPage pgGeneral;
+	private GenesisConfigurationPage pgGeneral;
 	private LicensePage pgLicense;
 	private ExternalToolsPage pgExternal;
 //	private OnlineServicesPage pgOnline;
@@ -59,7 +60,7 @@ public class SettingsScreen extends ManagedScreen {
 		
 		getNavigationItems().addAll(btnGeneral, btnPlugins, btnLicenses, btnAbout);
 		
-//		pgGeneral = new GenesisConfigurationPage();
+		pgGeneral = new GenesisConfigurationPage();
 		pgLicense = new LicensePage();
 //		pgExternal= new ExternalToolsPage(external);
 //		pgOnline  = new OnlineServicesPage();
@@ -69,12 +70,12 @@ public class SettingsScreen extends ManagedScreen {
 	
 	//-------------------------------------------------------------------
 	private void initLayout() {
-//		setLandingPage(pgGeneral);
+		setLandingPage(pgGeneral);
 	}
 	
 	//-------------------------------------------------------------------
 	private void initInteractivity() {
-//		btnGeneral .setOnAction(event -> showPage(pgGeneral));
+		btnGeneral .setOnAction(event -> showPage(pgGeneral));
 		btnLicenses.setOnAction(event -> showPage(pgLicense));
 //		btnOnline  .setOnAction(event -> showPage(pgOnline));
 		btnPlugins .setOnAction(event -> showPage(pgPlugins));
