@@ -128,9 +128,10 @@ jlink {
             	'--win-upgrade-uuid',
             	'aabbccdd-eeff-1122-3344-556677889900']
 //            imageOptions = ['--icon src/main/deploy/package/windows/Genesis.ico']
+            imageOptions = ["--win-console"]
         } else {
         	resourceDir= file("src/main/deploy/package/linux")
-            installerType = 'rpm' // 'rpm'
+            installerType = '' // 'rpm'
             installerOptions = [
                 '--linux-menu-group', 'RPGFramework', 
                 '--linux-app-category', 'Game',
