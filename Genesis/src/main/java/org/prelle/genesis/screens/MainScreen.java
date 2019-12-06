@@ -414,10 +414,15 @@ public class MainScreen extends ManagedScreen implements BabylonEventListener {
 			}
 		}
 		if (bestWidth<RECOMMENDED_WIDTH || bestHeight<RECOMMENDED_HEIGHT) {
-			String winScale = "Render-Scale = "+getScene().getWindow().getRenderScaleX()+"  Output scale="+getScene().getWindow().getOutputScaleX();
+			if (getScene().getWindow().getRenderScaleX()>1.0) {
+				String mess = String.format(RES.getString("warning.scaling.message"), bestWidth, bestHeight);
+				getManager().showAlertAndCall(AlertType.ERROR, RES.getString("warning.scaling.title"), mess);
+			} else {
+				String winScale = "Render-Scale = "+getScene().getWindow().getRenderScaleX()+"  Output scale="+getScene().getWindow().getOutputScaleX();
 
-			String mess = String.format(RES.getString("warning.resolution.message"), bestWidth, bestHeight, RECOMMENDED_WIDTH, RECOMMENDED_HEIGHT)+"\n\n"+winScale;
-			getManager().showAlertAndCall(AlertType.ERROR, RES.getString("warning.resolution.title"), mess);
+				String mess = String.format(RES.getString("warning.resolution.message"), bestWidth, bestHeight, RECOMMENDED_WIDTH, RECOMMENDED_HEIGHT)+"\n\n"+winScale;
+				getManager().showAlertAndCall(AlertType.ERROR, RES.getString("warning.resolution.title"), mess);
+			}
 		}
 
 	}
