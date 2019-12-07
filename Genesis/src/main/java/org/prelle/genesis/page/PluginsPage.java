@@ -1,32 +1,38 @@
 package org.prelle.genesis.page;
 
+import java.net.URL;
+import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.ResourceBundle;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.prelle.genesis.Genesis5Main;
 import org.prelle.javafx.CommandBar.DisplayState;
 import org.prelle.javafx.ManagedScreenPage;
 
 import de.rpgframework.ResourceI18N;
-import de.rpgframework.character.CharacterProviderLoader;
 import de.rpgframework.character.PluginDescriptor;
+import de.rpgframework.character.PluginRegistry;
 import de.rpgframework.character.PluginState;
-import de.rpgframework.character.RulePlugin;
-import de.rpgframework.character.RulePluginFeatures;
 import de.rpgframework.core.RoleplayingSystem;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 
 /**
  * @author prelle
@@ -37,9 +43,17 @@ public class PluginsPage extends ManagedScreenPage {
 	private static ResourceBundle RES = ResourceBundle.getBundle(PluginsPage.class.getName());;
 	private final static Logger logger = LogManager.getLogger("genesis");
 	
-	private TabPane tabs;
-	private Map<RoleplayingSystem,TableView<RulePlugin<?>>> tablesBySystem;
-
+	private TableView<PluginDescriptor> table;
+	
+	private Label lbName;
+	private Label lbVendor;
+	private Label lbSystem;
+	private Label lbVersion;
+	private Label lbDate;
+	private Label lbState;
+	private Hyperlink lbInfoURL;
+	private Hyperlink lbBugtracker;
+	
 	//-------------------------------------------------------------------
 	/**
 	 */
@@ -54,140 +68,207 @@ public class PluginsPage extends ManagedScreenPage {
 	
 	//--------------------------------------------------------------------
 	private void initComponents() {
-		tabs = new TabPane();
-		tablesBySystem = new HashMap<RoleplayingSystem, TableView<RulePlugin<?>>>();
+		table = new TableView<PluginDescriptor>();
+		
+		lbName   = new Label();
+		lbVendor = new Label();
+		lbSystem = new Label();
+		lbVersion= new Label();
+		lbDate   = new Label();
+		lbState  = new Label();
+		lbInfoURL= new Hyperlink();
+		lbBugtracker = new Hyperlink();
 	}
 	
 	//--------------------------------------------------------------------
 	private void initLayout() {
-		setContent(tabs);
+		table.setStyle("-fx-min-width: 40em");
+		table.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+		createColumns();
+		
+		Label hdName    = new Label(ResourceI18N.get(RES, "label.name"));
+		Label hdVendor  = new Label(ResourceI18N.get(RES, "label.vendor"));
+		Label hdSystem  = new Label(ResourceI18N.get(RES, "label.system"));
+		Label hdVersion = new Label(ResourceI18N.get(RES, "label.version"));
+		Label hdDate    = new Label(ResourceI18N.get(RES, "label.date"));
+		Label hdState   = new Label(ResourceI18N.get(RES, "label.state"));
+		Label hdInfoURL   = new Label(ResourceI18N.get(RES, "label.homepage"));
+		Label hdBugtracker= new Label(ResourceI18N.get(RES, "label.bugtracker"));
+		
+		hdName.getStyleClass().add("base");
+		hdVendor.getStyleClass().add("base");
+		hdSystem.getStyleClass().add("base");
+		hdVersion.getStyleClass().add("base");
+		hdDate.getStyleClass().add("base");
+		hdState.getStyleClass().add("base");
+		hdInfoURL.getStyleClass().add("base");
+		hdBugtracker.getStyleClass().add("base");
+		
+		GridPane details = new GridPane();
+		details.setHgap(5);
+		details.setVgap(10);
+		details.add(hdName   , 0, 0);
+		details.add(lbName   , 1, 0);
+		details.add(hdVendor , 0, 1);
+		details.add(lbVendor , 1, 1);
+		details.add(hdSystem , 0, 2);
+		details.add(lbSystem , 1, 2);
+		details.add(hdVersion, 0, 3);
+		details.add(lbVersion, 1, 3);
+		details.add(hdDate   , 0, 4);
+		details.add(lbDate   , 1, 4);
+		details.add(hdState  , 0, 5);
+		details.add(lbState  , 1, 5);
+		details.add(hdInfoURL, 0, 6);
+		details.add(lbInfoURL, 1, 6);
+		details.add(hdBugtracker, 0, 7);
+		details.add(lbBugtracker, 1, 7);
+		
+		details.setStyle("-fx-min-width: 30em");
+		
+		HBox masterDetail = new HBox(20, table, details);
+		HBox.setHgrow(table, Priority.ALWAYS);
+		setContent(masterDetail);
 	}
 	
 	//--------------------------------------------------------------------
 	private void initInteractivity() {
+		table.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
+			if (n!=null) {
+				lbName.setText(n.getName());
+				lbVendor.setText(n.getVendor());
+				lbSystem.setText(n.system);
+				lbVersion.setText(n.getVersion());
+				lbDate.setText(DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT).format(n.timestamp.toEpochMilli()));
+				lbState.setText(n.getState()+"");
+				if (n.homepage!=null)
+					lbInfoURL.setText(n.homepage+"");
+				else
+					lbInfoURL.setText(null);
+				lbInfoURL.setUserData(n.homepage);
+				if (n.bugtracker!=null)
+					lbBugtracker.setText(n.bugtracker+"");
+				else
+					lbBugtracker.setText(null);
+				lbBugtracker.setUserData(n.bugtracker);
+			}
+		});
+		
+		lbInfoURL.setOnAction(new EventHandler<ActionEvent>() {
+		    public void handle(ActionEvent event) {
+		    	logger.info("Show Homepage in external browser: "+lbInfoURL.getUserData());
+		    	if ( lbInfoURL.getUserData()!=null ) {
+		    		Genesis5Main.getHostServicesDelegate().showDocument(  ((URL)lbInfoURL.getUserData()).toString() );
+		    	}
+		    }
+		});
+		lbBugtracker.setOnAction(new EventHandler<ActionEvent>() {
+		    public void handle(ActionEvent event) {
+		    	logger.info("Show Homepage in external browser: "+lbBugtracker.getUserData());
+		    	if ( lbBugtracker.getUserData()!=null ) {
+		    		Genesis5Main.getHostServicesDelegate().showDocument(  ((URL)lbBugtracker.getUserData()).toString() );
+		    	}
+		    }
+		});
 	}
 	
 	//--------------------------------------------------------------------
 	@SuppressWarnings("unchecked")
-	private TableView<RulePlugin<?>> createTableFor(RoleplayingSystem system) {
-		TableColumn<RulePlugin<?>, String> colName    = new TableColumn<RulePlugin<?>, String>(ResourceI18N.get(RES, "column.name"));
-		TableColumn<RulePlugin<?>, String> colVersion = new TableColumn<RulePlugin<?>, String>(ResourceI18N.get(RES, "column.version"));
-		TableColumn<RulePlugin<?>, String> colAuthor  = new TableColumn<RulePlugin<?>, String>(ResourceI18N.get(RES, "column.author"));
-//		TableColumn<RulePlugin<?>, String> colIssues  = new TableColumn<RulePlugin<?>, String>(ResourceI18N.get(RES, "column.issues"));
-		TableColumn<RulePlugin<?>, PluginState> colState  = new TableColumn<RulePlugin<?>, PluginState>(ResourceI18N.get(RES, "column.state"));
+	private void createColumns() {
+		TableColumn<PluginDescriptor, Boolean> colLoad   = new TableColumn<PluginDescriptor, Boolean>(ResourceI18N.get(RES, "column.use"));
+		TableColumn<PluginDescriptor, String> colSystem  = new TableColumn<PluginDescriptor, String>(ResourceI18N.get(RES, "column.system"));
+		TableColumn<PluginDescriptor, String[]> colName  = new TableColumn<PluginDescriptor, String[]>(ResourceI18N.get(RES, "column.name"));
+		TableColumn<PluginDescriptor, String> colVersion = new TableColumn<PluginDescriptor, String>(ResourceI18N.get(RES, "column.version"));
+		TableColumn<PluginDescriptor, PluginState> colState  = new TableColumn<PluginDescriptor, PluginState>(ResourceI18N.get(RES, "column.state"));
 
-		colName.setCellValueFactory( new PropertyValueFactory<>("ReadableName"));
-		colAuthor.setCellValueFactory( cdf -> new SimpleStringProperty(cdf.getValue().getClass().getPackage().getImplementationVendor()));
-		colVersion.setCellValueFactory( cdf -> new SimpleStringProperty(cdf.getValue().getClass().getPackage().getImplementationVersion()));
-//		colIssues.setCellValueFactory( cdf -> new SimpleStringProperty(cdf.getValue().getClass().getProtectionDomain().getCodeSource()+""));
-		colState.setCellValueFactory( cdf -> {
-			PluginDescriptor descr = CharacterProviderLoader.getPluginDescriptor(cdf.getValue());
-			if (descr==null)
-				return null;
-			return new SimpleObjectProperty<PluginState>(descr.state);
+		colLoad.setCellValueFactory( cdf -> new SimpleBooleanProperty(PluginRegistry.getPluginLoading(cdf.getValue().uuid)));
+		colName.setCellValueFactory( cdf -> {
+			return new SimpleObjectProperty<String[]>(new String[] {cdf.getValue().name, cdf.getValue().vendor});
 		});
-		TableView<RulePlugin<?>> table = new TableView<RulePlugin<?>>();
-		table.getColumns().addAll(colName,  colVersion, colAuthor, colState);
+		colVersion.setCellValueFactory( new PropertyValueFactory<>("Version"));
+//		colAuthor.setCellValueFactory( cdf -> new SimpleStringProperty(cdf.getValue().getClass().getPackage().getImplementationVendor()));
+//		colIssues.setCellValueFactory( cdf -> new SimpleStringProperty(cdf.getValue().getClass().getProtectionDomain().getCodeSource()+""));
+		colState.setCellValueFactory( new PropertyValueFactory<>("state"));
+		colSystem.setCellValueFactory( cdf -> {
+			PluginDescriptor descr = cdf.getValue();
+			if (descr.system!=null) {
+				try {
+					return new SimpleStringProperty(RoleplayingSystem.valueOf(descr.system).getName());
+				} catch (IllegalArgumentException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			return new SimpleStringProperty("-");
+		});
 		
-		tablesBySystem.put(system, table);
-		return table;
+		colName.setCellFactory( (table) -> new PluginNameCell());
+		colLoad.setCellFactory( (table) -> new PluginLoadCell());
+		
+		table.getColumns().addAll(colLoad, colSystem, colName,  colVersion, colState);
+		
 	}
 	
 	//--------------------------------------------------------------------
 	public void refresh() {
-		tabs.getTabs().clear();
-		tablesBySystem.clear();
+		table.getItems().clear();
 		
 		/*
 		 * Sort rule plugins
 		 */
-		List<RulePlugin<?>> plugins = new ArrayList<>(CharacterProviderLoader.getRulePlugins());
-		Collections.sort(plugins, new Comparator<RulePlugin<?>>() {
-			public int compare(RulePlugin<?> o1, RulePlugin<?> o2) {
-				if (o1.getRules()!=o2.getRules()) {
-					return Integer.compare(o1.getRules().ordinal(), o2.getRules().ordinal());
-				}
-				if (o1.getSupportedFeatures().contains(RulePluginFeatures.PERSISTENCE) && !o2.getSupportedFeatures().contains(RulePluginFeatures.PERSISTENCE)) return -1;
-				return o1.getReadableName().compareTo(o2.getReadableName());
-			}
-		});
+		List<PluginDescriptor> plugins = new ArrayList<>(PluginRegistry.getKnownPlugins());
+		table.getItems().addAll(plugins);
 		
-		
-		/*
-		 * Rules
-		 */
-		logger.info("++++++++++++++++++++++++++++++plugins");
-		for (RulePlugin<?> plugin : plugins) {
-			logger.info("  check plugin "+plugin);
-			TableView<RulePlugin<?>> table = tablesBySystem.get(plugin.getRules());
-			if (table==null) {
-				table = createTableFor(plugin.getRules());
-				Tab tab = new Tab(plugin.getRules().getName());
-				tab.setContent(table);
-				tab.setClosable(false);
-				tabs.getTabs().add(tab);
-			}
-			table.getItems().add(plugin);
-//			
-//			VBox vbox = rules.get(plugin.getRules());
-//			if (vbox==null) {
-//				Label name = new Label(plugin.getRules().getName());
-//				name.getStyleClass().add("section-head");
-//				vbox = new VBox(5);		
-//				vbox.getStyleClass().add("content");
-//				vbox.setStyle("-fx-min-height: 5em; -fx-padding: 1em;");
-//				vbox.getChildren().add(name);
-//				rules.put(plugin.getRules(), vbox);
-//				tiles.getChildren().add(vbox);
-//			}
-//			
-//			// Plugin tile
-//			StringBuffer features_S = new StringBuffer();
-//			for (RulePluginFeatures feature : plugin.getSupportedFeatures()) {
-//				features_S.append(feature.toString()+", ");
-//			}
-//			Package pack = plugin.getClass().getPackage();
-//			System.out.println("PluginsScreen: pack="+pack+"  ImplTitle="+pack.getImplementationTitle()+"   ImplVend="+pack.getImplementationVendor()+"  src="+plugin.getClass().getProtectionDomain().getCodeSource());
-//			
-//			// Line 1
-////			Label name = new Label(plugin.getRules().getName()+"/"+features_S);
-//			Label name = new Label(plugin.getRules().getName()+"/"+plugin.getClass().getSimpleName());
-//			name.getStyleClass().add("text-body");
-//			if (pack.getImplementationTitle()!=null)
-//				name.setText(pack.getImplementationTitle());
-//			
-//			Label version = new Label();
-//			if (pack.getImplementationVersion()!=null)
-//				version.setText(pack.getImplementationVersion());
-//			version.getStyleClass().add("text-secondary-info");
-//			
-//			HBox line1 = new HBox(10);
-//			line1.getChildren().addAll(name, version);
-//			HBox.setHgrow(name, Priority.ALWAYS);
-//			name.setMaxWidth(Double.MAX_VALUE);
-//
-//			// Line 2
-//			Label author = new Label(plugin.getClass().getPackage().getName());
-//			if (pack.getImplementationVendor()!=null)
-//				author.setText(pack.getImplementationVendor());
-//			author.getStyleClass().add("text-tertiary-info");
-//			
-//			Label features = new Label(features_S.toString());
-//			features.getStyleClass().add("text-tertiary-info");
-//			features.setAlignment(Pos.CENTER_RIGHT);
-//			features.setMaxWidth(Double.MAX_VALUE);
-//			
-//			HBox line2 = new HBox(10);
-//			line2.getChildren().addAll(author, features);
-//			HBox.setHgrow(author, Priority.ALWAYS);
-//			author.setMaxWidth(Double.MAX_VALUE);
-//
-//			// Layout
-//			VBox entry = new VBox();
-//			entry.getChildren().addAll(line1, line2);
-//			
-//			vbox.getChildren().add(entry);
-		}
 	}
 
 }
+
+class PluginNameCell extends TableCell<PluginDescriptor,String[]> {
+	
+	private Label lbName = new Label();
+	private Label lbAuthor = new Label();
+	private VBox layout;
+	
+	public PluginNameCell() {
+		layout = new VBox(5, lbName, lbAuthor);
+		lbName.getStyleClass().add("base");
+	}
+	
+	public void updateItem(String[] item, boolean empty) {
+		super.updateItem(item, empty);
+		if (empty) {
+			setGraphic(null);
+		} else {
+			lbName.setText(item[0]);
+			lbAuthor.setText(item[1]);
+			setGraphic(layout);
+		}
+		
+	}
+}
+
+
+class PluginLoadCell extends TableCell<PluginDescriptor,Boolean> {
+	
+	private CheckBox cb;
+	
+	public PluginLoadCell() {
+		cb = new CheckBox();
+		cb.selectedProperty().addListener( (ov,o,n) -> {
+			if (getTableRow()!=null && getTableRow().getItem()!=null)
+				PluginRegistry.setPluginLoading(getTableRow().getItem().uuid, n);
+		});
+	}
+	
+	public void updateItem(Boolean item, boolean empty) {
+		super.updateItem(item, empty);
+		if (empty) {
+			setGraphic(null);
+		} else {
+			cb.setSelected(item);
+			setGraphic(cb);
+		}
+		
+	}
+}
+

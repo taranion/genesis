@@ -24,7 +24,6 @@ import de.rpgframework.ConfigContainer;
 import de.rpgframework.ConfigOption;
 import de.rpgframework.RPGFramework;
 import de.rpgframework.RPGFrameworkLoader;
-import de.rpgframework.character.CharacterHandle;
 import de.rpgframework.character.CharacterProvider;
 import de.rpgframework.character.CharacterProviderLoader;
 import de.rpgframework.character.RulePlugin;
@@ -84,7 +83,6 @@ public class MainScreen extends ManagedScreen implements BabylonEventListener {
 		BabylonEventBus.add(this);
 		rpgFramework = RPGFrameworkLoader.getInstance();
 		charProv     = CharacterProviderLoader.getCharacterProvider();
-		logger.info("RPGFramework = "+rpgFramework);
 		logger.debug("<init>");
 		external = new ExternalTools();
 

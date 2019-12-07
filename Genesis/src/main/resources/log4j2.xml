@@ -22,6 +22,7 @@
         </Root>
         <Logger name="xml" level="warn" />
         <Logger name="babylon.chars" level="info" />
+        <Logger name="rpgframework" level="info" />
         <Logger name="splittermond" level="info" />
     </Loggers>
 </Configuration>

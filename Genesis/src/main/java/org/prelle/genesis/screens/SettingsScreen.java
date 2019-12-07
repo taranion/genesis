@@ -5,8 +5,8 @@ package org.prelle.genesis.screens;
 
 import java.util.ResourceBundle;
 
+import org.apache.logging.log4j.LogManager;
 import org.prelle.genesis.ExternalTools;
-import org.prelle.genesis.Genesis5Main;
 import org.prelle.genesis.page.ExternalToolsPage;
 import org.prelle.genesis.page.GenesisConfigurationPage;
 import org.prelle.genesis.page.LicensePage;
@@ -85,7 +85,8 @@ public class SettingsScreen extends ManagedScreen {
 
 	//-------------------------------------------------------------------
 	public void refresh() {
-//		logger.info("refresh()-----------------------------------------------");
+		LogManager.getLogger("genesis").info("refresh()-----------------------------------------------");
 		pgPlugins.refresh();
+		
 	}
 }

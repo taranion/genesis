@@ -13,10 +13,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
-import java.util.MissingResourceException;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
-import java.util.StringTokenizer;
 import java.util.prefs.Preferences;
 
 import org.apache.logging.log4j.LogManager;
@@ -24,7 +22,6 @@ import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.core.Appender;
 import org.apache.logging.log4j.core.appender.RollingFileAppender;
 import org.prelle.genesis.screens.MainScreen;
-import org.prelle.javafx.AlertType;
 import org.prelle.javafx.ModernUI;
 import org.prelle.javafx.ScreenManager;
 
@@ -38,6 +35,7 @@ import de.rpgframework.RPGFrameworkLoader;
 import de.rpgframework.ResourceI18N;
 import de.rpgframework.boot.StandardBootSteps;
 import javafx.application.Application;
+import javafx.application.HostServices;
 import javafx.application.Platform;
 import javafx.application.Preloader;
 import javafx.application.Preloader.PreloaderNotification;
@@ -78,8 +76,9 @@ public class Genesis5Main extends Application {
 	//	private Label version;
 	private RPGFrameworkInitCallback currentCallback;
 	private ScreenManager manager;
-	private String releaseNotes;
 	private Path installDir;
+	
+	private static HostServices host;
 
 	//-------------------------------------------------------------------
 	static {
@@ -195,9 +194,10 @@ public class Genesis5Main extends Application {
 	 */
 	@Override
 	public void init() throws Exception {
+		host = getHostServices();
 		if (System.getProperty(Constants.KEY_APPLICATION_ID)==null)
 			System.setProperty(Constants.KEY_APPLICATION_ID, "genesis");
-
+		
 		installDir = getInstallationDirectory();
 		System.out.println("Genesis installation directory: "+installDir);
 		System.setProperty(RPGFrameworkConstants.PROPERTY_INSTALLATION_DIRECTORY, installDir.toString());
@@ -463,44 +463,8 @@ public class Genesis5Main extends Application {
 	}
 
 	//--------------------------------------------------------------------
-	private int[] getJavaVersion() {
-		String jVersion = System.getProperty("java.version");
-		StringTokenizer tok = new StringTokenizer(jVersion, "._");
-		int[] ret = new int[4];
-		try {
-			ret[0] = Integer.parseInt(tok.nextToken());
-			ret[1] = tok.hasMoreTokens()?Integer.parseInt(tok.nextToken()):0;
-			ret[2] = tok.hasMoreTokens()?Integer.parseInt(tok.nextToken()):0;
-			ret[3] = tok.hasMoreTokens()?Integer.parseInt(tok.nextToken()):0;
-		} catch (Exception e) {
-			logger.error("Error parsing Java version '"+jVersion+"'",e);
-		}
-		return ret;
+	@SuppressWarnings("exports")
+	public static HostServices getHostServicesDelegate() {
+		return host;
 	}
-
-	//--------------------------------------------------------------------
-	private boolean checkJavaVersion() {
-		// Warn for java versions
-		int[] javaVersion = getJavaVersion();
-		if (javaVersion[1]>0) {
-			if (javaVersion[1]<8)
-				return false;
-			if (javaVersion[1]>8)
-				return true;
-			if (javaVersion[2]==0 && javaVersion[3]<65)
-				return false;
-		}
-		return true;
-	}
-
-	//--------------------------------------------------------------------
-	/**
-	 * Called from Bootloaders ApplicationStarter via Reflection
-	 */
-	public void setReleaseNotes(String html) {
-		if (html!=null)
-			logger.debug("Release notes injected");
-		releaseNotes = html;
-	}
-
 }
