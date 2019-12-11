@@ -21,6 +21,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.core.Appender;
 import org.apache.logging.log4j.core.appender.RollingFileAppender;
+import org.prelle.genesis.screens.InstallPluginsNode;
 import org.prelle.genesis.screens.MainScreen;
 import org.prelle.javafx.ModernUI;
 import org.prelle.javafx.ScreenManager;
@@ -94,6 +95,7 @@ public class Genesis5Main extends Application {
 	}
 
 	//-------------------------------------------------------------------
+	@SuppressWarnings("unused")
 	private static void printSystemProperties() {
 		List<String> keys = new ArrayList<>();
 		System.getProperties().keySet().forEach(key -> keys.add((String)key));
@@ -280,8 +282,7 @@ public class Genesis5Main extends Application {
 		manager = new ScreenManager();
 //		manager.setSettingsEnabled(true);
 //		manager.setOnSettingsAction(event -> settingsClicked());
-
-
+		
 		/*
 		 * Initialize RPGFramework
 		 */
@@ -320,17 +321,25 @@ public class Genesis5Main extends Application {
 						lblIntro.setStyle("-fx-font-size: 150%");
 						box.getChildren().add(lblIntro);
 
-						Node lastOption = null;
-						for (ConfigOption<?> opt : configuration) {
-							@SuppressWarnings("unchecked")
-							ConfigOption<Boolean> optBool = (ConfigOption<Boolean>)opt;
-							CheckBox lbl = new CheckBox(opt.getName());
-							lastOption = lbl;
-							lbl.setSelected((Boolean)optBool.getValue());
-							box.getChildren().add(lbl);
-							lbl.setOnAction( ev -> optBool.set( lbl.isSelected()) );
+						if ("CONFIGURE_UPDATER".equals(id)) {
+							InstallPluginsNode content = new InstallPluginsNode();
+							box.getChildren().add(content);
+						} else {
+
+							Node lastOption = null;
+							for (ConfigOption<?> opt : configuration) {
+								@SuppressWarnings("unchecked")
+								ConfigOption<Boolean> optBool = (ConfigOption<Boolean>)opt;
+								CheckBox lbl = new CheckBox(opt.getName());
+								lastOption = lbl;
+								lbl.setSelected((Boolean)optBool.getValue());
+								box.getChildren().add(lbl);
+								lbl.setOnAction( ev -> optBool.set( lbl.isSelected()) );
+							}
+							if (lastOption!=null)
+								VBox.setMargin(lastOption, new Insets(10,0,0,0));
 						}
-						VBox.setMargin(lastOption, new Insets(10,0,0,0));
+						
 						Button okay = new Button("OK");
 						okay.setMaxWidth(Double.MAX_VALUE);
 						okay.setStyle("-fx-border-width: 1px;");
@@ -342,6 +351,7 @@ public class Genesis5Main extends Application {
 							Platform.runLater( () -> {
 								logger.warn("GO");
 								Scene scene = new Scene(box);
+								scene.getStylesheets().add(Genesis5Main.class.getResource("css/genesis.css").toString());
 								Stage stage = new Stage(StageStyle.DECORATED);
 								okay.setOnAction( ev -> stage.hide());
 								stage.setScene(scene);
@@ -362,6 +372,7 @@ public class Genesis5Main extends Application {
 				};
 				RPGFrameworkLoader.setCallback(callback);
 				RPGFramework framework = RPGFrameworkLoader.getInstance();
+				framework.addBootStep(StandardBootSteps.CONFIGURE_UPDATER);
 				framework.addBootStep(StandardBootSteps.ROLEPLAYING_SYSTEMS);
 				framework.addBootStep(StandardBootSteps.PRODUCT_DATA);
 				framework.addBootStep(StandardBootSteps.CHARACTERS);

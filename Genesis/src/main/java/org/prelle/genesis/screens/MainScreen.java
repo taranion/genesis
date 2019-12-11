@@ -12,6 +12,7 @@ import java.util.ResourceBundle;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.prelle.genesis.ExternalTools;
+import org.prelle.genesis.PrintHelper;
 import org.prelle.genesis.page.CharactersOverviewPage;
 import org.prelle.javafx.AlertType;
 import org.prelle.javafx.CloseType;
@@ -24,6 +25,7 @@ import de.rpgframework.ConfigContainer;
 import de.rpgframework.ConfigOption;
 import de.rpgframework.RPGFramework;
 import de.rpgframework.RPGFrameworkLoader;
+import de.rpgframework.character.CharacterHandle;
 import de.rpgframework.character.CharacterProvider;
 import de.rpgframework.character.CharacterProviderLoader;
 import de.rpgframework.character.RulePlugin;
@@ -387,11 +389,11 @@ public class MainScreen extends ManagedScreen implements BabylonEventListener {
 			if (opt.getLocalId().equals("developer_mode"))
 				updateDataInputContextMenu();
 			break;
-//		case PRINT_REQUESTED:
-//			logger.debug("RCV "+event);
-//			CharacterHandle handle = (CharacterHandle)event.getData()[0];
-//			PrintHelper.printClicked(handle, getScreenManager());
-//			break;
+		case PRINT_REQUESTED:
+			logger.debug("RCV "+event);
+			CharacterHandle handle = (CharacterHandle)event.getData()[0];
+			PrintHelper.printClicked(handle, getScreenManager());
+			break;
 		default:
 			logger.warn("Ignore event "+event);
 		}

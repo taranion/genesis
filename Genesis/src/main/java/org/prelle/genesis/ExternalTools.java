@@ -33,6 +33,7 @@ import de.rpgframework.core.RoleplayingSystem;
  * @author Stefan
  *
  */
+@SuppressWarnings("exports")
 public class ExternalTools implements ConfigChangeListener {
 
 	private final static Logger logger = LogManager.getLogger("genesis");
