@@ -3,6 +3,7 @@
  */
 package org.prelle.genesis.screens;
 
+import java.text.DateFormat;
 import java.util.ResourceBundle;
 
 import de.rpgframework.ResourceI18N;
@@ -59,6 +60,8 @@ public class InstallPluginsNode extends VBox {
 
 class InstallPluginListCell extends ListCell<PluginDescriptor> {
 	
+	private final static DateFormat FORMAT = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.MEDIUM);
+	
 	private CheckBox cbSelected;
 	private Label lbName, lbAuthor, lbRules, lbState, lbVersion, lbDate;
 	private GridPane grid;
@@ -74,6 +77,8 @@ class InstallPluginListCell extends ListCell<PluginDescriptor> {
 		 lbDate = new Label();
 		 
 		 lbName.setStyle("-fx-font-weight: bold");
+		 lbRules.setStyle("-fx-font-weight: bold");
+		 lbVersion.setStyle("-fx-font-weight: bold");
 		 
 		 grid = new GridPane();
 		 grid.setStyle("-fx-hgap: 0.5em");
@@ -86,8 +91,9 @@ class InstallPluginListCell extends ListCell<PluginDescriptor> {
 		 grid.add(lbDate   , 3, 1);
 		 
 		 grid.getColumnConstraints().add(new ColumnConstraints(30));
-		 grid.getColumnConstraints().add(new ColumnConstraints(200));
+		 grid.getColumnConstraints().add(new ColumnConstraints(250));
 		 grid.getColumnConstraints().add(new ColumnConstraints(100));
+		 grid.getColumnConstraints().add(new ColumnConstraints(160));
 		 
 		 cbSelected.selectedProperty().addListener( (ov,o,n) -> {
 			 PluginRegistry.setPluginLoading(getItem().uuid, n);
@@ -110,7 +116,7 @@ class InstallPluginListCell extends ListCell<PluginDescriptor> {
 			if (item.system!=null)
 				lbRules.setText(RoleplayingSystem.valueOf(item.system).getName());
 			lbVersion.setText(item.getVersion());
-			lbVersion.setText(item.timestamp+"");
+			lbDate.setText(FORMAT.format(item.timestamp.toEpochMilli()));
 		}
 	}	
 

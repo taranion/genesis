@@ -61,7 +61,7 @@ public class Genesis5Main extends Application {
 
 	private static Logger logger ;
 
-	private static ResourceBundle RES = ResourceBundle.getBundle(Genesis5Main.class.getName());;
+	private static ResourceBundle RES;
 
 	public class MessageNotification implements PreloaderNotification {
 		private String message;
@@ -92,6 +92,7 @@ public class Genesis5Main extends Application {
 				Locale.setDefault(lang);
 			}
 		}
+		RES = ResourceBundle.getBundle(Genesis5Main.class.getName());
 	}
 
 	//-------------------------------------------------------------------
@@ -300,7 +301,7 @@ public class Genesis5Main extends Application {
 
 					@Override
 					public void message(String mess) {
-						logger.info(mess);
+						logger.debug(mess);
 						currentCallback.message(mess);
 					}
 
@@ -323,6 +324,7 @@ public class Genesis5Main extends Application {
 
 						if ("CONFIGURE_UPDATER".equals(id)) {
 							InstallPluginsNode content = new InstallPluginsNode();
+							box.setStyle("-fx-pref-width: 43em; -fx-padding: 1em");
 							box.getChildren().add(content);
 						} else {
 
@@ -378,7 +380,7 @@ public class Genesis5Main extends Application {
 				framework.addBootStep(StandardBootSteps.CHARACTERS);
 //				framework.addBootStep(new CheckForUpdates(logger));
 //				framework.addBootStep(new CheckReleaseNotes(logger, Genesis5Main.this));
-				logger.info("initialize RPGFramework");
+				logger.debug("initialize RPGFramework");
 				framework.initialize(callback);
 
 				Platform.runLater(new Runnable() {
