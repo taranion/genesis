@@ -121,6 +121,7 @@ public class Genesis5Main extends Application {
 	private Path getInstallationDirectory() {
 		CodeSource codeSource = getClass().getProtectionDomain().getCodeSource();
 		URL codeSourceURL = codeSource.getLocation();
+		System.err.println("codeSourceURL = "+codeSourceURL);
 		if (codeSourceURL.getProtocol().equals("file")) {
 			// Started from JAR
 			try {
@@ -139,6 +140,12 @@ public class Genesis5Main extends Application {
 		System.err.println("Cannot detect installation directory");
 		System.exit(ExitCodes.UNKNOWN_INSTALL_LOCATION);
 		return null;
+	}
+
+	//-------------------------------------------------------------------
+	private Path getUserInstallationDirectory() {
+		Path home = Paths.get(System.getProperty("user.home"));
+		return home.resolve("genesis").resolve(System.getProperty("profile","no-profile"));
 	}
 
 	//-------------------------------------------------------------------
@@ -203,6 +210,8 @@ public class Genesis5Main extends Application {
 		
 		installDir = getInstallationDirectory();
 		System.out.println("Genesis installation directory: "+installDir);
+		installDir = getUserInstallationDirectory();
+		System.out.println("Genesis per user installation directory: "+installDir);
 		System.setProperty(RPGFrameworkConstants.PROPERTY_INSTALLATION_DIRECTORY, installDir.toString());
 		
 		try {
