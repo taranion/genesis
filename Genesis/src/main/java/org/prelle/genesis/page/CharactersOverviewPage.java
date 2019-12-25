@@ -86,8 +86,9 @@ public class CharactersOverviewPage extends ManagedScreenPage implements EventHa
 	private MenuItem actionAdd;
 
 	//-------------------------------------------------------------------
-	public CharactersOverviewPage(ConfigContainer cfgGenesis) {
+	public CharactersOverviewPage(ExternalTools external) {
 		super("Genesis");
+		this.external = external;
 		rpgFramework = RPGFrameworkLoader.getInstance();
 		logger.info("RPGFramework = "+rpgFramework);
 		charProv     = CharacterProviderLoader.getCharacterProvider();
@@ -100,9 +101,6 @@ public class CharactersOverviewPage extends ManagedScreenPage implements EventHa
 		initComponents();
 		initLayout();
 		initInteractivity();
-
-		external = new ExternalTools();
-		external.prepareConfigNodes(cfgGenesis);
 	}
 
 	//-------------------------------------------------------------------

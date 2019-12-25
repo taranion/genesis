@@ -22,6 +22,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
@@ -84,6 +85,7 @@ public class PluginsPage extends ManagedScreenPage {
 	private void initLayout() {
 		table.setStyle("-fx-min-width: 40em");
 		table.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+		table.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
 		createColumns();
 		
 		Label hdName    = new Label(ResourceI18N.get(RES, "label.name"));
@@ -128,6 +130,8 @@ public class PluginsPage extends ManagedScreenPage {
 		
 		HBox masterDetail = new HBox(20, table, details);
 		HBox.setHgrow(table, Priority.ALWAYS);
+		HBox.setMargin(table, new Insets(10,10,0,10));
+		HBox.setMargin(details, new Insets(10,10,0,10));
 		setContent(masterDetail);
 	}
 	

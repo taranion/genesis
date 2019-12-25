@@ -113,8 +113,12 @@ class InstallPluginListCell extends ListCell<PluginDescriptor> {
 			lbName.setText(item.getName());
 			lbAuthor.setText(item.getVendor());
 			lbState.setText(item.getState()+"");
-			if (item.system!=null)
-				lbRules.setText(RoleplayingSystem.valueOf(item.system).getName());
+			try {
+				if (item.system!=null)
+					lbRules.setText(RoleplayingSystem.valueOf(item.system).getName());
+			} catch (IllegalArgumentException e) {
+				lbRules.setText("Error("+item.system+")");
+			}
 			lbVersion.setText(item.getVersion());
 			lbDate.setText(FORMAT.format(item.timestamp.toEpochMilli()));
 		}

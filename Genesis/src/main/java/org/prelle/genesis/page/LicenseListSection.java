@@ -8,12 +8,14 @@ import java.util.ResourceBundle;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.prelle.genesis.Constants;
+import org.prelle.genesis.Genesis5Main;
 import org.prelle.javafx.AlertType;
 import org.prelle.javafx.CloseType;
 import org.prelle.javafx.ScreenManagerProvider;
 import org.prelle.rpgframework.jfx.ListSection;
 
 import de.rpgframework.RPGFrameworkLoader;
+import de.rpgframework.ResourceI18N;
 import de.rpgframework.core.CommandBus;
 import de.rpgframework.core.CommandResult;
 import de.rpgframework.core.CommandType;
@@ -33,11 +35,11 @@ public class LicenseListSection extends ListSection<License> {
 
 	private final static Logger logger = LogManager.getLogger("gui");
 
-	private static ResourceBundle GUICOMMON = Constants.RES;
+	private final static ResourceBundle RES = ResourceBundle.getBundle(LicensePage.class.getName());
 
 	//-------------------------------------------------------------------
 	public LicenseListSection(String title, ScreenManagerProvider provider) {
-		super(title, provider, (PropertyResourceBundle) Constants.RES);
+		super(title, provider, (PropertyResourceBundle) RES);
 		super.list.setCellFactory(lv -> new LicenseCell());
 		setAddButton(null);
 	}
@@ -61,8 +63,8 @@ public class LicenseListSection extends ListSection<License> {
 		License lic = super.list.getSelectionModel().getSelectedItem();
 		logger.info("onDelete "+lic);
 		CloseType answer = provider.getScreenManager().showAlertAndCall(AlertType.QUESTION,
-				GUICOMMON.getString("licensescreen.removeQuestion.head"),
-				GUICOMMON.getString("licensescreen.removeQuestion.desc"));
+				ResourceI18N.get(RES,"licensescreen.removeQuestion.head"),
+				ResourceI18N.get(RES,"licensescreen.removeQuestion.desc"));
 		if (answer!=CloseType.OK)
 			return;
 
@@ -76,8 +78,8 @@ public class LicenseListSection extends ListSection<License> {
 		}
 
 		provider.getScreenManager().showAlertAndCall(AlertType.ERROR,
-				GUICOMMON.getString("licensescreen.removeFailed.head"),
-				GUICOMMON.getString("licensescreen.removeFailed.desc")+result.getMessage());
+				ResourceI18N.get(RES,"licensescreen.removeFailed.head"),
+				ResourceI18N.get(RES,"licensescreen.removeFailed.desc")+result.getMessage());
 	}
 
 	@Override
@@ -90,8 +92,7 @@ public class LicenseListSection extends ListSection<License> {
 
 class LicenseCell extends ListCell<License> {
 
-	private static ResourceBundle GUICOMMON = Constants.RES;
-
+	private final static ResourceBundle RES = ResourceBundle.getBundle(LicensePage.class.getName());
 	private final static DateFormat FORMAT = DateFormat.getDateInstance(DateFormat.MEDIUM);
 	
 	private Parent layout;
@@ -123,11 +124,11 @@ class LicenseCell extends ListCell<License> {
 			// Check validity
 			boolean valid = RPGFrameworkLoader.getInstance().getLicenseManager().hasLicense(item.getSystem(), item.getValue());
 			if (item.getUntil()>0)
-				stateText = GUICOMMON.getString("label.license.validUntil")+" "+FORMAT.format(new Date(item.getUntil()));
+				stateText = ResourceI18N.get(RES,"label.license.validUntil")+" "+FORMAT.format(new Date(item.getUntil()));
 			else
-				stateText = GUICOMMON.getString("label.license.validSince")+" "+FORMAT.format(new Date(item.getFrom()));
+				stateText = ResourceI18N.get(RES,"label.license.validSince")+" "+FORMAT.format(new Date(item.getFrom()));
 			if (!valid)
-				stateText = GUICOMMON.getString("label.license.invalid");
+				stateText = ResourceI18N.get(RES,"label.license.invalid");
 
 			String flag = null;
 			if ("de".equals(item.getLanguage()) || item.getLanguage()==null) {

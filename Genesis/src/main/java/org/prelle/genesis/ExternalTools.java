@@ -38,12 +38,12 @@ public class ExternalTools implements ConfigChangeListener {
 
 	private final static Logger logger = LogManager.getLogger("genesis");
 
-	private static ResourceBundle RES = Constants.RES;
+	public final static ResourceBundle RES = ResourceBundle.getBundle(ExternalTools.class.getName());
 
 	private ConfigContainer cfgExternal;
 
 	private Map<RoleplayingSystem, ConfigContainer> ruleMap;
-
+	
 	//-------------------------------------------------------------------
 	public void prepareConfigNodes(ConfigContainer cfgGenesis) {
 		cfgExternal = cfgGenesis.createContainer("external");

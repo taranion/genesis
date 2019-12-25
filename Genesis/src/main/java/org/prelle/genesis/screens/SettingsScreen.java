@@ -58,11 +58,11 @@ public class SettingsScreen extends ManagedScreen {
 		btnOpenWith = new MenuItem(GENESIS.getString("settings.openwidth"), new Label("\uE90F")); // E0ED
 		btnAbout    = new MenuItem(GENESIS.getString("settings.about"), new Label("\uE8FD")); // E17D
 		
-		getNavigationItems().addAll(btnGeneral, btnPlugins, btnLicenses, btnAbout);
+		getNavigationItems().addAll(btnGeneral, btnPlugins, btnLicenses);
 		
 		pgGeneral = new GenesisConfigurationPage();
 		pgLicense = new LicensePage();
-//		pgExternal= new ExternalToolsPage(external);
+		pgExternal= new ExternalToolsPage(external);
 //		pgOnline  = new OnlineServicesPage();
 		pgPlugins = new PluginsPage();
 //		pgAbout   = new AboutPage();

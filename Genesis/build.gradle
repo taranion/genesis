@@ -33,6 +33,7 @@ dependencies {
     implementation "de.rpgframework:rpgframework-products:4.0.0-SNAPSHOT"
     runtimeOnly "org.prelle:simple-persist:3.0.1"
     runtimeOnly "com.sun.mail:javax.mail:1.6.0"
+    runtimeOnly "org.prelle.rpgframework:babylon-licensecheck:3.0.0-SNAPSHOT"
 }
 
 javafx {

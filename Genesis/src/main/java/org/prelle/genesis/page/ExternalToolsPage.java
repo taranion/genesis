@@ -18,6 +18,7 @@ import org.prelle.javafx.CommandBar.DisplayState;
 import org.prelle.javafx.FontIcon;
 import org.prelle.javafx.ManagedScreenPage;
 
+import de.rpgframework.ResourceI18N;
 import de.rpgframework.core.RoleplayingSystem;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -38,13 +39,13 @@ import javafx.util.StringConverter;
  *
  */
 public class ExternalToolsPage extends ManagedScreenPage {
-	
-	private static ResourceBundle RES = ResourceBundle.getBundle("org/prelle/genesis/i18n/genesis");
-	
+
+	public final static ResourceBundle RES = ResourceBundle.getBundle(ExternalToolsPage.class.getName());
+
 	private ExternalTools external;
-	
+
 	private HBox content;
-	
+
 	private VBox listPane;
 	private MenuItem    btnAdd;
 
@@ -60,10 +61,10 @@ public class ExternalToolsPage extends ManagedScreenPage {
 		initLayout();
 		initInteractivity();
 		getCommandBar().setDisplayState(DisplayState.HIDDEN);
-		
+
 		refresh();
 	}
-	
+
 	//--------------------------------------------------------------------
 	private void initComponents() {
 
@@ -71,18 +72,18 @@ public class ExternalToolsPage extends ManagedScreenPage {
 
 		btnAdd = new MenuItem(null, iconAdd);
 		btnAdd.getStyleClass().add("bordered");
-		
+
 		getCommandBar().getPrimaryCommands().add(btnAdd);
-//		getStaticButtons().add(btnAdd);
+		//		getStaticButtons().add(btnAdd);
 	}
-	
+
 	//--------------------------------------------------------------------
 	private void initLayout() {
 		FontIcon icon = new FontIcon("\uE17D");
 
-		Label description = new Label(RES.getString("screen.externaltools.descr"));
+		Label description = new Label(ResourceI18N.get(RES,"screen.externaltools.descr"));
 		description.setWrapText(true);
-		
+
 		VBox descrPane = new VBox();
 		descrPane.setMaxHeight(Double.MAX_VALUE);
 		descrPane.getStyleClass().add("description-pane");
@@ -93,20 +94,20 @@ public class ExternalToolsPage extends ManagedScreenPage {
 		listPane = new VBox();
 		listPane.setStyle("-fx-spacing: 2em");
 		ScrollPane scroll = new ScrollPane(listPane);
-		
+
 		content = new HBox();
 		content.getChildren().addAll(descrPane, scroll);
 		setContent(content);
 	}
-	
+
 	//--------------------------------------------------------------------
 	private void initInteractivity() {
 		btnAdd.setOnAction(event -> {
-			Label lblRules = new Label(RES.getString("screen.externaltools.system"));
-			Label lblPath  = new Label(RES.getString("screen.externaltools.path"));
+			Label lblRules = new Label(ResourceI18N.get(RES,"screen.externaltools.system"));
+			Label lblPath  = new Label(ResourceI18N.get(RES,"screen.externaltools.path"));
 			lblRules.getStyleClass().add("text-small-subheader");
 			lblPath .getStyleClass().add("text-small-subheader");
-			Button btnSelect = new Button(RES.getString("button.select"));
+			Button btnSelect = new Button(ResourceI18N.get(RES,"button.select"));
 			btnSelect.getStyleClass().add("bordered");
 			ChoiceBox<RoleplayingSystem> cbRules = new ChoiceBox<>();
 			cbRules.setConverter(new StringConverter<RoleplayingSystem>() {
@@ -120,23 +121,23 @@ public class ExternalToolsPage extends ManagedScreenPage {
 					return o1.getName().compareTo(o2.getName());
 				}
 			});
-			
+
 			TextField tfPath = new TextField();
 			tfPath.setStyle("-fx-pref-width: 40em");
 			HBox pathLine = new HBox(20);
 			pathLine.getChildren().addAll(tfPath, btnSelect);
-			
+
 			// Select button
 			btnSelect.setOnAction(event2 -> {
 				Path path = chooseExecutable();
 				if (path!=null) 
 					tfPath.setText(path.toString());
 			});
-			
+
 			VBox content = new VBox(5);
 			content.getChildren().addAll(lblRules, cbRules, lblPath, pathLine);
 			VBox.setMargin(lblPath, new Insets(20, 0, 0, 0));
-			
+
 			CloseType result = getManager().showAlertAndCall(AlertType.QUESTION, "", content);
 			if (result==CloseType.OK || result==CloseType.YES) {
 				Path path = FileSystems.getDefault().getPath(tfPath.getText());
@@ -145,26 +146,26 @@ public class ExternalToolsPage extends ManagedScreenPage {
 			}
 		});
 	}
-	
+
 	//--------------------------------------------------------------------
 	public Path chooseExecutable() {
 		FileChooser chooser = new FileChooser();
 		chooser.setInitialDirectory(new File(System.getProperty("user.home")));
 		chooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("EXE", "*.exe"),
-                new FileChooser.ExtensionFilter("ALL", "*")
-            );
+				new FileChooser.ExtensionFilter("EXE", "*.exe"),
+				new FileChooser.ExtensionFilter("ALL", "*")
+				);
 		File selection = chooser.showOpenDialog(new Stage());
 		if (selection!=null) {
 			return selection.toPath();
 		}
 		return null;
 	}
-	
+
 	//--------------------------------------------------------------------
 	private void refresh() {
 		listPane.getChildren().clear();
-		
+
 		Map<RoleplayingSystem, Path> pathes = external.getConfiguredPathes();
 		List<RoleplayingSystem> keys = new ArrayList<RoleplayingSystem>(pathes.keySet());
 		Collections.sort(keys, new Comparator<RoleplayingSystem>() {
@@ -175,15 +176,15 @@ public class ExternalToolsPage extends ManagedScreenPage {
 		});
 		for (RoleplayingSystem rules : keys ) {
 			Path path = pathes.get(rules);
-			
+
 			Label lblSystem = new Label(rules.getName());
-			Label lblPath   = new Label(RES.getString("screen.externaltools.path"));
+			Label lblPath   = new Label(ResourceI18N.get(RES,"screen.externaltools.path"));
 			lblPath.getStyleClass().add("text-small-subheader");
 			lblSystem .setStyle("-fx-font-weight: bold; -fx-font-size: 150%"); 
 			TextField tfPath = new TextField(path.toString());
 			tfPath.setStyle("-fx-pref-width: 40em");
 			tfPath.setPromptText(RES.getString("screen.externaltools.path.prompt"));
-			Button btnSelect = new Button(RES.getString("button.select"));
+			Button btnSelect = new Button(ResourceI18N.get(RES,"button.select"));
 			btnSelect.getStyleClass().add("bordered");
 			btnSelect.setOnAction(event -> {
 				Path path2 = chooseExecutable();
@@ -193,25 +194,25 @@ public class ExternalToolsPage extends ManagedScreenPage {
 					tfPath.setText(path2.toString());
 				}
 			});
-			
+
 			HBox line2 = new HBox();
 			line2.getChildren().addAll(lblPath, tfPath, btnSelect);
-			
+
 			VBox bxLines = new VBox();
 			bxLines.setStyle("-fx-spacing: 1em");
 			bxLines.getChildren().addAll(lblSystem, line2);
-			
+
 			FontIcon icon = new FontIcon("\uE107");
 			Button btnTrash = new Button(null,icon);
 			btnTrash.setOnAction(event3 -> {
 				external.unsetTool(rules);
 				refresh();
 			});
-			
+
 			HBox cell = new HBox(10);
 			cell.getChildren().addAll(bxLines, btnTrash);
 			cell.setStyle("-fx-background-color: derive(white, -8%)");
-			
+
 			listPane.getChildren().add(cell);
 		}
 	}

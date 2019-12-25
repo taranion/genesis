@@ -86,7 +86,9 @@ public class MainScreen extends ManagedScreen implements BabylonEventListener {
 		rpgFramework = RPGFrameworkLoader.getInstance();
 		charProv     = CharacterProviderLoader.getCharacterProvider();
 		logger.debug("<init>");
+
 		external = new ExternalTools();
+		external.prepareConfigNodes(cfgGenesis);
 
 		logger.debug("<init> initComponents");
 		initComponents(cfgGenesis);
@@ -94,15 +96,12 @@ public class MainScreen extends ManagedScreen implements BabylonEventListener {
 		initLayout();
 		logger.debug("<init> initInteractivity");
 		initInteractivity();
-
-		external = new ExternalTools();
-		external.prepareConfigNodes(cfgGenesis);
 		logger.debug("<init>  done");
 	}
 
 	//-------------------------------------------------------------------
 	private void initComponents(ConfigContainer cfgGenesis) {
-		pgCharacters = new CharactersOverviewPage(cfgGenesis);
+		pgCharacters = new CharactersOverviewPage(external);
 		scSettings   = new SettingsScreen(external);
 
 		/*
