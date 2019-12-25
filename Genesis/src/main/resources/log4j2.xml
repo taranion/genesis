@@ -2,6 +2,7 @@
 <Configuration status="info">
     <Appenders>
         <RollingFile name="fileLogger" fileName="${sys:logdir}/genesis-log.txt" filePattern="${sys:logdir}/genesis-log.txt_%d{yyyyMMdd}.log.gz">
+            <ThresholdFilter level="INFO"/>
             <PatternLayout>
                 <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %5p [%c] (%F:%L) - %m%n</pattern>
             </PatternLayout>

@@ -217,7 +217,8 @@ public class Genesis5Main extends Application {
 		try {
 			initDetectVersion();
 			initSetupLogging();
-			logger.info("Genesis installation directory: "+installDir);
+			logger.info("Genesis installation directory: "+getInstallationDirectory());
+			logger.info("Genesis per user installation directory: "+installDir);
 		} catch (Throwable e) {
 			if (logger!=null)
 				logger.fatal("Error in init()",e);
