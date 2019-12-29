@@ -17,6 +17,9 @@ jobs:
 #        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
 #        restore-keys: |
 #          ${{ runner.os }}-maven-    
+        
+    - name: Set version
+      run: export VERSION='cat Genesis\version.txt)'
     - name: Build distribution
       env:
         GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
