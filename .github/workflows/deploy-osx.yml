@@ -30,25 +30,25 @@ jobs:
         GCLOUD_PWD_TOKEN: ${{ secrets.GCLOUD_PWD_TOKEN }}
       run: cd Genesis ;  ./gradlew jpackage -Ddownload.jpackage=true; ls build/jpackage
     - name: Test jpackage
-      run: ls /opt
+      run: cd Genesis ; ls -l ; pwd ; ls -l /opt
     - name: Show  result
-      run: cd Genesis ; ls build/distributions ; ls build/jpackage 
-    - name: Upload distribution
-      uses: appleboy/scp-action@master
+      run: cd Genesis ; ls build/distributions 
+    - name: Deploy ZIP
+      uses: garygrossgarten/github-action-scp@release
       with:
+        local: "Genesis/build/distributions/Genesis-${{env.VERSION}}.zip"
+        remote: "/var/www/html/genesis-builds/osx"
         host: euve265084.serverprofi24.de
         username: github
         password: ${{ secrets.DEPLOY_PASSWORD }}
-        source: "Genesis/build/distributions/*.zip"
-        target: "/var/www/html/genesis-builds/osx"
-        strip_components: 3
-    - name: Upload RPM
-      uses: appleboy/scp-action@master
+    - name: Show  result
+      run: cd Genesis ; ls build/jpackage 
+    - name: Deploy PKG
+      uses: garygrossgarten/github-action-scp@release
       with:
+        local: "Genesis/build/jpackage/Genesis-${{env.VERSION}}.pkg"
+        remote: "/var/www/html/genesis-builds/osx"
         host: euve265084.serverprofi24.de
         username: github
         password: ${{ secrets.DEPLOY_PASSWORD }}
-        source: "Genesis/build/jpackage/*.pkg"
-        target: "/var/www/html/genesis-builds/osx"
-        strip_components: 3
         
