@@ -12,10 +12,10 @@ import org.prelle.genesis.Genesis5Main;
 import org.prelle.javafx.CommandBar.DisplayState;
 import org.prelle.javafx.ManagedScreenPage;
 
+import de.rpgframework.PluginDescriptor;
+import de.rpgframework.PluginState;
+import de.rpgframework.RPGFrameworkLoader;
 import de.rpgframework.ResourceI18N;
-import de.rpgframework.character.PluginDescriptor;
-import de.rpgframework.character.PluginRegistry;
-import de.rpgframework.character.PluginState;
 import de.rpgframework.core.RoleplayingSystem;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -142,7 +142,7 @@ public class PluginsPage extends ManagedScreenPage {
 				lbName.setText(n.getName());
 				lbVendor.setText(n.getVendor());
 				lbSystem.setText(n.system);
-				lbVersion.setText(n.getVersion());
+				lbVersion.setText(n.getVersion()+"");
 				lbDate.setText(DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT).format(n.timestamp.toEpochMilli()));
 				lbState.setText(n.getState()+"");
 				if (n.homepage!=null)
@@ -185,7 +185,7 @@ public class PluginsPage extends ManagedScreenPage {
 		TableColumn<PluginDescriptor, String> colVersion = new TableColumn<PluginDescriptor, String>(ResourceI18N.get(RES, "column.version"));
 		TableColumn<PluginDescriptor, PluginState> colState  = new TableColumn<PluginDescriptor, PluginState>(ResourceI18N.get(RES, "column.state"));
 
-		colLoad.setCellValueFactory( cdf -> new SimpleBooleanProperty(PluginRegistry.getPluginLoading(cdf.getValue().uuid)));
+		colLoad.setCellValueFactory( cdf -> new SimpleBooleanProperty(RPGFrameworkLoader.getInstance().getPluginRegistry().getPluginLoading(cdf.getValue().uuid)));
 		colName.setCellValueFactory( cdf -> {
 			return new SimpleObjectProperty<String[]>(new String[] {cdf.getValue().name, cdf.getValue().vendor});
 		});
@@ -220,7 +220,7 @@ public class PluginsPage extends ManagedScreenPage {
 		/*
 		 * Sort rule plugins
 		 */
-		List<PluginDescriptor> plugins = new ArrayList<>(PluginRegistry.getKnownPlugins());
+		List<PluginDescriptor> plugins = new ArrayList<>(RPGFrameworkLoader.getInstance().getPluginRegistry().getKnownPlugins());
 		table.getItems().addAll(plugins);
 		
 	}
@@ -260,7 +260,7 @@ class PluginLoadCell extends TableCell<PluginDescriptor,Boolean> {
 		cb = new CheckBox();
 		cb.selectedProperty().addListener( (ov,o,n) -> {
 			if (getTableRow()!=null && getTableRow().getItem()!=null)
-				PluginRegistry.setPluginLoading(getTableRow().getItem().uuid, n);
+				RPGFrameworkLoader.getInstance().getPluginRegistry().setPluginLoading(getTableRow().getItem().uuid, n);
 		});
 	}
 	

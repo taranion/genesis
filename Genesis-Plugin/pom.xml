@@ -16,8 +16,8 @@
 
 	<repositories>
 		<repository>
-			<id>google</id>
-			<url>https://rpgframework-maven-repository.appspot.com/</url>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/groups/public</url>
 			<releases>
 				<enabled>true</enabled>
 			</releases>
@@ -26,27 +26,6 @@
 				<updatePolicy>always</updatePolicy>
 			</snapshots>
 		</repository>
-		<repository>
-			<id>central</id>
-			<url>https://repo.maven.apache.org/maven2</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-		<!-- <repository> -->
-		<!-- <id>github</id> -->
-		<!-- <name>GitHub Taranion Apache Maven Packages</name> -->
-		<!-- <url>https://maven.pkg.github.com/taranion/rpgframework</url> -->
-		<!-- <releases> -->
-		<!-- <enabled>true</enabled> -->
-		<!-- </releases> -->
-		<!-- <snapshots> -->
-		<!-- <enabled>false</enabled> -->
-		<!-- </snapshots> -->
-		<!-- </repository> -->
 	</repositories>
 
 	<dependencyManagement>

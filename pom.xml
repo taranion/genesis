@@ -102,7 +102,7 @@
 			<dependency>
 				<groupId>org.prelle</groupId>
 				<artifactId>simple-persist</artifactId>
-				<version>3.0.1</version>
+				<version>3.0.3</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -120,14 +120,13 @@
 
 	<distributionManagement>
 		<repository>
-			<id>GitHub</id>
-			<name>GitHub Taranion Apache Maven Packages</name>
-			<url>https://maven.pkg.github.com/taranion/rpgframework</url>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
 			<uniqueVersion>false</uniqueVersion>
 		</repository>
 		<snapshotRepository>
-			<id>google</id>
-			<url>https://rpgframework-maven-repository.appspot.com/</url>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
 			<uniqueVersion>false</uniqueVersion>
 		</snapshotRepository>
 	</distributionManagement>

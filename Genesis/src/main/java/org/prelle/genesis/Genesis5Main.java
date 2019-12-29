@@ -23,8 +23,10 @@ import org.apache.logging.log4j.core.Appender;
 import org.apache.logging.log4j.core.appender.RollingFileAppender;
 import org.prelle.genesis.screens.InstallPluginsNode;
 import org.prelle.genesis.screens.MainScreen;
+import org.prelle.javafx.JavaFXConstants;
 import org.prelle.javafx.ModernUI;
 import org.prelle.javafx.ScreenManager;
+import org.prelle.rpgframework.jfx.RPGFrameworkJFXConstants;
 
 import de.rpgframework.ConfigContainer;
 import de.rpgframework.ConfigOption;
@@ -161,7 +163,6 @@ public class Genesis5Main extends Application {
 			else
 				version = "Development";
 		} 
-		System.out.println("Version "+version);
 		System.setProperty(Constants.KEY_APPLICATION_VERSION, version);
 	}
 
@@ -192,7 +193,7 @@ public class Genesis5Main extends Application {
 		System.out.println("Logging to "+getLoggerFileName());
 		
 		RPGFrameworkLoader.getCallback();
-		logger.debug("START: init()------------------------------------");
+		logger.trace("START: init()------------------------------------");
 		logger.info("Running Genesis version "+System.getProperty(Constants.KEY_APPLICATION_VERSION));
 		logger.info("Running on "+System.getProperty("os.name")+ "/" + System.getProperty("os.version")+ "/" + System.getProperty("os.arch"));
 		logger.info("Running under "+System.getProperty("java.vendor")+" Java "+System.getProperty("java.version")+" with JavaFX "+System.getProperty("javafx.version"));
@@ -225,7 +226,7 @@ public class Genesis5Main extends Application {
 			e.printStackTrace();
 			System.exit(ExitCodes.ERROR_INIT_PHASE);
 		} finally {
-			logger.debug("STOP : init()------------------------------------");
+			logger.trace("STOP : init()------------------------------------");
 		}
 	}
 
@@ -332,7 +333,7 @@ public class Genesis5Main extends Application {
 						lblIntro.setStyle("-fx-font-size: 150%");
 						box.getChildren().add(lblIntro);
 
-						if ("CONFIGURE_UPDATER".equals(id)) {
+						if (StandardBootSteps.UPDATE_PLUGINS.name().equals(id)) {
 							InstallPluginsNode content = new InstallPluginsNode();
 							box.setStyle("-fx-pref-width: 43em; -fx-padding: 1em");
 							box.getChildren().add(content);
@@ -384,9 +385,9 @@ public class Genesis5Main extends Application {
 				};
 				RPGFrameworkLoader.setCallback(callback);
 				RPGFramework framework = RPGFrameworkLoader.getInstance();
-				framework.addBootStep(StandardBootSteps.CONFIGURE_UPDATER);
+				framework.addBootStep(StandardBootSteps.UPDATE_PLUGINS);
 				framework.addBootStep(StandardBootSteps.ROLEPLAYING_SYSTEMS);
-				framework.addBootStep(StandardBootSteps.PRODUCT_DATA);
+//				framework.addBootStep(StandardBootSteps.PRODUCT_DATA);
 				framework.addBootStep(StandardBootSteps.CHARACTERS);
 //				framework.addBootStep(new CheckForUpdates(logger));
 //				framework.addBootStep(new CheckReleaseNotes(logger, Genesis5Main.this));
@@ -454,6 +455,7 @@ public class Genesis5Main extends Application {
 		ModernUI.initialize(scene);
 //		scene.getStylesheets().add(RPGFrameworkJFXConstants.class.getResource("css/rpgframework.css").toExternalForm());
 		scene.getStylesheets().add(Genesis5Main.class.getResource("css/genesis.css").toString());
+		scene.getStylesheets().add(RPGFrameworkJFXConstants.STYLESHEET);
 
 		/*
 		 * Move window to secondary monitor

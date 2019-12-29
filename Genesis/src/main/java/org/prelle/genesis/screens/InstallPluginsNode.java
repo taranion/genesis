@@ -6,9 +6,9 @@ package org.prelle.genesis.screens;
 import java.text.DateFormat;
 import java.util.ResourceBundle;
 
+import de.rpgframework.PluginDescriptor;
+import de.rpgframework.RPGFrameworkLoader;
 import de.rpgframework.ResourceI18N;
-import de.rpgframework.character.PluginDescriptor;
-import de.rpgframework.character.PluginRegistry;
 import de.rpgframework.core.RoleplayingSystem;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
@@ -35,7 +35,7 @@ public class InstallPluginsNode extends VBox {
 		initLayout();
 		initInteractivity();
 		
-		lvPlugins.getItems().addAll(PluginRegistry.getKnownPlugins());
+		lvPlugins.getItems().addAll(RPGFrameworkLoader.getInstance().getPluginRegistry().getKnownRemotePlugins());
 	}
 	
 	//-------------------------------------------------------------------
@@ -96,7 +96,7 @@ class InstallPluginListCell extends ListCell<PluginDescriptor> {
 		 grid.getColumnConstraints().add(new ColumnConstraints(160));
 		 
 		 cbSelected.selectedProperty().addListener( (ov,o,n) -> {
-			 PluginRegistry.setPluginLoading(getItem().uuid, n);
+			 RPGFrameworkLoader.getInstance().getPluginRegistry().setPluginLoading(getItem().uuid, n);
 		 });
 	}
 	
@@ -109,7 +109,7 @@ class InstallPluginListCell extends ListCell<PluginDescriptor> {
 		} else {
 			setGraphic(grid);
 			
-			cbSelected.setSelected(PluginRegistry.getPluginLoading(item.uuid));
+			cbSelected.setSelected(RPGFrameworkLoader.getInstance().getPluginRegistry().getPluginLoading(item.uuid));
 			lbName.setText(item.getName());
 			lbAuthor.setText(item.getVendor());
 			lbState.setText(item.getState()+"");
@@ -119,7 +119,7 @@ class InstallPluginListCell extends ListCell<PluginDescriptor> {
 			} catch (IllegalArgumentException e) {
 				lbRules.setText("Error("+item.system+")");
 			}
-			lbVersion.setText(item.getVersion());
+			lbVersion.setText(item.getVersion().toString());
 			lbDate.setText(FORMAT.format(item.timestamp.toEpochMilli()));
 		}
 	}	
