@@ -29,6 +29,8 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GCLOUD_PWD_TOKEN: ${{ secrets.GCLOUD_PWD_TOKEN }}
       run: cd Genesis ;  ./gradlew jpackage -Ddownload.jpackage=true; ls build/jpackage
+    - name: Test jpackage
+      run: /opt/jdk-14/bin/jpackage -h
     - name: Show  result
       run: cd Genesis ; ls build/distributions ; ls build/jpackage 
     - name: Upload distribution
