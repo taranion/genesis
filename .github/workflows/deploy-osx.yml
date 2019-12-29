@@ -23,14 +23,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GCLOUD_PWD_TOKEN: ${{ secrets.GCLOUD_PWD_TOKEN }}
       run: cd Genesis ;  ./gradlew distZIP ; ls build/distributions 
-    - name: Deploy ZIP
-      uses: garygrossgarten/github-action-scp@release
-      with:
-        local: "Genesis/build/distributions/Genesis-*.zip"
-        remote: "/var/www/html/genesis-builds/osx"
-        host: euve265084.serverprofi24.de
-        username: github
-        password: ${{ secrets.DEPLOY_PASSWORD }}
     - name: Build installer
       env:
         GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
@@ -40,7 +32,16 @@ jobs:
          cd Genesis
          ./gradlew jpackage -Ddownload.jpackage=true
          ls build/jpackage
+         set
          export VERSION=$VERSION
+    - name: Deploy ZIP
+      uses: garygrossgarten/github-action-scp@release
+      with:
+        local: "Genesis/build/distributions/Genesis-${{env.VERSION}}.zip"
+        remote: "/var/www/html/genesis-builds/osx"
+        host: euve265084.serverprofi24.de
+        username: github
+        password: ${{ secrets.DEPLOY_PASSWORD }}
     - name: Test jpackage
       run: cd Genesis ; jpackage -h
     - name: Deploy PKG
