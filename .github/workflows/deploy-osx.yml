@@ -1,0 +1,52 @@
+name: Deploy to Linux
+on: [push]
+
+jobs:
+  deploy:
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up JDK 11
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+#    - uses: actions/cache@v1
+#      with:
+#        path: ~/.m2/repository
+#        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+#        restore-keys: |
+#          ${{ runner.os }}-maven-    
+    - name: Build distribution
+      env:
+        GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GCLOUD_PWD_TOKEN: ${{ secrets.GCLOUD_PWD_TOKEN }}
+      run: cd Genesis ;  ./gradlew distZIP
+    - name: Build installer
+      env:
+        GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GCLOUD_PWD_TOKEN: ${{ secrets.GCLOUD_PWD_TOKEN }}
+      run: cd Genesis ;  ./gradlew jpackage -Ddownload.jpackage=true; ls build/jpackage
+    - name: Show  result
+      run: cd Genesis ; ls build/distributions ; ls build/jpackage 
+    - name: Upload distribution
+      uses: appleboy/scp-action@master
+      with:
+        host: euve265084.serverprofi24.de
+        username: github
+        password: ${{ secrets.DEPLOY_PASSWORD }}
+        source: "Genesis/build/distributions/*.zip"
+        target: "/var/www/html/genesis-builds/osx"
+        strip_components: 3
+    - name: Upload RPM
+      uses: appleboy/scp-action@master
+      with:
+        host: euve265084.serverprofi24.de
+        username: github
+        password: ${{ secrets.DEPLOY_PASSWORD }}
+        source: "Genesis/build/jpackage/*.pkg"
+        target: "/var/www/html/genesis-builds/osx"
+        strip_components: 3
+        
