@@ -11,24 +11,24 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 11
-#    - uses: actions/cache@v1
-#      with:
-#        path: ~/.m2/repository
-#        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-#        restore-keys: |
-#          ${{ runner.os }}-maven-    
+    - uses: actions/cache@v1
+      with:
+        path: ~/.m2/repository
+        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+        restore-keys: |
+          ${{ runner.os }}-maven-    
     - name: Build distribution
       env:
         GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GCLOUD_PWD_TOKEN: ${{ secrets.GCLOUD_PWD_TOKEN }}
-      run: cd Genesis ;  ./gradlew distZIP
+      run: cd Genesis ;  ./gradlew clean distZIP
     - name: Build installer
       env:
         GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GCLOUD_PWD_TOKEN: ${{ secrets.GCLOUD_PWD_TOKEN }}
-      run: cd Genesis ;  ./gradlew jpackage -Ddownload.jpackage=true; ls build/jpackage
+      run: cd Genesis ;  ./gradlew clean jpackage -Ddownload.jpackage=true; ls build/jpackage
     - name: Show  result
       run: cd Genesis ; ls build/distributions
     - name: Upload distribution
