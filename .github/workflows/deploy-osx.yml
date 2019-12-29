@@ -19,7 +19,7 @@ jobs:
 #          ${{ runner.os }}-maven-    
         
     - name: Set version
-      run: export VERSION='cat Genesis\version.txt)'
+      run: export VERSION='cat Genesis/version.txt'
     - name: Build distribution
       env:
         GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
@@ -36,7 +36,6 @@ jobs:
          ./gradlew jpackage -Ddownload.jpackage=true
          ls build/jpackage
          set
-         export VERSION=$VERSION
     - name: Deploy ZIP
       uses: garygrossgarten/github-action-scp@release
       with:
