@@ -18,6 +18,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.prelle.genesis.Constants;
 import org.prelle.genesis.ExternalTools;
+import org.prelle.genesis.PrintHelper;
 import org.prelle.genesis.jfx.common.CommonCharacterScreenPage;
 import org.prelle.genesis.page.CharacterListCell.CharActionEvent;
 import org.prelle.javafx.AlertType;
@@ -445,9 +446,9 @@ public class CharactersOverviewPage extends ManagedScreenPage implements EventHa
 		case CharacterListCell.ATTACH:
 			showCommonCharacterScreen(handle);
 			break;
-//		case CharacterListCell.PRINT:
-//			PrintHelper.printClicked(handle, getScreenManager());
-//			break;
+		case CharacterListCell.PRINT:
+			PrintHelper.printClicked(handle, getScreenManager());
+			break;
 		case CharacterListCell.EDIT:
 			editClicked(handle);
 			break;

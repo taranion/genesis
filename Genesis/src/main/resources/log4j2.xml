@@ -17,15 +17,17 @@
         </Console>
     </Appenders>
     <Loggers>
-        <Root level="debug" additivity="false">
+        <Root level="info" additivity="false">
             <appender-ref ref="console" />
             <appender-ref ref="fileLogger" />
         </Root>
         <Logger name="xml" level="warn" />
         <Logger name="rpgframework" level="debug" />
-        <Logger name="rpgframework.chars" level="info" />
+        <Logger name="rpgframework.chars" level="debug" />
         <Logger name="rpgframework.products" level="info" />
         <Logger name="splittermond" level="info" />
+        <Logger name="shadowrun6" level="error" />
+        <Logger name="shadowrun6.print" level="debug" />
         <Logger name="coriolis" level="info" />
         <Logger name="ubiquity" level="info" />
     </Loggers>

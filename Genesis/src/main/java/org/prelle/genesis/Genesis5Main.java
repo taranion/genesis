@@ -9,8 +9,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.CodeSource;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.PropertyResourceBundle;
@@ -23,6 +25,7 @@ import org.apache.logging.log4j.core.Appender;
 import org.apache.logging.log4j.core.appender.RollingFileAppender;
 import org.prelle.genesis.screens.InstallPluginsNode;
 import org.prelle.genesis.screens.MainScreen;
+import org.prelle.javafx.AlertType;
 import org.prelle.javafx.JavaFXConstants;
 import org.prelle.javafx.ModernUI;
 import org.prelle.javafx.ScreenManager;
@@ -30,6 +33,8 @@ import org.prelle.rpgframework.jfx.RPGFrameworkJFXConstants;
 
 import de.rpgframework.ConfigContainer;
 import de.rpgframework.ConfigOption;
+import de.rpgframework.PluginDescriptor;
+import de.rpgframework.PluginRegistry;
 import de.rpgframework.ConfigOption.Type;
 import de.rpgframework.RPGFramework;
 import de.rpgframework.RPGFrameworkConstants;
@@ -51,6 +56,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -450,8 +456,10 @@ public class Genesis5Main extends Application {
 
 		Scene scene = new Scene(manager);
 		stage.setScene(scene);
-		stage.setWidth(1280);
-		stage.setHeight(900);
+		stage.setWidth(Screen.getPrimary().getVisualBounds().getWidth());
+		stage.setHeight(Screen.getPrimary().getVisualBounds().getHeight());
+		stage.setY(0);
+		stage.setX(0);
 		ModernUI.initialize(scene);
 //		scene.getStylesheets().add(RPGFrameworkJFXConstants.class.getResource("css/rpgframework.css").toExternalForm());
 		scene.getStylesheets().add(Genesis5Main.class.getResource("css/genesis.css").toString());
@@ -478,6 +486,7 @@ public class Genesis5Main extends Application {
 
 		stage.show();
 
+		checkForPluginUpdates();
 		//        /*
 		//         * Check for release notes to display. Send notification to preloader and get
 		//         * it filled with release notes, if there are any
@@ -491,5 +500,41 @@ public class Genesis5Main extends Application {
 	@SuppressWarnings("exports")
 	public static HostServices getHostServicesDelegate() {
 		return host;
+	}
+
+	//--------------------------------------------------------------------
+	/**
+	 * Eventually show information about updated plugins
+	 */
+	private void checkForPluginUpdates() {
+		PluginRegistry registry = RPGFrameworkLoader.getInstance().getPluginRegistry();
+		List<PluginDescriptor> state = new ArrayList<PluginDescriptor>();
+		for (PluginDescriptor plugin : registry.getKnownPlugins()) {
+			logger.info("Plugin "+plugin.filename+" =\t"+plugin.result);
+			if (plugin.result!=null)
+				state.add(plugin);
+		}
+		
+		if (!state.isEmpty()) {	
+			Collections.sort(state);
+			DateFormat FORMAT = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.MEDIUM);
+			GridPane grid = new GridPane();
+			grid.setStyle("-fx-vgap: 0.5em; -fx-hgap: 1em");
+			int y=-1;
+			for (PluginDescriptor plugin : state) {
+				y++;
+				grid.add(new Label(plugin.getName()), 0, y);
+				grid.add(new Label(plugin.getVersion()+""), 1, y);
+				grid.add(new Label(FORMAT.format(new Date(plugin.timestamp.toEpochMilli()))), 2, y);
+			}
+		
+			VBox layout = new VBox(20);
+			Label msg = new Label(ResourceI18N.get(RES, "dialog.updates.message"));
+			msg.setWrapText(true);
+			layout.getChildren().addAll(msg, grid);
+			
+			manager.showAlertAndCall(AlertType.NOTIFICATION, ResourceI18N.get(RES, "dialog.updates.title"), layout);
+		}
+		
 	}
 }

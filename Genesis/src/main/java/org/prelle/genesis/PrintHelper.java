@@ -29,6 +29,7 @@ import org.prelle.javafx.CloseType;
 import org.prelle.javafx.ScreenManager;
 
 import de.rpgframework.ConfigOption;
+import de.rpgframework.ResourceI18N;
 import de.rpgframework.character.Attachment;
 import de.rpgframework.character.CharacterHandle;
 import de.rpgframework.character.CharacterHandle.Format;
@@ -68,7 +69,7 @@ import javafx.util.StringConverter;
 public class PrintHelper {
 
 	private final static Logger logger = LogManager.getLogger("genesis");
-	private final static ResourceBundle RES = ResourceBundle.getBundle("org/prelle/genesis/i18n/genesis");
+	private final static ResourceBundle RES = ResourceBundle.getBundle(PrintHelper.class.getName());
 
 	//-------------------------------------------------------------------
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -205,7 +206,7 @@ public class PrintHelper {
 		VBox choiceDialog = new VBox(20);
 		choiceDialog.getChildren().addAll(cbPlugins, stack);
 
-		CloseType closed = manager.showAlertAndCall(AlertType.QUESTION, RES.getString("dialog.printoptions.title"), choiceDialog);
+		CloseType closed = manager.showAlertAndCall(AlertType.QUESTION, ResourceI18N.get(RES, "dialog.printoptions.title"), choiceDialog);
 		if (closed==CloseType.CANCEL || closed==CloseType.NO)
 			return;
 
@@ -236,21 +237,21 @@ public class PrintHelper {
 			logger.warn("No plugin processed PRINT command");
 			manager.showAlertAndCall(
 					AlertType.ERROR,
-					RES.getString("error.print.no_plugin.title"),
-					RES.getString("error.print.no_plugin.mess")
+					ResourceI18N.get(RES, "error.print.no_plugin.title"),
+					ResourceI18N.get(RES, "error.print.no_plugin.mess")
 					);
 			return;
 		}
 		if (!result.wasSuccessful()) {
 			logger.warn("processing PRINT command failed: "+result.getMessage());
 			String todo = String.format(
-					RES.getString("label.consultlogfile"),
+					ResourceI18N.get(RES, "label.consultlogfile"),
 					getLoggerFileName()
 					);
 
 			manager.showAlertAndCall(
 					AlertType.ERROR,
-					RES.getString("error.print.generic.title"),
+					ResourceI18N.get(RES, "error.print.generic.title"),
 					todo+"\n\n"+result.getMessage()
 					);
 			return;
@@ -290,7 +291,7 @@ public class PrintHelper {
 		}
 
 
-		String mess = String.format(RES.getString("message.print.success"), result.getReturnValue());
+		String mess = ResourceI18N.format(RES, "message.print.success", result.getReturnValue());
 		manager.showAlertAndCall(AlertType.NOTIFICATION, "", mess);
 	}
 
@@ -329,7 +330,7 @@ public class PrintHelper {
 		cbTypes.setId("printtype");
 		cbTypes.getItems().addAll(types);
 		cbTypes.setValue(types.iterator().next());
-		grid.add(new Label(RES.getString("label.printtype")), 0, i);
+		grid.add(new Label(ResourceI18N.get(RES, "label.printtype")), 0, i);
 		grid.add(cbTypes, 1, i);
 
 		// Template
@@ -353,7 +354,7 @@ public class PrintHelper {
 			cbTemplates.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> grid.setUserData(n));
 
 			// Edit Button
-			Button btnEditTemp = new Button(RES.getString("label.customize"));
+			Button btnEditTemp = new Button(ResourceI18N.get(RES, "label.customize"));
 			btnEditTemp.setOnAction(event -> {
 				PrintTemplate templ = openPrintTemplateEditor(manager, charac, cbTemplates.getValue(), elements, system);
 				if (templ!=null) {
@@ -363,7 +364,7 @@ public class PrintHelper {
 					 * it is saved as a new template, otherwise under the old name
 					 */
 					logger.debug("ask name for template");
-					Label lbName = new Label(RES.getString("dialog.printtemplate.name"));
+					Label lbName = new Label(ResourceI18N.get(RES, "dialog.printtemplate.name"));
 					TextField tfName = new TextField();
 					VBox box = new VBox(10);
 					box.getChildren().addAll(lbName, tfName);
@@ -373,7 +374,7 @@ public class PrintHelper {
 						tfName.setText(templ.getName());
 						box.getChildren().add(1, lbDesc);
 					}
-					CloseType closed = manager.showAlertAndCall(AlertType.QUESTION, RES.getString("dialog.printtemplate.title"), box);
+					CloseType closed = manager.showAlertAndCall(AlertType.QUESTION, ResourceI18N.get(RES, "dialog.printtemplate.title"), box);
 					String newName = tfName.getText();
 					if (closed==CloseType.OK) {
 						// User chose a name or left in unchanged
@@ -469,7 +470,7 @@ public class PrintHelper {
 					((ConfigOption<String>)option).set( newVal);
 				}
 				TextField dir = new TextField(String.valueOf(option.getValue()));
-				Button dirSelect = new Button(RES.getString("button.select"));
+				Button dirSelect = new Button(ResourceI18N.get(RES, "button.select"));
 				HBox dirLine = new HBox(5);
 				dirLine.getChildren().addAll(dir, dirSelect);
 				dir.setId(option.getPathID());
@@ -568,8 +569,8 @@ public class PrintHelper {
 			if (!notFound.isEmpty()) {
 				logger.warn("PrintTemplate "+template.getName()+" has unknown element references: "+notFound);
 				manager.showAlertAndCall(AlertType.ERROR,
-						RES.getString("error.printtemplate.unknown_ids.title"),
-						String.format(RES.getString("error.printtemplate.unknown_ids.desc"), notFound));
+						ResourceI18N.get(RES, "error.printtemplate.unknown_ids.title"),
+						ResourceI18N.format(RES, "error.printtemplate.unknown_ids.desc", notFound));
 			} else
 				logger.warn("All references resolved");
 		}
