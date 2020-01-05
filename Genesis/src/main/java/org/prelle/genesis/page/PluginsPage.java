@@ -220,7 +220,7 @@ public class PluginsPage extends ManagedScreenPage {
 		/*
 		 * Sort rule plugins
 		 */
-		List<PluginDescriptor> plugins = new ArrayList<>(RPGFrameworkLoader.getInstance().getPluginRegistry().getKnownPlugins());
+		List<PluginDescriptor> plugins = new ArrayList<>(RPGFrameworkLoader.getInstance().getPluginRegistry().getKnownRemotePlugins());
 		table.getItems().addAll(plugins);
 		
 	}
