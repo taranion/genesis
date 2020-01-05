@@ -2,6 +2,7 @@ package org.prelle.genesis.page;
 
 import java.net.URL;
 import java.text.DateFormat;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -184,6 +185,7 @@ public class PluginsPage extends ManagedScreenPage {
 		TableColumn<PluginDescriptor, String[]> colName  = new TableColumn<PluginDescriptor, String[]>(ResourceI18N.get(RES, "column.name"));
 		TableColumn<PluginDescriptor, String> colVersion = new TableColumn<PluginDescriptor, String>(ResourceI18N.get(RES, "column.version"));
 		TableColumn<PluginDescriptor, PluginState> colState  = new TableColumn<PluginDescriptor, PluginState>(ResourceI18N.get(RES, "column.state"));
+		TableColumn<PluginDescriptor, Instant> colTime   = new TableColumn<PluginDescriptor, Instant>(ResourceI18N.get(RES, "column.timestamp"));
 
 		colLoad.setCellValueFactory( cdf -> new SimpleBooleanProperty(RPGFrameworkLoader.getInstance().getPluginRegistry().getPluginLoading(cdf.getValue().uuid)));
 		colName.setCellValueFactory( cdf -> {
@@ -205,11 +207,12 @@ public class PluginsPage extends ManagedScreenPage {
 			}
 			return new SimpleStringProperty("-");
 		});
+		colTime.setCellValueFactory( new PropertyValueFactory<>("timestamp"));
 		
 		colName.setCellFactory( (table) -> new PluginNameCell());
 		colLoad.setCellFactory( (table) -> new PluginLoadCell());
 		
-		table.getColumns().addAll(colLoad, colSystem, colName,  colVersion, colState);
+		table.getColumns().addAll(colLoad, colSystem, colName,  colVersion, colState, colTime);
 		
 	}
 	

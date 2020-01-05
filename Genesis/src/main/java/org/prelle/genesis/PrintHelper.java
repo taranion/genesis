@@ -293,6 +293,10 @@ public class PrintHelper {
 
 		String mess = ResourceI18N.format(RES, "message.print.success", result.getReturnValue());
 		manager.showAlertAndCall(AlertType.NOTIFICATION, "", mess);
+		
+		// Eventually open file
+		logger.debug("Open in PDF viewer");
+		Genesis5Main.getHostServicesDelegate().showDocument(resultFile.toUri().toString());
 	}
 
 	//-------------------------------------------------------------------

@@ -23,19 +23,19 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.core.Appender;
 import org.apache.logging.log4j.core.appender.RollingFileAppender;
+import org.prelle.genesis.jobs.CheckForUpdates;
 import org.prelle.genesis.screens.InstallPluginsNode;
 import org.prelle.genesis.screens.MainScreen;
 import org.prelle.javafx.AlertType;
-import org.prelle.javafx.JavaFXConstants;
 import org.prelle.javafx.ModernUI;
 import org.prelle.javafx.ScreenManager;
 import org.prelle.rpgframework.jfx.RPGFrameworkJFXConstants;
 
 import de.rpgframework.ConfigContainer;
 import de.rpgframework.ConfigOption;
+import de.rpgframework.ConfigOption.Type;
 import de.rpgframework.PluginDescriptor;
 import de.rpgframework.PluginRegistry;
-import de.rpgframework.ConfigOption.Type;
 import de.rpgframework.RPGFramework;
 import de.rpgframework.RPGFrameworkConstants;
 import de.rpgframework.RPGFrameworkInitCallback;
@@ -215,7 +215,7 @@ public class Genesis5Main extends Application {
 		if (System.getProperty(Constants.KEY_APPLICATION_ID)==null)
 			System.setProperty(Constants.KEY_APPLICATION_ID, "genesis");
 		if (System.getProperty(Constants.KEY_PROFILE)==null)
-			System.setProperty(Constants.KEY_PROFILE, "Development");
+			System.setProperty(Constants.KEY_PROFILE, "development");
 		
 		installDir = getInstallationDirectory();
 		System.out.println("Genesis installation directory: "+installDir);
@@ -397,7 +397,7 @@ public class Genesis5Main extends Application {
 				framework.addBootStep(StandardBootSteps.ROLEPLAYING_SYSTEMS);
 //				framework.addBootStep(StandardBootSteps.PRODUCT_DATA);
 				framework.addBootStep(StandardBootSteps.CHARACTERS);
-//				framework.addBootStep(new CheckForUpdates(logger));
+				framework.addBootStep(new CheckForUpdates(logger));
 //				framework.addBootStep(new CheckReleaseNotes(logger, Genesis5Main.this));
 				logger.debug("initialize RPGFramework");
 				framework.initialize(callback);
