@@ -31,9 +31,9 @@ class GenesisSplashScreen extends StackPane implements RPGFrameworkInitCallback 
 		ImageView iView = new ImageView(logo);
 
 		bar = new ProgressBar();
-		version = new Label(System.getProperty(Constants.KEY_APPLICATION_VERSION)+"\n"+System.getProperty(Constants.KEY_APPLICATION_DATE));
-		if (System.getProperty(Constants.KEY_APPLICATION_VERSION)==null)
-			version = new Label("Development snapshot");
+		String versText = System.getProperty(Constants.KEY_APPLICATION_VERSION, "Run in IDE");
+		String profText = System.getProperty(Constants.KEY_PROFILE, "NoProfile");
+		version = new Label("Version: "+versText+"\nProfile: "+profText);
 		version.setWrapText(true);
 		version.setTextAlignment(TextAlignment.CENTER);
 		status = new Label("Checking for updates");
