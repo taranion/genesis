@@ -45,6 +45,7 @@ public class PluginsPage extends ManagedScreenPage {
 	private static ResourceBundle RES = ResourceBundle.getBundle(PluginsPage.class.getName());;
 	private final static Logger logger = LogManager.getLogger("genesis");
 	
+	private Label lbExplain;
 	private TableView<PluginDescriptor> table;
 	
 	private Label lbName;
@@ -70,6 +71,7 @@ public class PluginsPage extends ManagedScreenPage {
 	
 	//--------------------------------------------------------------------
 	private void initComponents() {
+		lbExplain= new Label(ResourceI18N.get(RES, "pluginspage.explain"));
 		table = new TableView<PluginDescriptor>();
 		
 		lbName   = new Label();
@@ -84,6 +86,8 @@ public class PluginsPage extends ManagedScreenPage {
 	
 	//--------------------------------------------------------------------
 	private void initLayout() {
+		lbExplain.setWrapText(true);
+		
 		table.setStyle("-fx-min-width: 40em");
 		table.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 		table.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
@@ -133,7 +137,11 @@ public class PluginsPage extends ManagedScreenPage {
 		HBox.setHgrow(table, Priority.ALWAYS);
 		HBox.setMargin(table, new Insets(10,10,0,10));
 		HBox.setMargin(details, new Insets(10,10,0,10));
-		setContent(masterDetail);
+		
+		VBox layout = new VBox(20, lbExplain, masterDetail);
+		VBox.setVgrow(masterDetail, Priority.ALWAYS);
+		masterDetail.setMaxHeight(Double.MAX_VALUE);
+		setContent(layout);
 	}
 	
 	//--------------------------------------------------------------------
