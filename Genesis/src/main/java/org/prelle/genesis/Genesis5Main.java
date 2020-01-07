@@ -509,6 +509,7 @@ public class Genesis5Main extends Application {
 	 * Eventually show information about updated plugins
 	 */
 	private void checkForPluginUpdates() {
+		logger.debug("Check if plugins have been updated");
 		PluginRegistry registry = RPGFrameworkLoader.getInstance().getPluginRegistry();
 		List<PluginDescriptor> state = new ArrayList<PluginDescriptor>();
 		for (PluginDescriptor plugin : registry.getKnownPlugins()) {
