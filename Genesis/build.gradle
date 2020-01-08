@@ -123,6 +123,7 @@ jlink {
             ]
         } else if(os.windows) {
         	resourceDir= file("src/main/deploy/package/windows")
+            installerType = 'msi' 
             installerOptions = [
             	'--win-per-user-install', 
             	'--win-menu', 
