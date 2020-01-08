@@ -153,7 +153,11 @@ public class Genesis5Main extends Application {
 	//-------------------------------------------------------------------
 	private Path getUserInstallationDirectory() {
 		Path home = Paths.get(System.getProperty("user.home"));
-		return home.resolve("genesis").resolve(System.getProperty("profile","no-profile"));
+		if (System.getProperty("os.name").toLowerCase().indexOf("mac")>0) {
+			// Running on Mac OS
+			return home.resolve("Library").resolve("Application Support").resolve("de.rpgframework.Genesis").resolve(System.getProperty("profile","no-profile"));
+		} else
+			return home.resolve("genesis").resolve(System.getProperty("profile","no-profile"));
 	}
 
 	//-------------------------------------------------------------------
