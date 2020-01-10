@@ -149,7 +149,7 @@ jlink {
             "--copyright", "Stefan Prelle",
             "--description", "A multi-system tabletop RPG generator software",
             "--vendor", "RPGFramework project",
-            "--name", "Genesis"
+            "--name", "Genesis-${profile}"
         ]
     }
 }
