@@ -1,4 +1,4 @@
-name: Deploy to Linux Production
+name: Deploy to Linux
 on: [push]
 #on:
 #  push:
