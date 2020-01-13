@@ -1,4 +1,4 @@
-name: Deploy to Mac OS
+name: Deploy to Mac OS Devel
 on: [push]
 
 jobs:

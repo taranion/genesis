@@ -1,4 +1,4 @@
-name: Deploy to Windows
+name: Deploy to Windows Devel
 on: [push]
 #on:
 #  push:
