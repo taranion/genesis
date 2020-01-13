@@ -8,7 +8,7 @@ plugins {
 
 // Application Configuration
 ext {
-    appName = "Genesis"
+    appName = "Genesis-Devel"
     appLauncher = "Genesis-Development"
     appPackaging = "RPGFramework"
     appModuleName = "genesis"
