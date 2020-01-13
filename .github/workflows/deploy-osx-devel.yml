@@ -51,7 +51,7 @@ jobs:
       uses: garygrossgarten/github-action-scp@release
       with:
         local: "Genesis/build/jpackage/Genesis-Devel-${{env.VERSION}}.pkg"
-        remote: "/var/www/html/genesis-builds/osx/Genesis-${{env.VERSION}}.pkg"
+        remote: "/var/www/html/genesis-builds/osx/Genesis-Devel-${{env.VERSION}}.pkg"
         host: euve265084.serverprofi24.de
         username: github
         password: ${{ secrets.DEPLOY_PASSWORD }}
@@ -60,7 +60,7 @@ jobs:
       uses: garygrossgarten/github-action-scp@release
       with:
         local: "Genesis/build/jpackage/Genesis-Devel-${{env.VERSION}}.dmg"
-        remote: "/var/www/html/genesis-builds/osx/Genesis-${{env.VERSION}}.dmg"
+        remote: "/var/www/html/genesis-builds/osx/Genesis-Devel-${{env.VERSION}}.dmg"
         host: euve265084.serverprofi24.de
         username: github
         password: ${{ secrets.DEPLOY_PASSWORD }}
