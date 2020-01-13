@@ -1,0 +1,67 @@
+name: Deploy to Mac OS
+on: [push]
+
+jobs:
+  deploy:
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up JDK 11
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - uses: actions/cache@v1
+      with:
+        path: ~/.m2/repository
+        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+        restore-keys: |
+          ${{ runner.os }}-maven-    
+        
+    - name: Set version
+      run: echo "::set-env name=VERSION::$(cat Genesis/version.txt)"
+      
+#    - name: Build distribution
+#      env:
+#        GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
+#        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        GCLOUD_PWD_TOKEN: ${{ secrets.GCLOUD_PWD_TOKEN }}
+#      run: cd Genesis ;  ./gradlew distZIP ; ls build/distributions ; cd - ; ls Genesis/build/distributions/Genesis-${{env.VERSION}}.zip
+      
+#    - name: Deploy ZIP
+#      uses: garygrossgarten/github-action-scp@release
+#      with:
+#        local: "Genesis/build/distributions/Genesis-${{env.VERSION}}.zip"
+#        remote: "/var/www/html/genesis-builds/osx/Genesis-${{env.VERSION}}.zip"
+#        host: euve265084.serverprofi24.de
+#        username: github
+#        password: ${{ secrets.DEPLOY_PASSWORD }}
+ 
+    - name: Build installer
+      env:
+        GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GCLOUD_PWD_TOKEN: ${{ secrets.GCLOUD_PWD_TOKEN }}
+      run: | 
+         cd Genesis
+         ./gradlew jpackage -b build-developer.gradle -Ddownload.jpackage=true
+         ls -l build/jpackage
+         
+    - name: Deploy PKG
+      uses: garygrossgarten/github-action-scp@release
+      with:
+        local: "Genesis/build/jpackage/Genesis-${{env.VERSION}}.pkg"
+        remote: "/var/www/html/genesis-builds/osx/Genesis-${{env.VERSION}}.pkg"
+        host: euve265084.serverprofi24.de
+        username: github
+        password: ${{ secrets.DEPLOY_PASSWORD }}
+         
+    - name: Deploy DMG
+      uses: garygrossgarten/github-action-scp@release
+      with:
+        local: "Genesis/build/jpackage/Genesis-${{env.VERSION}}.dmg"
+        remote: "/var/www/html/genesis-builds/osx/Genesis-${{env.VERSION}}.dmg"
+        host: euve265084.serverprofi24.de
+        username: github
+        password: ${{ secrets.DEPLOY_PASSWORD }}
+        

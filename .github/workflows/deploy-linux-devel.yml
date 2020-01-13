@@ -1,0 +1,55 @@
+name: Deploy to Linux
+on: [push]
+#on:
+#  push:
+#    # Sequence of patterns matched against refs/tags
+#    tags:
+#    - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up JDK 11
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - uses: actions/cache@v1
+      with:
+        path: ~/.m2/repository
+        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+        restore-keys: |
+          ${{ runner.os }}-maven-    
+#    - name: Build distribution
+#      env:
+#        GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
+#        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        GCLOUD_PWD_TOKEN: ${{ secrets.GCLOUD_PWD_TOKEN }}
+#      run: cd Genesis ;  ./gradlew distZIP; ls build/distributions
+    - name: Build RPM and DEB installer
+      env:
+        GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GCLOUD_PWD_TOKEN: ${{ secrets.GCLOUD_PWD_TOKEN }}
+      run: cd Genesis ;  ./gradlew jpackage -b build-developer.gradle -Ddownload.jpackage=true ; ls build/jpackage
+    - name: Upload RPM
+      uses: appleboy/scp-action@master
+      with:
+        host: euve265084.serverprofi24.de
+        username: github
+        password: ${{ secrets.DEPLOY_PASSWORD }}
+        source: "Genesis/build/jpackage/*.rpm"
+        target: "/var/www/html/genesis-builds/linux"
+        strip_components: 3
+    - name: Upload DEB
+      uses: appleboy/scp-action@master
+      with:
+        host: euve265084.serverprofi24.de
+        username: github
+        password: ${{ secrets.DEPLOY_PASSWORD }}
+        source: "Genesis/build/jpackage/*.deb"
+        target: "/var/www/html/genesis-builds/linux"
+        strip_components: 3
+        
