@@ -219,7 +219,7 @@ public class Genesis5Main extends Application {
 		if (System.getProperty(Constants.KEY_APPLICATION_ID)==null)
 			System.setProperty(Constants.KEY_APPLICATION_ID, "genesis");
 		if (System.getProperty(Constants.KEY_PROFILE)==null)
-			System.setProperty(Constants.KEY_PROFILE, "development");
+			System.setProperty(Constants.KEY_PROFILE, "no-profile");
 		
 		installDir = getInstallationDirectory();
 		System.out.println("Genesis installation directory: "+installDir);

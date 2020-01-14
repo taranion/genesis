@@ -78,10 +78,10 @@ application {
                                   "-Dglass.win.uiScale=96dpi",
                                   "-Dprofile=staging"]
     } else
-    if (profile == 'production') {
+    if (profile == 'release') {
       applicationDefaultJvmArgs = [ "-Dprism.allowhidpi=false",
                                   "-Dglass.win.uiScale=96dpi",
-                                  "-Dprofile=production"]
+                                  "-Dprofile=release"]
     }
 }
 
@@ -90,7 +90,7 @@ jlink {
     options = ['--compress', '2', '--no-header-files', '--no-man-pages']
     launcher {
         name = "${appLauncher}"
-        jvmArgs = ["-Dapplication.version=$version","-Dglass.win.uiScale=96dpi","-Dprofile=production"]
+        jvmArgs = ["-Dapplication.version=$version","-Dglass.win.uiScale=96dpi","-Dprofile=release"]
     }
 	secondaryLauncher {
         name = 'Genesis-Staging'
