@@ -517,7 +517,7 @@ public class Genesis5Main extends Application {
 		PluginRegistry registry = RPGFrameworkLoader.getInstance().getPluginRegistry();
 		List<PluginDescriptor> state = new ArrayList<PluginDescriptor>();
 		for (PluginDescriptor plugin : registry.getKnownPlugins()) {
-			logger.info("Plugin "+plugin.filename+" =\t"+plugin.result);
+			logger.info("Plugin "+plugin.filename+"  \tupdated= "+plugin.result);
 			if (plugin.result!=null)
 				state.add(plugin);
 		}
