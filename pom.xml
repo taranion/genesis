@@ -5,7 +5,7 @@
 
 	<groupId>org.prelle.rpgframework</groupId>
 	<artifactId>genesis-master</artifactId>
-	<version>6.0.0-SNAPSHOT</version>
+	<version>6.0.0</version>
 	<packaging>pom</packaging>
 
 	<name>Genesis Master Build</name>
@@ -35,10 +35,11 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<log4j.version>2.11.1</log4j.version>
+		<log4j.version>2.12.1</log4j.version>
 		<maven.compiler.target>11</maven.compiler.target>
 		<maven.compiler.source>11</maven.compiler.source>
-		<openjfx.version>14-ea+2</openjfx.version>
+		<openjfx.version>14-ea+7</openjfx.version>
+		<rpgframework>4.0.0</rpgframework>
 	</properties>
 
 	<dependencyManagement>
@@ -57,17 +58,17 @@
 			<dependency>
 				<groupId>de.rpgframework</groupId>
 				<artifactId>rpgframework-core</artifactId>
-				<version>4.0.0-SNAPSHOT</version>
+				<version>${rpgframework}</version>
 			</dependency>
 			<dependency>
 				<groupId>de.rpgframework</groupId>
 				<artifactId>rpgframework-chars</artifactId>
-				<version>4.0.0-SNAPSHOT</version>
+				<version>${rpgframework}</version>
 			</dependency>
 			<dependency>
 				<groupId>de.rpgframework</groupId>
 				<artifactId>rpgframework-javafx</artifactId>
-				<version>4.0.0-SNAPSHOT</version>
+				<version>${rpgframework}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.openjfx</groupId>
