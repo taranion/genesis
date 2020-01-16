@@ -33,7 +33,7 @@ jobs:
         GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GCLOUD_PWD_TOKEN: ${{ secrets.GCLOUD_PWD_TOKEN }}
-      run: cd Genesis ;  ./gradlew jpackage -b build-developer.gradle -Ddownload.jpackage=true ; ls build/jpackage
+      run: cd Genesis ;  ./gradlew jpackage -b build-developer.gradle -Ddownload.jpackage=true --refresh-dependencies; ls build/jpackage
     - name: Upload RPM
       uses: appleboy/scp-action@master
       with:

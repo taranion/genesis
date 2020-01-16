@@ -44,7 +44,7 @@ jobs:
     - name: Package runtime image
       run: | 
          cd Genesis
-         ./gradlew -b build-developer.gradle jpackage -D"download.jpackage"=true 
+         ./gradlew -b build-developer.gradle jpackage -D"download.jpackage"=true  --refresh-dependencies
          dir build\jpackage
          echo version=$VERSION
     - name: Dir

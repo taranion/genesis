@@ -44,7 +44,7 @@ jobs:
         GCLOUD_PWD_TOKEN: ${{ secrets.GCLOUD_PWD_TOKEN }}
       run: | 
          cd Genesis
-         ./gradlew jpackage -b build-developer.gradle -Ddownload.jpackage=true
+         ./gradlew jpackage -b build-developer.gradle -Ddownload.jpackage=true --refresh-dependencies
          ls -l build/jpackage
          
     - name: Deploy PKG
