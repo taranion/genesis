@@ -37,7 +37,7 @@ dependencies {
     runtimeOnly "de.rpgframework:itextpdf:4.2.0"
     runtimeOnly "org.apache.pdfbox:pdfbox:2.0.18"
     runtimeOnly "org.apache.pdfbox:fontbox:2.0.18"
-    runtimeOnly "commons-logging:commons-logging:1.2"
+    runtimeOnly "commons-logging:commons-logging:1.2" 
 }
 
 javafx {
