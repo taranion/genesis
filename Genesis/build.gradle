@@ -101,7 +101,7 @@ jlink {
         mainClass = "org.prelle.genesis.Genesis5Main"
         jvmArgs = ["-Dapplication.version=$version","-Dglass.win.uiScale=96dpi","-Dprofile=staging"]
     }
-    forceMerge('log4j-api')
+    forceMerge('log4j-api','itextpdf','org.apache.pdfbox')
     jpackage {
         // Let the plugin detect the path to the JDK providing the jpackage tool by searching the locations indicated by:
         //  - the badass.jlink.jpackage.home system property
