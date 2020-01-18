@@ -14,7 +14,7 @@
 	<description>All dependencies provided by Genesis</description>
 	<packaging>pom</packaging>
 
-	<repositories>
+	<repositories> 
 		<repository>
 			<id>ossrh</id>
 			<url>https://oss.sonatype.org/content/groups/public</url>
