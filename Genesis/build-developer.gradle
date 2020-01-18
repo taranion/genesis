@@ -34,6 +34,10 @@ dependencies {
     runtimeOnly "org.prelle:simple-persist:3.0.5"
     runtimeOnly "com.sun.mail:javax.mail:1.6.0"
     runtimeOnly "org.prelle.rpgframework:babylon-licensecheck:3.0.0-SNAPSHOT"
+    runtimeOnly "de.rpgframework:itextpdf:4.2.0"
+    runtimeOnly "org.apache.pdfbox:pdfbox:2.0.18"
+    runtimeOnly "org.apache.pdfbox:fontbox:2.0.18"
+    runtimeOnly "commons-logging:commons-logging:1.2" 
 }
 
 javafx {
@@ -92,7 +96,7 @@ jlink {
         name = "${appLauncher}"
         jvmArgs = ["-Dapplication.version=$version","-Dglass.win.uiScale=96dpi","-Dprofile=development"]
     }
-    forceMerge('log4j-api')
+    forceMerge('log4j-api','itextpdf','org.apache.pdfbox')
     jpackage {
         // Let the plugin detect the path to the JDK providing the jpackage tool by searching the locations indicated by:
         //  - the badass.jlink.jpackage.home system property
