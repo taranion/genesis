@@ -94,12 +94,22 @@ jlink {
     options = ['--compress', '2', '--no-header-files', '--no-man-pages']
     launcher {
         name = "${appLauncher}"
-        jvmArgs = ["-Dapplication.version=$version","-Dglass.win.uiScale=96dpi","-Dprofile=release"]
+        jvmArgs = ["-Dapplication.version=$version","-Dprofile=release"]
+    }
+	secondaryLauncher {
+        name = 'Genesis-HiDPI'
+        mainClass = "org.prelle.genesis.Genesis5Main"
+        jvmArgs = ["-Dapplication.version=$version","-Dglass.win.uiScale=144dpi","-Dprofile=staging"]
     }
 	secondaryLauncher {
         name = 'Genesis-Staging'
         mainClass = "org.prelle.genesis.Genesis5Main"
-        jvmArgs = ["-Dapplication.version=$version","-Dglass.win.uiScale=96dpi","-Dprofile=staging"]
+        jvmArgs = ["-Dapplication.version=$version","-Dprofile=staging"]
+    }
+	secondaryLauncher {
+        name = 'Genesis-Staging-HiDPI'
+        mainClass = "org.prelle.genesis.Genesis5Main"
+        jvmArgs = ["-Dapplication.version=$version","-Dglass.win.uiScale=144dpi","-Dprofile=staging"]
     }
     forceMerge('log4j-api','itextpdf','org.apache.pdfbox')
     jpackage {
