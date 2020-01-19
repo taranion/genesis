@@ -26,8 +26,7 @@
         <Logger name="rpgframework.chars" level="info" />
         <Logger name="rpgframework.products" level="info" />
         <Logger name="splittermond" level="info" />
-        <Logger name="shadowrun6" level="warn" />
-        <Logger name="shadowrun6.print" level="debug" />
+        <Logger name="shadowrun6" level="info" />
         <Logger name="coriolis" level="info" />
         <Logger name="ubiquity" level="info" />
     </Loggers>

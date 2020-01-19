@@ -13,7 +13,7 @@ ext {
     appPackaging = "RPGFramework"
     appModuleName = "genesis"
     appMainClass = "genesis/org.prelle.genesis.Genesis5Main"
-    profile = 'development'    
+    profile = 'development'
 }
 
 repositories {
