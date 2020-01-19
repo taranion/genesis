@@ -99,7 +99,7 @@ jlink {
 	secondaryLauncher {
         name = 'Genesis-HiDPI'
         mainClass = "org.prelle.genesis.Genesis5Main"
-        jvmArgs = ["-Dapplication.version=$version","-Dglass.win.uiScale=144dpi","-Dprofile=staging"]
+        jvmArgs = ["-Dapplication.version=$version","-Dglass.win.uiScale=112dpi","-Dprofile=staging"]
     }
 	secondaryLauncher {
         name = 'Genesis-Staging'
@@ -109,7 +109,7 @@ jlink {
 	secondaryLauncher {
         name = 'Genesis-Staging-HiDPI'
         mainClass = "org.prelle.genesis.Genesis5Main"
-        jvmArgs = ["-Dapplication.version=$version","-Dglass.win.uiScale=144dpi","-Dprofile=staging"]
+        jvmArgs = ["-Dapplication.version=$version","-Dglass.win.uiScale=112dpi","-Dprofile=staging"]
     }
     forceMerge('log4j-api','itextpdf','org.apache.pdfbox')
     jpackage {
@@ -179,17 +179,17 @@ jlink {
 /** @return  [url, extension, directory] */
 String[] getJPackageCoordinates() {
     if(os.macOsX) return [
-        'https://download.java.net/java/early_access/jdk14/30/GPL/openjdk-14-ea+30_osx-x64_bin.tar.gz',
+        'https://download.java.net/java/early_access/jdk14/32/GPL/openjdk-14-ea+32_osx-x64_bin.tar.gz',
         'tar.gz',
         'jdk-14.jdk/Contents/Home'
     ]
     if(os.windows) return [
-        'https://download.java.net/java/early_access/jdk14/30/GPL/openjdk-14-ea+30_windows-x64_bin.zip',
+        'https://download.java.net/java/early_access/jdk14/32/GPL/openjdk-14-ea+32_windows-x64_bin.zip',
         'zip',
         'jdk-14'
     ]
     return [
-        'https://download.java.net/java/early_access/jdk14/30/GPL/openjdk-14-ea+30_linux-x64_bin.tar.gz',
+        'https://download.java.net/java/early_access/jdk14/32/GPL/openjdk-14-ea+32_linux-x64_bin.tar.gz',
         'tar.gz',
         'jdk-14'
     ]
