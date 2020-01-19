@@ -493,6 +493,7 @@ public class Genesis5Main extends Application {
 		stage.show();
 
 		checkForPluginUpdates();
+		checkForErrors();
 		//        /*
 		//         * Check for release notes to display. Send notification to preloader and get
 		//         * it filled with release notes, if there are any
@@ -541,6 +542,34 @@ public class Genesis5Main extends Application {
 			layout.getChildren().addAll(msg, grid);
 			
 			manager.showAlertAndCall(AlertType.NOTIFICATION, ResourceI18N.get(RES, "dialog.updates.title"), layout);
+		}
+		
+	}
+
+	//--------------------------------------------------------------------
+	/**
+	 * Eventually show information about updated plugins
+	 */
+	private void checkForErrors() {
+		logger.debug("Check if errors have occurred");
+		List<String> errors = RPGFrameworkLoader.getInstance().getUpdateErrors();
+		
+		if (!errors.isEmpty()) {	
+			DateFormat FORMAT = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.MEDIUM);
+			VBox grid = new VBox();
+			grid.setStyle("-fx-vgap: 0.5em; -fx-hgap: 1em");
+			int y=-1;
+			for (String message : errors) {
+				y++;
+				grid.getChildren().add(new Label(message));
+			}
+		
+			VBox layout = new VBox(20);
+			Label msg = new Label(ResourceI18N.get(RES, "dialog.update_failures.message"));
+			msg.setWrapText(true);
+			layout.getChildren().addAll(msg, grid);
+			
+			manager.showAlertAndCall(AlertType.NOTIFICATION, ResourceI18N.get(RES, "dialog.update_failures.title"), layout);
 		}
 		
 	}
