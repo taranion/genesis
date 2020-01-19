@@ -138,8 +138,7 @@ jlink {
             	'--win-menu', 
             	'--win-menu-group','RPGFramework',
             	'--win-shortcut', 
-            	'--verbose',
-            	'--win-dir-chooser',    	
+            	'--verbose',    	
             	'--win-upgrade-uuid', 'e641bb70-6cba-43bf-8070-c1894b6d46e9']
             imageOptions = ['--icon','src/main/deploy/package/windows/Genesis.ico']
          } else {
