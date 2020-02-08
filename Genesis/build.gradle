@@ -31,7 +31,7 @@ dependencies {
     implementation "de.rpgframework:rpgframework-chars:4.0.0-SNAPSHOT"
     implementation "de.rpgframework:rpgframework-javafx:4.0.0-SNAPSHOT"
     implementation "de.rpgframework:rpgframework-products:4.0.0-SNAPSHOT"
-    runtimeOnly "org.prelle:simple-persist:3.0.5"
+    runtimeOnly "org.prelle:simple-persist:3.1.0-SNAPSHOT"
     runtimeOnly "com.sun.mail:javax.mail:1.6.0"
     runtimeOnly "org.prelle.rpgframework:babylon-licensecheck:3.0.0-SNAPSHOT"
     runtimeOnly "de.rpgframework:itextpdf:4.2.0"
