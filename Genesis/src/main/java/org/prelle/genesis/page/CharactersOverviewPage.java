@@ -383,15 +383,21 @@ public class CharactersOverviewPage extends ManagedScreenPage implements EventHa
 						manager
 				);
 		if (!willWork) {
-			logger.warn("TODO: Remote open "+selected);
-			try {
-				external.open(selected);
-			} catch (IOException e) {
-				manager.showAlertAndCall(AlertType.ERROR, "Error opening externally", e.toString());
-			} catch (Exception e) {
-				StringWriter out = new StringWriter();
-				e.printStackTrace(new PrintWriter(out));
-				manager.showAlertAndCall(AlertType.ERROR, "Error opening externally", out.toString());
+			if (external.getToolPath(selected.getRuleIdentifier())==null) {
+				logger.warn("Trying to edit character with plugin or external tool: "+selected);
+				manager.showAlertAndCall(AlertType.ERROR, ResourceI18N.get(RES, "error.open_external.unconfigured.title"), 
+						ResourceI18N.format(RES, "error.open_external.unconfigured.mess",selected.getRuleIdentifier().getName()));				
+			} else {
+				try {
+					logger.warn("Remote open "+selected);
+					external.open(selected);
+				} catch (IOException e) {
+					manager.showAlertAndCall(AlertType.ERROR, "Error opening externally", e.toString());
+				} catch (Exception e) {
+					StringWriter out = new StringWriter();
+					e.printStackTrace(new PrintWriter(out));
+					manager.showAlertAndCall(AlertType.ERROR, "Error opening externally", out.toString());
+				}
 			}
 			return;
 		}

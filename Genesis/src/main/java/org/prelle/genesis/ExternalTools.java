@@ -83,6 +83,8 @@ public class ExternalTools implements ConfigChangeListener {
 	public Path getToolPath(RoleplayingSystem rules) {
 		ConfigContainer perRules = (ConfigContainer) cfgExternal.getChild(rules.name().toLowerCase());
 		ConfigOption<String> cfgPath = (ConfigOption<String>) perRules.getChild("path");
+		if (cfgPath==null || cfgPath.getValue()==null)
+			return null;
 		return FileSystems.getDefault().getPath(cfgPath.getStringValue());
 	}
 
@@ -141,6 +143,10 @@ public class ExternalTools implements ConfigChangeListener {
 		logger.debug("Open file "+realPath);
 		//		try {
 		Path toolPath = getToolPath(handle.getRuleIdentifier());
+		if (toolPath==null) {
+			throw new IOException(ResourceI18N.format(RES, "error.externaltools.unconfigured", handle.getRuleIdentifier().getName()));
+		}
+		
 		logger.info("Call "+toolPath+" "+realPath);
 		Process pro = Runtime.getRuntime().exec(new String[]{toolPath.toString(), realPath.toString()});
 		logger.debug("Process = "+pro);
