@@ -78,7 +78,7 @@
 			<dependency>
 				<groupId>org.prelle</groupId>
 				<artifactId>simple-persist</artifactId>
-				<version>[3.0.5,3.0.99)</version>
+				<version>[3.1.0-SNAPSHOT,3.1.99)</version>
 			</dependency>
 			<dependency>
 				<groupId>de.rpgframework</groupId>
