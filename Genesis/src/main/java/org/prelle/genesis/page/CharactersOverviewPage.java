@@ -193,7 +193,7 @@ public class CharactersOverviewPage extends ManagedScreenPage implements EventHa
 
 		CloseType response = getScreenManager().showAlertAndCall(
 				AlertType.CONFIRMATION,
-				RES.getString("confirm.delete.char"),
+				ResourceI18N.get(RES,"confirm.delete.char"),
 				ResourceI18N.format(RES,"confirm.delete.char.long", selected.getRuleIdentifier().getName(), selected.getName())
 				);
 		logger.debug("Response was "+response);
