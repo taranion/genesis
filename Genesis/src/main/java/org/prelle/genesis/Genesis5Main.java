@@ -399,7 +399,7 @@ public class Genesis5Main extends Application {
 				RPGFramework framework = RPGFrameworkLoader.getInstance();
 				framework.addBootStep(StandardBootSteps.UPDATE_PLUGINS);
 				framework.addBootStep(StandardBootSteps.ROLEPLAYING_SYSTEMS);
-//				framework.addBootStep(StandardBootSteps.PRODUCT_DATA);
+				framework.addBootStep(StandardBootSteps.PRODUCT_DATA);
 				framework.addBootStep(StandardBootSteps.CHARACTERS);
 				framework.addBootStep(new CheckForUpdates(logger));
 //				framework.addBootStep(new CheckReleaseNotes(logger, Genesis5Main.this));
