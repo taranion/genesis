@@ -3,25 +3,6 @@
  */
 package org.prelle.genesis.page;
 
-import java.text.DateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.ResourceBundle;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.prelle.javafx.AlertType;
-import org.prelle.javafx.CloseType;
-import org.prelle.javafx.CommandBar.DisplayState;
-import org.prelle.javafx.FontIcon;
-import org.prelle.javafx.ManagedScreenPage;
-import org.prelle.javafx.NavigButtonControl;
-import org.prelle.javafx.ScreenManager;
-import org.prelle.javafx.ScreenManagerProvider;
-
 import de.rpgframework.RPGFrameworkLoader;
 import de.rpgframework.ResourceI18N;
 import de.rpgframework.core.ActivationKey;
@@ -39,6 +20,24 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.prelle.javafx.AlertType;
+import org.prelle.javafx.CloseType;
+import org.prelle.javafx.CommandBar.DisplayState;
+import org.prelle.javafx.FontIcon;
+import org.prelle.javafx.ManagedScreenPage;
+import org.prelle.javafx.NavigButtonControl;
+import org.prelle.javafx.ScreenManager;
+import org.prelle.javafx.ScreenManagerProvider;
+
+import java.text.DateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.ResourceBundle;
 
 /**
  * @author prelle
@@ -277,22 +276,36 @@ public class LicensePage extends ManagedScreenPage {
 		desc.setWrapText(true);
 		Label lblName = new Label(ResourceI18N.get(GUICOMMON,"label.activation.name"));
 		Label lblMail = new Label(ResourceI18N.get(GUICOMMON,"label.activation.mail"));
+		Label lblMailRepeat = new Label(ResourceI18N.get(GUICOMMON,"label.activation.mailrepeat"));
 		TextField tfName = new TextField();
 		TextField tfMail = new TextField();
+		TextField tfMailRepeat = new TextField();
 		tfName.setPromptText(ResourceI18N.get(GUICOMMON,"prompt.activation.name"));
 		tfMail.setPromptText(ResourceI18N.get(GUICOMMON,"prompt.activation.mail"));
+		tfMailRepeat.setPromptText(ResourceI18N.get(GUICOMMON,"prompt.activation.mail"));
 		VBox layout = new VBox(5);
-		layout.getChildren().addAll(desc, lblName, tfName, lblMail, tfMail);
+		layout.getChildren().addAll(desc, lblName, tfName, lblMail, tfMail, lblMailRepeat, tfMailRepeat);
 		VBox.setMargin(lblName, new Insets(10, 0, 0, 0));
 		VBox.setMargin(lblMail, new Insets(10, 0, 0, 0));
+		VBox.setMargin(lblMailRepeat, new Insets(10, 0, 0, 0));
 
 		NavigButtonControl control = new NavigButtonControl();
-		tfName.textProperty().addListener( (ov,o,n) -> control.setDisabled(CloseType.OK, !((n!=null && n.length()>1) && tfMail.getText()!=null && tfMail.getText().length()>1)) );
-		tfMail.textProperty().addListener( (ov,o,n) -> control.setDisabled(CloseType.OK, !((n!=null && n.length()>1) && tfName.getText()!=null && tfName.getText().length()>1)) );
-		
-		
+		tfName.textProperty().addListener((ov, o, n) -> control.setDisabled(CloseType.OK, !inputValid(tfName.getText(), tfMail.getText(), tfMailRepeat.getText())));
+		tfMail.textProperty().addListener((ov, o, n) -> control.setDisabled(CloseType.OK, !inputValid(tfName.getText(), tfMail.getText(), tfMailRepeat.getText())));
+		tfMailRepeat.textProperty().addListener((ov, o, n) -> control.setDisabled(CloseType.OK, !inputValid(tfName.getText(), tfMail.getText(), tfMailRepeat.getText())));
+
 		CloseType closed = getManager().showAlertAndCall(AlertType.QUESTION, ResourceI18N.get(GUICOMMON,"dialog.activation.title"), layout, control);
 		return new DialogReturn(closed, tfName.getText(), tfMail.getText());
+	}
+
+	private boolean inputValid(String name, String email, String emailRepeat){
+		if (name == null || email == null || emailRepeat == null) {
+			return false;
+		}
+		if (name.length() <= 1 || email.length() <=1 || emailRepeat.length() <= 1) {
+			return false;
+		}
+		return email.equals(emailRepeat);
 	}
 
 }
