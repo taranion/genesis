@@ -215,8 +215,8 @@ public class CharactersOverviewPage extends ManagedScreenPage implements EventHa
 				StringWriter buf = new StringWriter();
 				e.printStackTrace(new PrintWriter(buf));
 				getScreenManager().showAlertAndCall(AlertType.ERROR,
-						ResourceI18N.format(RES, "error.deleting.char", ""),
-						ResourceI18N.format(RES,"error.deleting.char", buf.toString())
+						ResourceI18N.get(RES, "error.deleting.char.title"),
+						ResourceI18N.format(RES,"error.deleting.char.message", buf.toString())
 						);
 			}
 		}
