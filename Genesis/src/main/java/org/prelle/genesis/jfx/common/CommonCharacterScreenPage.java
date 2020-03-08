@@ -7,6 +7,7 @@ import java.awt.Desktop;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
@@ -17,11 +18,13 @@ import java.util.ResourceBundle;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.prelle.genesis.Constants;
+import org.prelle.genesis.Genesis5Main;
 import org.prelle.javafx.AlertType;
 import org.prelle.javafx.FontIcon;
 import org.prelle.javafx.ManagedScreen;
 import org.prelle.javafx.ScreenManager;
 
+import de.rpgframework.ResourceI18N;
 import de.rpgframework.character.Attachment;
 import de.rpgframework.character.CharacterHandle;
 import de.rpgframework.character.CharacterHandle.Format;
@@ -127,7 +130,7 @@ public class CommonCharacterScreenPage extends ManagedScreen {
 		FontIcon icon = new FontIcon("\uE13D");
 		icon.setStyle("-fx-font-size: 600%");
 
-		Label description = new Label(GUICOMMON.getString("commoncharacterscreen.descr"));
+		Label description = new Label(ResourceI18N.get(GUICOMMON,"commoncharacterscreen.descr"));
 		description.setWrapText(true);
 		description.setMaxHeight(Double.MAX_VALUE);
 		description.setAlignment(Pos.TOP_LEFT);
@@ -142,13 +145,14 @@ public class CommonCharacterScreenPage extends ManagedScreen {
 		/*
 		 *  Character
 		 */
-		Label headCharacter = new Label(GUICOMMON.getString("commoncharacterscreen.col.character"));
+		Label headCharacter = new Label(ResourceI18N.get(GUICOMMON,"commoncharacterscreen.col.character"));
 		headCharacter.getStyleClass().add("section-head");
 		headCharacter.setMaxWidth(Double.MAX_VALUE);
 		HBox lineCharacter = new HBox(headCharacter, btnCharacter);
 		HBox.setHgrow(headCharacter, Priority.ALWAYS);
 
-		ImageView bgCharacter = new ImageView(new Image(getClass().getResourceAsStream("images/Icon_Character.png")));
+		InputStream ins = Genesis5Main.class.getResourceAsStream("images/Icon_Character.png");
+		ImageView bgCharacter = new ImageView(new Image(ins));
 		bgCharacter.setFitHeight(96);
 		bgCharacter.setFitWidth(96);
 		bgCharacter.setStyle("-fx-opacity: 0.5");
@@ -167,13 +171,13 @@ public class CommonCharacterScreenPage extends ManagedScreen {
 		/*
 		 * Background
 		 */
-		Label headBackground= new Label(GUICOMMON.getString("commoncharacterscreen.col.background"));
+		Label headBackground= new Label(ResourceI18N.get(GUICOMMON,"commoncharacterscreen.col.background"));
 		headBackground.getStyleClass().add("section-head");
 		headBackground.setMaxWidth(Double.MAX_VALUE);
 		HBox lineBackground = new HBox(headBackground, btnBackground);
 		HBox.setHgrow(headBackground, Priority.ALWAYS);
 
-		ImageView bgBackground= new ImageView(new Image(getClass().getResourceAsStream("images/Icon_Background.png")));
+		ImageView bgBackground= new ImageView(new Image(Genesis5Main.class.getResourceAsStream("images/Icon_Background.png")));
 		bgBackground.setFitHeight(96);
 		bgBackground.setFitWidth(96);
 		bgBackground.setStyle("-fx-opacity: 0.5");
@@ -192,13 +196,13 @@ public class CommonCharacterScreenPage extends ManagedScreen {
 		/*
 		 * Reports
 		 */
-		Label headReport    = new Label(GUICOMMON.getString("commoncharacterscreen.col.report"));
+		Label headReport    = new Label(ResourceI18N.get(GUICOMMON,"commoncharacterscreen.col.report"));
 		headReport.getStyleClass().add("section-head");
 		headReport.setMaxWidth(Double.MAX_VALUE);
 		HBox lineReport = new HBox(headReport, btnReport);
 		HBox.setHgrow(headReport, Priority.ALWAYS);
 
-		ImageView bgReports   = new ImageView(new Image(getClass().getResourceAsStream("images/Icon_Reports.png")));
+		ImageView bgReports   = new ImageView(new Image(Genesis5Main.class.getResourceAsStream("images/Icon_Reports.png")));
 		bgReports.setFitHeight(96);
 		bgReports.setFitWidth(96);
 		bgReports.setStyle("-fx-opacity: 0.5");
@@ -263,12 +267,12 @@ public class CommonCharacterScreenPage extends ManagedScreen {
 	//--------------------------------------------------------------------
 	public void addTo(Type type) {
 		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle(GUICOMMON.getString("commoncharacterscreen.filechooser.open."+type.name().toLowerCase()));
+		fileChooser.setTitle(ResourceI18N.get(GUICOMMON,"commoncharacterscreen.filechooser.open."+type.name().toLowerCase()));
 		if (initialDir!=null)
 			fileChooser.setInitialDirectory(initialDir);
 		switch (type) {
 		case BACKGROUND:
-			fileChooser.getExtensionFilters().add(new ExtensionFilter(GUICOMMON.getString("commoncharacterscreen.filechooser.filter.documents"), Arrays.asList("*.pdf","*.txt","*.html","*.htm")));
+			fileChooser.getExtensionFilters().add(new ExtensionFilter(ResourceI18N.get(GUICOMMON,"commoncharacterscreen.filechooser.filter.documents"), Arrays.asList("*.pdf","*.txt","*.html","*.htm")));
 			break;
 		default:
 		}
@@ -362,7 +366,7 @@ public class CommonCharacterScreenPage extends ManagedScreen {
 class AttachmentCell extends ListCell<Attachment> {
 
 	private final static Logger logger = LogManager.getLogger("gui");
-	private static ResourceBundle GUICOMMON = ResourceBundle.getBundle("org/prelle/rpgframework/jfx/common/i18n/guicommon");
+	private static ResourceBundle GUICOMMON = Constants.RES;
 
 	private static Image ICON_PDF;
 	private static Image ICON_HTML;
@@ -371,10 +375,10 @@ class AttachmentCell extends ListCell<Attachment> {
 
 	//--------------------------------------------------------------------
 	static {
-		ICON_PDF  = new Image(AttachmentCell.class.getResourceAsStream("images/Icon_PDF.png"));
-		ICON_HTML = new Image(AttachmentCell.class.getResourceAsStream("images/Icon_HTML.png"));
-		ICON_DICE = new Image(AttachmentCell.class.getResourceAsStream("images/Icon_Dice.png"));
-		ICON_TXT  = new Image(AttachmentCell.class.getResourceAsStream("images/Icon_TXT.png"));
+		ICON_PDF  = new Image(Genesis5Main.class.getResourceAsStream("images/Icon_PDF.png"));
+		ICON_HTML = new Image(Genesis5Main.class.getResourceAsStream("images/Icon_HTML.png"));
+		ICON_DICE = new Image(Genesis5Main.class.getResourceAsStream("images/Icon_Dice.png"));
+		ICON_TXT  = new Image(Genesis5Main.class.getResourceAsStream("images/Icon_TXT.png"));
 	}
 
 	private Attachment data;
@@ -398,9 +402,9 @@ class AttachmentCell extends ListCell<Attachment> {
 		/*
 		 * Context menu
 		 */
-		menuOpen = new MenuItem(GUICOMMON.getString("commoncharacterscreen.open"));
+		menuOpen = new MenuItem(ResourceI18N.get(GUICOMMON,"commoncharacterscreen.open"));
 		menuOpen.setOnAction(event -> open());
-		menuDelete = new MenuItem(GUICOMMON.getString("commoncharacterscreen.delete"));
+		menuDelete = new MenuItem(ResourceI18N.get(GUICOMMON,"commoncharacterscreen.delete"));
 		menuDelete.setOnAction(event -> parent.deleteAttachment(data));
 		context = new ContextMenu();
 		context.getItems().addAll(menuOpen,menuDelete);
