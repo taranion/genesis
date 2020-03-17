@@ -207,6 +207,7 @@ public class Genesis5Main extends Application {
 		logger.info("Running Genesis version "+System.getProperty(Constants.KEY_APPLICATION_VERSION));
 		logger.info("Running on "+System.getProperty("os.name")+ "/" + System.getProperty("os.version")+ "/" + System.getProperty("os.arch"));
 		logger.info("Running under "+System.getProperty("java.vendor")+" Java "+System.getProperty("java.version")+" with JavaFX "+System.getProperty("javafx.version"));
+		logger.info("Running with language "+Locale.getDefault().getLanguage());
 	}
 
 	//-------------------------------------------------------------------
