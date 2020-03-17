@@ -164,18 +164,18 @@ public class LicensePage extends ManagedScreenPage {
 			logger.debug("Detected = "+detected);
 			if (detected==null) {
 				logger.error("Failed detecting key type of: "+val);
-				getManager().showAlertAndCall(AlertType.ERROR, "Licensing not supported", "This application has no built in support for licensing");
+				getManager().showAlertAndCall(AlertType.ERROR, "License verification failed", "Entweder ist der Lizenzserver abgestürzt, oder Genesis läuft nicht in der richtigen Sprache für die Lizenz.");
 				return;
 			}
+			logger.debug("Detected = "+detected.getClass());
 			if (detected instanceof String) {
 				logger.error("Failed detecting key type of: "+val);
 				if (String.valueOf(detected).equals("Cannot detect type of license."))
 					getManager().showAlertAndCall(AlertType.ERROR, (String)detected, "The data you entered is neither an activation key, nor a license key.\nCheck that the entered string does not contain any line breaks.");
 				else
-					getManager().showAlertAndCall(AlertType.ERROR, (String)detected, "The process failed. Please verify the entered data.\nYou can contact license@rpgframework.de for help.");
+					getManager().showAlertAndCall(AlertType.ERROR, (String)detected, "The process failed. The message was: "+detected+"\nPlease verify the entered data.\nYou can contact license@rpgframework.de for help.");
 				return;
 			}
-			logger.debug("Detected = "+detected.getClass());
 			logger.debug("Detected2 = "+(detected instanceof ActivationKey));
 			logger.debug("Detected3 = "+(ActivationKey.class.isAssignableFrom(detected.getClass())));
 			logger.debug("Interfaces = "+Arrays.asList(detected.getClass().getInterfaces()));
