@@ -342,6 +342,8 @@ public class MainScreen extends ManagedScreen implements BabylonEventListener {
 				type = AlertType.CONFIRMATION;
 				break;
 			case 1: // WARN
+				type = AlertType.NOTIFICATION;
+				break;
 			case 2: // ERROR
 				type = AlertType.ERROR;
 				break;

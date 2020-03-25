@@ -29,8 +29,9 @@
         <Logger name="rpgframework.products" level="debug" />
         <Logger name="splittermond" level="warn" />
         <Logger name="shadowrun6" level="warn" />
-        <!--Logger name="shadowrun6.jfx" level="info" /-->
+        <Logger name="shadowrun6.jfx.items" level="info" />
         <Logger name="shadowrun6.gen.attrib" level="info" />
+        <Logger name="shadowrun6.gen.items" level="debug" />
         <!-- Logger name="shadowrun6.items.proc" level="warn" /-->
         <Logger name="coriolis" level="info" />
         <Logger name="ubiquity" level="info" />
