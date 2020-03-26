@@ -12,7 +12,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - name: Set up JDK 11
+    - name: Set up JDK 14
       uses: actions/setup-java@v1
       with:
         java-version: 14
@@ -28,6 +28,23 @@ jobs:
 #        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 #        GCLOUD_PWD_TOKEN: ${{ secrets.GCLOUD_PWD_TOKEN }}
 #      run: cd Genesis ;  ./gradlew distZIP; ls build/distributions
+    - name: Echo
+      run: java -version
+    - name: Build ZIP
+      env:
+        GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GCLOUD_PWD_TOKEN: ${{ secrets.GCLOUD_PWD_TOKEN }}
+      run: cd Genesis ;  ./gradlew jlinkZip ; ls build/distributions
+    - name: Upload JAR
+      uses: appleboy/scp-action@master
+      with:
+        host: euve265084.serverprofi24.de
+        username: github
+        password: ${{ secrets.DEPLOY_PASSWORD }}
+        source: "Genesis/build/distributions/*.zip"
+        target: "/var/www/html/downloads/linux"
+        strip_components: 3
     - name: Build RPM and DEB installer
       env:
         GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
@@ -50,21 +67,6 @@ jobs:
         username: github
         password: ${{ secrets.DEPLOY_PASSWORD }}
         source: "Genesis/build/jpackage/*.deb"
-        target: "/var/www/html/downloads/linux"
-        strip_components: 3
-    - name: Build ZIP
-      env:
-        GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        GCLOUD_PWD_TOKEN: ${{ secrets.GCLOUD_PWD_TOKEN }}
-      run: cd Genesis ;  ./gradlew jlinkZip ; ls build/distributions
-    - name: Upload JAR
-      uses: appleboy/scp-action@master
-      with:
-        host: euve265084.serverprofi24.de
-        username: github
-        password: ${{ secrets.DEPLOY_PASSWORD }}
-        source: "Genesis/build/distributions/*.zip"
         target: "/var/www/html/downloads/linux"
         strip_components: 3
         
