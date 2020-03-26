@@ -48,12 +48,12 @@ jobs:
          dir build\jpackage
          echo version=$VERSION
       
-    - name: Signtool 
-      uses: dlemstra/code-sign-action@v1
-      with:
-        certificate: '${{ secrets.CERTIFICATE }}'
-        folder: 'Genesis\build\jpackage'
-        recursive: false
+#    - name: Signtool 
+#      uses: dlemstra/code-sign-action@v1
+#      with:
+#        certificate: '${{ secrets.CERTIFICATE }}'
+#        folder: 'Genesis\build\jpackage'
+#        recursive: false
     - name: Dir
       run: dir Genesis\build\jpackage
       
