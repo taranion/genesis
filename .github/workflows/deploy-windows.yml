@@ -51,9 +51,9 @@ jobs:
     - name: Sign
       uses: dlemstra/code-sign-action@v1
       with:
-    	certificate: '${{ secrets.CERTIFICATE }}'
-    	folder: 'Genesis\build\jpackage'
-    	recursive: false
+        certificate: '${{ secrets.CERTIFICATE }}'
+        folder: 'Genesis\build\jpackage'
+        recursive: false
     - name: Dir
       run: dir Genesis\build\jpackage
       
