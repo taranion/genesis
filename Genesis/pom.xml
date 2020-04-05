@@ -149,6 +149,12 @@
 			<version>4.0.0</version>
 			<scope>runtime</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.prelle.rpgframework</groupId>
+			<artifactId>splittermond-json</artifactId>
+			<version>1.0.0</version>
+			<scope>runtime</scope>
+		</dependency>
 
 <!-- 		<dependency> -->
 <!-- 			<groupId>org.prelle.rpgframework</groupId> -->
@@ -257,7 +263,7 @@
         <dependency>
             <groupId>org.prelle.rpgframework</groupId>
             <artifactId>shadowrun6-print</artifactId>
-			<version>1.0.1</version>
+			<version>[1.0.2,)</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
