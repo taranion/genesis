@@ -12,4 +12,6 @@ module genesis {
 	requires java.desktop;
 	requires de.rpgframework.chars;
 	requires de.rpgframework.javafx;
+	
+	requires com.google.gson;
 }
