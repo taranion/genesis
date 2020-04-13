@@ -9,3 +9,4 @@ build
 /bin/
 /.settings/
 /.classpath
+hs_err*
