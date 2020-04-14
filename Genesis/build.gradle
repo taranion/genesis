@@ -2,7 +2,7 @@ plugins {
     id 'application'
     id 'eclipse'
     id 'org.openjfx.javafxplugin' version '0.0.8'
-    id 'org.beryx.jlink' version '2.17.3'
+    id 'org.beryx.jlink' version '2.17.6'
     id "de.undercouch.download" version "4.0.0"
 }
 
@@ -33,7 +33,7 @@ dependencies {
     implementation "de.rpgframework:rpgframework-products:4.0.0-SNAPSHOT"
     runtimeOnly "org.prelle:simple-persist:3.1.3"
     runtimeOnly "com.sun.mail:javax.mail:1.6.0"
-    runtimeOnly "org.prelle.rpgframework:babylon-licensecheck:3.0.0-SNAPSHOT"
+    runtimeOnly "org.prelle.rpgframework:babylon-licensecheck:3.0.1-SNAPSHOT"
     runtimeOnly "de.rpgframework:itextpdf:4.2.0"
     runtimeOnly "org.apache.pdfbox:pdfbox:2.0.18"
     runtimeOnly "org.apache.pdfbox:fontbox:2.0.18"
@@ -113,7 +113,7 @@ jlink {
         mainClass = "org.prelle.genesis.Genesis5Main"
         jvmArgs = ["-Dapplication.version=$version","-Dglass.win.uiScale=112dpi","-Dprofile=staging"]
     }
-    forceMerge('log4j-api','itextpdf','org.apache.pdfbox','com.google.gson','gson','babylon-licensecheck')
+    forceMerge('log4j-api','itextpdf','org.apache.pdfbox','com.google.gson','babylon-licensecheck')
     jpackage {
         // Let the plugin detect the path to the JDK providing the jpackage tool by searching the locations indicated by:
         //  - the badass.jlink.jpackage.home system property
@@ -124,7 +124,7 @@ jlink {
         //   OR
         //
         // explicitly configure the below property:
-        //jpackageHome = '/opt/jdk-14'
+        jpackageHome = '/opt/jdk-14'
         //jpackageHome = "C:/Users/Stefan/workspaces/RPGFramework/Applications/Genesis/Genesis/build/download/jdk-14"
         //
         //   OR
