@@ -437,6 +437,9 @@ public class Genesis5Main extends Application {
 
 		stage.initStyle(StageStyle.DECORATED);
 		stage.setTitle("Genesis");
+		String versText = System.getProperty(Constants.KEY_APPLICATION_VERSION, "Run in IDE");
+		String profText = System.getProperty(Constants.KEY_PROFILE, "NoProfile");
+		stage.setTitle("Genesis "+versText+" - "+profText);
 		stage.getIcons().add(
 				new Image(Genesis5Main.class.getResourceAsStream( "images/icon.gif" )));
 		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
