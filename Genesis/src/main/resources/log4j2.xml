@@ -26,11 +26,11 @@
         <Logger name="rpgframework" level="debug" />
         <Logger name="rpgframework.chars" level="info" />
         <Logger name="rpgframework.jfx"   level="info" />
-        <Logger name="rpgframework.products" level="debug" />
+        <Logger name="rpgframework.products" level="info" />
         <Logger name="splittermond" level="warn" />
         <Logger name="shadowrun6" level="info" />
-        <Logger name="shadowrun6.items" level="warn" />
-        <Logger name="shadowrun6.lvl" level="warn" />
+        <Logger name="shadowrun6.items" level="info" />
+        <Logger name="shadowrun6.lvl" level="debug" />
         <Logger name="shadowrun6.proc" level="debug" />
         <Logger name="shadowrun6.jfx" level="info" />
         <Logger name="shadowrun6.jfx.items" level="debug" />
