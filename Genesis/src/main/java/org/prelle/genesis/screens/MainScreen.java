@@ -332,6 +332,19 @@ public class MainScreen extends ManagedScreen implements BabylonEventListener {
 	 */
 	@Override
 	public void handleAppEvent(BabylonEvent event) {
+		if (Platform.isFxApplicationThread()) {
+			handleAppEventInternal(event);
+		} else {
+			Platform.runLater(new Runnable() {
+				public void run() {
+					handleAppEventInternal(event);
+				}
+			});
+		}
+	}
+
+	//--------------------------------------------------------------------
+	private void handleAppEventInternal(BabylonEvent event) {
 		switch (event.getType()) {
 		case UI_MESSAGE:
 			int type_i = (Integer)event.getData()[0];
@@ -339,7 +352,7 @@ public class MainScreen extends ManagedScreen implements BabylonEventListener {
 			AlertType type = AlertType.ERROR;
 			switch (type_i) {
 			case 0: // INFO
-				type = AlertType.CONFIRMATION;
+				type = AlertType.NOTIFICATION;
 				break;
 			case 1: // WARN
 				type = AlertType.NOTIFICATION;
@@ -349,9 +362,19 @@ public class MainScreen extends ManagedScreen implements BabylonEventListener {
 				break;
 			}
 			String todo = ResourceI18N.format(RES,"label.consultlogfile",System.getProperty("logdir"));
-			if (getManager()!=null)
-				getManager().showAlertAndCall(type, RES.getString("label.internalError"), mess+"\n\n"+todo);
-			else {
+			if (getManager()!=null) {
+				switch (type_i) {
+				case 0: // INFO
+					getManager().showAlertAndCall(type, ResourceI18N.get(RES, "label.internalInfo"), mess+"\n\n"+todo);
+					break;
+				case 1: // WARN
+					getManager().showAlertAndCall(type, ResourceI18N.get(RES,"label.internalWarning"), mess+"\n\n"+todo);
+					break;
+				case 2: // ERROR
+					getManager().showAlertAndCall(type, ResourceI18N.get(RES,"label.internalError"), mess+"\n\n"+todo);
+					break;
+				}
+			} else {
 				Platform.runLater(new Runnable() {
 					public void run() {
 						javafx.scene.control.Alert.AlertType type2 = javafx.scene.control.Alert.AlertType.ERROR;
