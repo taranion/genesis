@@ -423,7 +423,7 @@ public class PrintHelper {
 			HBox tempLine = new HBox(5);
 			tempLine.getChildren().addAll(cbTemplates, btnEditTemp);
 			i++;
-			grid.add(new Label(RES.getString("label.template")), 0, i);
+			grid.add(new Label(ResourceI18N.get(RES,"label.template")), 0, i);
 			grid.add(tempLine, 1, i);
 		}
 

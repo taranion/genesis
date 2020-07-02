@@ -1,6 +1,3 @@
-/**
- *
- */
 package org.prelle.genesis.print;
 
 import java.nio.file.Path;
@@ -11,10 +8,10 @@ import java.util.ResourceBundle;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.prelle.genesis.Constants;
 import org.prelle.javafx.CloseType;
 import org.prelle.javafx.ManagedDialog;
 
+import de.rpgframework.ResourceI18N;
 import de.rpgframework.character.RuleSpecificCharacterObject;
 import de.rpgframework.core.RoleplayingSystem;
 import de.rpgframework.print.PDFPrintElement;
@@ -32,14 +29,10 @@ import javafx.scene.layout.VBox;
  * @author Stefan
  *
  */
-/**
- * @author Stefan
- *
- */
 public class PrintTemplateEditorScreen extends ManagedDialog {
 
 	private final static Logger logger = LogManager.getLogger("genesis");
-	private final static ResourceBundle GENESIS = Constants.RES;
+	private final static ResourceBundle RES = ResourceBundle.getBundle(PrintTemplateEditorScreen.class.getName());
 
 	private List<PDFPrintElement> elements;
 	private Map<String,PDFPrintElement> elementMap;
@@ -55,7 +48,7 @@ public class PrintTemplateEditorScreen extends ManagedDialog {
 
 	//--------------------------------------------------------------------
 	public PrintTemplateEditorScreen(List<PDFPrintElement> elements, RoleplayingSystem system) {
-		super(GENESIS.getString("screen.print_template_editor.title"), null, CloseType.OK);
+		super(ResourceI18N.get(RES,"screen.print_template_editor.title"), null, CloseType.OK);
 		this.elements = elements;
 		this.system   = system;
 		this.elementMap = new HashMap<>();
@@ -70,7 +63,7 @@ public class PrintTemplateEditorScreen extends ManagedDialog {
 
 	//--------------------------------------------------------------------
 	private void initComponents() {
-		noWYSIWYG = new Label(GENESIS.getString("screen.printtemplate.nowysiwyg"));
+		noWYSIWYG = new Label(ResourceI18N.get(RES,"screen.printtemplate.nowysiwyg"));
 		lvPages = new ListView<>();
 		lvPages.getItems().add(PrintManagerLoader.getInstance().createPageDefinition(6));
 		logger.debug("Added a page to the listview");

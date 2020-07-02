@@ -574,7 +574,7 @@ public class Genesis5Main extends Application {
 			layout.getChildren().addAll(msg, grid);
 			
 			manager.showAlertAndCall(AlertType.NOTIFICATION, ResourceI18N.get(RES, "dialog.update_failures.title"), layout);
-		}
-		
+		}		
 	}
+	
 }

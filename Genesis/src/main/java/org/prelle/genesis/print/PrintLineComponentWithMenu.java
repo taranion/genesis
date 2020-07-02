@@ -8,6 +8,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.prelle.genesis.Constants;
 
+import de.rpgframework.ResourceI18N;
 import de.rpgframework.character.RuleSpecificCharacterObject;
 import de.rpgframework.print.ElementCell;
 import de.rpgframework.print.MultiRowCell;
@@ -35,7 +36,7 @@ import javafx.scene.layout.StackPane;
 class PrintLineComponentWithMenu extends StackPane {
 
 	private final static Logger logger = LogManager.getLogger("genesis");
-	private final static ResourceBundle RES = Constants.RES;
+	private final static ResourceBundle RES = ResourceBundle.getBundle(PrintLineComponentWithMenu.class.getName());
 
 	private RuleSpecificCharacterObject character;
 	private ElementCell cell;
@@ -72,15 +73,15 @@ class PrintLineComponentWithMenu extends StackPane {
 	//--------------------------------------------------------------------
 	private void initComponents() {
 		btnDelete = new Button("\uE107");
-		btnDelete.setTooltip(new Tooltip(RES.getString("screen.printtemplate.tooltip.delete")));
+		btnDelete.setTooltip(new Tooltip(ResourceI18N.get(RES,"screen.printtemplate.tooltip.delete")));
 		btnDelete.getStyleClass().addAll("internal-window-button");
 
 		btnToggleLeftRight = new Button("\uE13C");
-		btnToggleLeftRight.setTooltip(new Tooltip(RES.getString("screen.printtemplate.tooltip.togglelr")));
+		btnToggleLeftRight.setTooltip(new Tooltip(ResourceI18N.get(RES,"screen.printtemplate.tooltip.togglelr")));
 		btnToggleLeftRight.getStyleClass().addAll("internal-window-button");
 
 		btnExpandBelow = new Button("\uE147");
-		btnExpandBelow.setTooltip(new Tooltip(RES.getString("screen.printtemplate.tooltip.expandRow")));
+		btnExpandBelow.setTooltip(new Tooltip(ResourceI18N.get(RES,"screen.printtemplate.tooltip.expandRow")));
 		btnExpandBelow.getStyleClass().addAll("internal-window-button");
 
 		btnShrinkVert = new Button("\uE010");
@@ -88,23 +89,23 @@ class PrintLineComponentWithMenu extends StackPane {
 		btnShrinkVert.getStyleClass().addAll("internal-window-button");
 
 		btnGrowVert = new Button("\uE011");
-		btnGrowVert.setTooltip(new Tooltip(RES.getString("screen.printtemplate.tooltip.growV")));
+		btnGrowVert.setTooltip(new Tooltip(ResourceI18N.get(RES,"screen.printtemplate.tooltip.growV")));
 		btnGrowVert.getStyleClass().addAll("internal-window-button");
 
 		btnShrinkHori = new Button("\uE012");
-		btnShrinkHori.setTooltip(new Tooltip(RES.getString("screen.printtemplate.tooltip.shrinkH")));
+		btnShrinkHori.setTooltip(new Tooltip(ResourceI18N.get(RES,"screen.printtemplate.tooltip.shrinkH")));
 		btnShrinkHori.getStyleClass().addAll("internal-window-button");
 
 		btnGrowHori = new Button("\uE013");
-		btnGrowHori.setTooltip(new Tooltip(RES.getString("screen.printtemplate.tooltip.growH")));
+		btnGrowHori.setTooltip(new Tooltip(ResourceI18N.get(RES,"screen.printtemplate.tooltip.growH")));
 		btnGrowHori.getStyleClass().addAll("internal-window-button");
 
 		btnFilter = new Button("\uE16E");
-		btnFilter.setTooltip(new Tooltip(RES.getString("screen.printtemplate.tooltip.filter")));
+		btnFilter.setTooltip(new Tooltip(ResourceI18N.get(RES,"screen.printtemplate.tooltip.filter")));
 		btnFilter.getStyleClass().addAll("internal-window-button");
 
 		btnPick = new Button("\uE094");
-		btnPick.setTooltip(new Tooltip(RES.getString("screen.printtemplate.tooltip.pick")));
+		btnPick.setTooltip(new Tooltip(ResourceI18N.get(RES,"screen.printtemplate.tooltip.pick")));
 		btnPick.getStyleClass().addAll("internal-window-button");
 	}
 

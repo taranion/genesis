@@ -1,6 +1,3 @@
-/**
- *
- */
 package org.prelle.genesis.print;
 
 import java.util.Map;
@@ -8,8 +5,8 @@ import java.util.ResourceBundle;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.prelle.genesis.Constants;
 
+import de.rpgframework.ResourceI18N;
 import de.rpgframework.print.ElementCell;
 import de.rpgframework.print.PDFPrintElement;
 import de.rpgframework.print.PrintManagerLoader;
@@ -28,7 +25,7 @@ import javafx.scene.layout.RowConstraints;
 public class AppendLineComponent extends Label implements RowComponent {
 
 	private final static Logger logger = LogManager.getLogger("genesis");
-	private final static ResourceBundle RES = Constants.RES;
+	private final static ResourceBundle RES = ResourceBundle.getBundle(PrintTemplateEditorScreen.class.getName());
 
 	private final static Double HEIGHT = 50.0;
 
@@ -41,7 +38,7 @@ public class AppendLineComponent extends Label implements RowComponent {
 
 	//--------------------------------------------------------------------
 	public AppendLineComponent(Map<String, PDFPrintElement> elementMap, PagePane page, int add, int show) {
-		super(RES.getString("screen.printtemplate.appendline"));
+		super(ResourceI18N.get(RES,"screen.printtemplate.appendline"));
 		elements = elementMap;
 		this.page = page;
 		this.addLine = add;

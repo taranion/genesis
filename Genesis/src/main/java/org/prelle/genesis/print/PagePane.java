@@ -16,6 +16,7 @@ import org.prelle.genesis.Constants;
 import org.prelle.javafx.AlertType;
 import org.prelle.javafx.CloseType;
 
+import de.rpgframework.ResourceI18N;
 import de.rpgframework.print.PDFPrintElement;
 import de.rpgframework.print.PageDefinition;
 import de.rpgframework.print.PrintLine;
@@ -39,7 +40,7 @@ import javafx.stage.FileChooser;
 class PagePane extends HBox {
 
 	private final static Logger logger = LogManager.getLogger("genesis");
-	private final static ResourceBundle RES = Constants.RES;
+	private final static ResourceBundle RES = ResourceBundle.getBundle(PagePane.class.getName());
 
 	private Map<String, PDFPrintElement> elements;
 	private PageDefinition page;
@@ -82,18 +83,18 @@ class PagePane extends HBox {
 
 		btnDelete = new Button("\uE107");
 		btnDelete.setStyle("-fx-font-size: 200%; -fx-text-fill: white; -fx-font-family: 'Segoe UI Symbol';");
-		btnDelete.setTooltip(new Tooltip(RES.getString("screen.printtemplate.button.delete_page")));
+		btnDelete.setTooltip(new Tooltip(ResourceI18N.get(RES,"screen.printtemplate.button.delete_page")));
 
 //		btnBackground = new Button(new String(Character.toChars(127912))); // 1f3a8
 //		btnBackground = new Button("\uEB9F");
 		btnBackground = new Button("\uE114");
 		btnBackground.setStyle("-fx-font-size: 200%; -fx-text-fill: white; -fx-font-family: 'Segoe UI Symbol'");
 //		btnBackground.setStyle("-fx-font-size: 200%; -fx-text-fill: white; -fx-font-face: 'Segoe UI Symbol'");
-		btnBackground.setTooltip(new Tooltip(RES.getString("screen.printtemplate.button.background")));
+		btnBackground.setTooltip(new Tooltip(ResourceI18N.get(RES,"screen.printtemplate.button.background")));
 
 		btnAdd = new Button("\uE109");  // E0C5
 		btnAdd.setStyle("-fx-font-size: 200%; -fx-text-fill: white; -fx-font-family: 'Segoe UI Symbol'");
-		btnAdd.setTooltip(new Tooltip(RES.getString("screen.printtemplate.button.add_page")));
+		btnAdd.setTooltip(new Tooltip(ResourceI18N.get(RES,"screen.printtemplate.button.add_page")));
 
 
 	}
@@ -131,8 +132,8 @@ class PagePane extends HBox {
 		btnDelete.setOnAction(ev -> {
 			CloseType result = provider.getScreenManager().showAlertAndCall(
 					AlertType.CONFIRMATION,
-					RES.getString("screen.printtemplate.deleteconfirm.title"),
-					RES.getString("screen.printtemplate.deleteconfirm.desc")
+					ResourceI18N.get(RES,"screen.printtemplate.deleteconfirm.title"),
+					ResourceI18N.get(RES,"screen.printtemplate.deleteconfirm.desc")
 					);
 			if (result==CloseType.OK || result==CloseType.YES) {
 				logger.info("User confirmed to delete page");
@@ -148,7 +149,7 @@ class PagePane extends HBox {
 		btnBackground.setOnAction(ev -> {
 			logger.debug("Select background image clicked");
 			FileChooser.ExtensionFilter images = new FileChooser.ExtensionFilter(
-				    RES.getString("filechooser.images"), "*.png", "*.jpg");
+					ResourceI18N.get(RES,"filechooser.images"), "*.png", "*.jpg");
 			FileChooser chooser = new FileChooser();
 			Preferences pref = 	Preferences.userRoot().node("/org/prelle/genesis");
 			String initialDirName = pref.get("printtemplate_pick_bg_dir", null);
@@ -187,7 +188,7 @@ class PagePane extends HBox {
 	public void setData(PageDefinition page, int i) {
 		logger.debug("setData("+page+")");
 		this.page = page;
-		lbPage.setText(RES.getString("label.page")+" "+i);
+		lbPage.setText(ResourceI18N.get(RES,"label.page")+" "+i);
 		update();
 	}
 
