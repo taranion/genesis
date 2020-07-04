@@ -31,6 +31,8 @@ import org.prelle.javafx.ModernUI;
 import org.prelle.javafx.ScreenManager;
 import org.prelle.rpgframework.jfx.RPGFrameworkJFXConstants;
 
+import com.google.gson.GsonBuilder;
+
 import de.rpgframework.ConfigContainer;
 import de.rpgframework.ConfigOption;
 import de.rpgframework.ConfigOption.Type;
