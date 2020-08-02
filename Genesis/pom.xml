@@ -114,25 +114,25 @@
 		<dependency>
 			<groupId>org.prelle.rpgframework</groupId>
 			<artifactId>splittermond-core</artifactId>
-			<version>4.0.1_SNAPSHOT</version>
+			<version>4.0.1-SNAPSHOT</version> 
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.prelle.rpgframework</groupId>
 			<artifactId>splittermond-data</artifactId>
-			<version>4.0.1_SNAPSHOT</version>
+			<version>4.0.1-SNAPSHOT</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.prelle.rpgframework</groupId>
 			<artifactId>splittermond-chargen</artifactId>
-			<version>4.0.1_SNAPSHOT</version>
+			<version>4.0.1-SNAPSHOT</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.prelle.rpgframework</groupId>
 			<artifactId>splittermond-chargen-jfx</artifactId>
-			<version>4.0.1_SNAPSHOT</version>
+			<version>4.0.1-SNAPSHOT</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
@@ -150,7 +150,7 @@
 		<dependency>
 			<groupId>org.prelle.rpgframework</groupId>
 			<artifactId>splittermond-bbcode</artifactId>
-			<version>4.0.1_SNAPSHOT</version>
+			<version>4.0.1-SNAPSHOT</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
