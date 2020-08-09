@@ -478,8 +478,15 @@ public class Genesis5Main extends Application {
 		/*
 		 * Move window to secondary monitor
 		 */
-		logger.debug(Constants.PREFKEY_FULLSCREEN+" = "+pref.getBoolean(Constants.PREFKEY_FULLSCREEN, true));
-		stage.setFullScreen(pref.getBoolean(Constants.PREFKEY_FULLSCREEN, false));
+		boolean fullScreen = pref.getBoolean(Constants.PREFKEY_FULLSCREEN, false);
+		logger.debug(Constants.PREFKEY_FULLSCREEN+" = "+fullScreen);
+		stage.setFullScreen(fullScreen);
+		if (!fullScreen) {
+			stage.setWidth(Math.min(1680, Screen.getPrimary().getVisualBounds().getWidth()));
+			stage.setHeight(Math.min(1050, Screen.getPrimary().getVisualBounds().getHeight()));
+		}
+		
+		
 		if ((Boolean)cfgSecondaryScreen.getValue()) {
 			for (Screen screen : Screen.getScreens()) {
 				if (screen!=Screen.getPrimary()) {
