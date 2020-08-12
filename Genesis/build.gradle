@@ -26,7 +26,7 @@ repositories {
 dependencies {
     implementation "org.apache.logging.log4j:log4j-api:2.13.3"
     implementation "org.apache.logging.log4j:log4j-core:2.13.3"
-    implementation "org.prelle:javafx-extensions:4.1.1-SNAPSHOT"
+    implementation "org.prelle:javafx-extensions:4.1.2"
     implementation "de.rpgframework:rpgframework-core:4.0.0-SNAPSHOT"
     implementation "de.rpgframework:rpgframework-chars:4.0.0-SNAPSHOT"
     implementation "de.rpgframework:rpgframework-javafx:4.0.0-SNAPSHOT"

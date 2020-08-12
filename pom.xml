@@ -97,7 +97,7 @@
 			<dependency>
 				<groupId>org.prelle</groupId>
 				<artifactId>javafx-extensions</artifactId>
-				<version>[4.1.1-SNAPSHOT,)</version>
+				<version>[4.1.2,)</version>
 			</dependency>
 			<dependency>
 				<groupId>org.prelle</groupId>
