@@ -160,6 +160,10 @@ public class LicensePage extends ManagedScreenPage {
 				getManager().showAlertAndCall(AlertType.ERROR, "Nothing entered", "Hey, you forgot to enter the license or activation key.");
 				return;
 			}
+			if ("572DFE98-046B-4C41-9443-17C8C9C2CBB3".equals(val.trim())) {
+				getManager().showAlertAndCall(AlertType.NOTIFICATION, "Nicht dein Ernst, oder?", "So, jetzt schlagen wir bitte einmal mit dem Kopf auf die Tischplatte. \nDu hast den Beispielcode aus der bebilderten Erklär-Anleitung abgetippt.\nNatürlich musst Du da den Code eintippen, den Du zugeschickt bekommen hast.");
+				return;
+			}
 			Object detected = detectLicenseKeyType(val);
 			logger.debug("Detected = "+detected);
 			if (detected==null) {
