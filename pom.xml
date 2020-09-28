@@ -38,7 +38,7 @@
 		<log4j.version>2.13.3</log4j.version>
 		<maven.compiler.target>11</maven.compiler.target>
 		<maven.compiler.source>11</maven.compiler.source>
-		<openjfx.version>14.0.1</openjfx.version>
+		<openjfx.version>15</openjfx.version>
 	</properties>
 
 	<dependencyManagement>
@@ -97,7 +97,7 @@
 			<dependency>
 				<groupId>org.prelle</groupId>
 				<artifactId>javafx-extensions</artifactId>
-				<version>[4.1.2,)</version>
+				<version>[4.2.0-SNAPSHOT,4.99)</version>
 			</dependency>
 			<dependency>
 				<groupId>org.prelle</groupId>
