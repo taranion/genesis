@@ -82,18 +82,20 @@ class PagePane extends HBox {
 		content.setPrefSize(PrintTemplateConstants.PAGE_WIDTH, PrintTemplateConstants.PAGE_HEIGHT);
 
 		btnDelete = new Button("\uE107");
-		btnDelete.setStyle("-fx-font-size: 200%; -fx-text-fill: white; -fx-font-family: 'Segoe UI Symbol';");
+		btnDelete.getStyleClass().add("mini-button");
+		btnDelete.setStyle("-fx-font-size: 150%; -fx-text-fill: white;");
 		btnDelete.setTooltip(new Tooltip(ResourceI18N.get(RES,"screen.printtemplate.button.delete_page")));
 
 //		btnBackground = new Button(new String(Character.toChars(127912))); // 1f3a8
 //		btnBackground = new Button("\uEB9F");
 		btnBackground = new Button("\uE114");
-		btnBackground.setStyle("-fx-font-size: 200%; -fx-text-fill: white; -fx-font-family: 'Segoe UI Symbol'");
-//		btnBackground.setStyle("-fx-font-size: 200%; -fx-text-fill: white; -fx-font-face: 'Segoe UI Symbol'");
+		btnBackground.getStyleClass().add("mini-button");
+		btnBackground.setStyle("-fx-font-size: 150%; -fx-text-fill: white; -fx-font-family: 'Segoe UI Symbol'");
 		btnBackground.setTooltip(new Tooltip(ResourceI18N.get(RES,"screen.printtemplate.button.background")));
 
 		btnAdd = new Button("\uE109");  // E0C5
-		btnAdd.setStyle("-fx-font-size: 200%; -fx-text-fill: white; -fx-font-family: 'Segoe UI Symbol'");
+		btnAdd.getStyleClass().add("mini-button");
+		btnAdd.setStyle("-fx-font-size: 150%; -fx-text-fill: white; -fx-font-family: 'Segoe UI Symbol'");
 		btnAdd.setTooltip(new Tooltip(ResourceI18N.get(RES,"screen.printtemplate.button.add_page")));
 
 

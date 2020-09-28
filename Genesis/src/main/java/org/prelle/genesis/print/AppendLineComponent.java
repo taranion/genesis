@@ -103,7 +103,7 @@ public class AppendLineComponent extends Label implements RowComponent {
 					try {
 						page.getPageDefinition().add(x, line, ref);
 					} catch (Exception e) {
-						logger.warn("Error (normal) dropping to line "+line+": "+e,e);
+						logger.warn("Error (normal) dropping to line "+line+": "+e);
 					}
 					logger.debug("  added cell at "+x+","+line+" - refresh view");
 

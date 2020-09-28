@@ -135,7 +135,7 @@
 			<version>4.0.1-SNAPSHOT</version>
 			<scope>runtime</scope>
 		</dependency>
-		<dependency>
+		<!--dependency>
 			<groupId>org.prelle.rpgframework</groupId>
 			<artifactId>splittermond-print</artifactId>
 			<version>3.0.1</version>
@@ -164,7 +164,7 @@
 			<artifactId>splittermond-json</artifactId>
 			<version>1.1.0</version>
 			<scope>runtime</scope>
-		</dependency>
+		</dependency-->
 
 <!-- 		<dependency> -->
 <!-- 			<groupId>org.prelle.rpgframework</groupId> -->

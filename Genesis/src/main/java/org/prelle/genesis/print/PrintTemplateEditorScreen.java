@@ -78,6 +78,7 @@ public class PrintTemplateEditorScreen extends ManagedDialog {
 	private void initLayout() {
 
 		lvPages.setMaxHeight(Double.MAX_VALUE);
+		lvPages.setStyle("-fx-min-height: 700px");
 		lvElements.setMaxHeight(Double.MAX_VALUE);
 
 		lvPages.setPrefWidth(PrintTemplateConstants.PAGE_WIDTH+150);
@@ -183,7 +184,7 @@ class PageDefinitionListCell extends ListCell<PageDefinition> {
 	public PageDefinitionListCell(Map<String, PDFPrintElement> elementMap, PrintTemplateEditorScreen prov) {
 		pane = new PagePane(elementMap, prov);
 		this.parent = prov;
-		setStyle("-fx-background-color: #c0c0c0; -fx-margin: 10px; -fx-padding: 2em");
+		setStyle("-fx-background-color: #c0c0c0; -fx-margin: 10px; -fx-padding: 1em");
 		getStyleClass().add("print-page-cell");
 	}
 
