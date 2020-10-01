@@ -1,5 +1,3 @@
-
-
 .root {
     -fx-base: white;
     -fx-background-color: rgb(244,244,244);
@@ -201,4 +199,31 @@
 
 .icon {
     -fx-font-family: 'Segoe MDL2 Assets';
+}
+
+.template-cell {
+  -fx-min-height: 2em;
+}
+.template-cell:empty {
+  -fx-background-color: #D0D0D0;
+}
+.template-cell:selected {
+  -fx-border-color: blue;
+  -fx-border-width: 1px;
+  -fx-border-style: solid;
+}
+.template-cell:possible {
+  -fx-background-color: green;
+  -fx-border-color: green;
+  -fx-border-width: 1px;
+  -fx-border-style: solid;
+}
+.template-cell:impossible {
+  -fx-background-color: red;
+  -fx-border-color: red;
+  -fx-border-width: 1px;
+  -fx-border-style: solid;
+}
+.template-cell:hover {
+  -fx-background-color: #E0E0E0;
 }

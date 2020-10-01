@@ -64,6 +64,10 @@
 		</dependency>
 		<dependency>
 			<groupId>de.rpgframework</groupId>
+			<artifactId>rpgframework-print</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>de.rpgframework</groupId>
 			<artifactId>rpgframework-javafx</artifactId>
 		</dependency>
 		<dependency>

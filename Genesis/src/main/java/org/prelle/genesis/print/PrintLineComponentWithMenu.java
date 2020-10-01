@@ -6,7 +6,6 @@ import java.util.ResourceBundle;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.prelle.genesis.Constants;
 
 import de.rpgframework.ResourceI18N;
 import de.rpgframework.character.RuleSpecificCharacterObject;
@@ -74,39 +73,39 @@ class PrintLineComponentWithMenu extends StackPane {
 	private void initComponents() {
 		btnDelete = new Button("\uE107");
 		btnDelete.setTooltip(new Tooltip(ResourceI18N.get(RES,"screen.printtemplate.tooltip.delete")));
-		btnDelete.getStyleClass().addAll("mini-button");
+		btnDelete.getStyleClass().addAll("internal-window-button","mini-button");
 
 		btnToggleLeftRight = new Button("\uE13C");
 		btnToggleLeftRight.setTooltip(new Tooltip(ResourceI18N.get(RES,"screen.printtemplate.tooltip.togglelr")));
-		btnToggleLeftRight.getStyleClass().addAll("mini-button");
+		btnToggleLeftRight.getStyleClass().addAll("internal-window-button","mini-button");
 
 		btnExpandBelow = new Button("\uE147");
 		btnExpandBelow.setTooltip(new Tooltip(ResourceI18N.get(RES,"screen.printtemplate.tooltip.expandRow")));
-		btnExpandBelow.getStyleClass().addAll("mini-button");
+		btnExpandBelow.getStyleClass().addAll("internal-window-button","mini-button");
 
 		btnShrinkVert = new Button("\uE010");
 		btnShrinkVert.setTooltip(new Tooltip(RES.getString("screen.printtemplate.tooltip.shrinkV")));
-		btnShrinkVert.getStyleClass().addAll("mini-button");
+		btnShrinkVert.getStyleClass().addAll("internal-window-button","mini-button");
 
 		btnGrowVert = new Button("\uE011");
 		btnGrowVert.setTooltip(new Tooltip(ResourceI18N.get(RES,"screen.printtemplate.tooltip.growV")));
-		btnGrowVert.getStyleClass().addAll("mini-button");
+		btnGrowVert.getStyleClass().addAll("internal-window-button","mini-button");
 
 		btnShrinkHori = new Button("\uE012");
 		btnShrinkHori.setTooltip(new Tooltip(ResourceI18N.get(RES,"screen.printtemplate.tooltip.shrinkH")));
-		btnShrinkHori.getStyleClass().addAll("mini-button");
+		btnShrinkHori.getStyleClass().addAll("internal-window-button","mini-button");
 
 		btnGrowHori = new Button("\uE013");
 		btnGrowHori.setTooltip(new Tooltip(ResourceI18N.get(RES,"screen.printtemplate.tooltip.growH")));
-		btnGrowHori.getStyleClass().addAll("mini-button");
+		btnGrowHori.getStyleClass().addAll("internal-window-button","mini-button");
 
 		btnFilter = new Button("\uE16E");
 		btnFilter.setTooltip(new Tooltip(ResourceI18N.get(RES,"screen.printtemplate.tooltip.filter")));
-		btnFilter.getStyleClass().addAll("mini-button");
+		btnFilter.getStyleClass().addAll("internal-window-button","mini-button");
 
 		btnPick = new Button("\uE094");
 		btnPick.setTooltip(new Tooltip(ResourceI18N.get(RES,"screen.printtemplate.tooltip.pick")));
-		btnPick.getStyleClass().addAll("mini-button");
+		btnPick.getStyleClass().addAll("internal-window-button","mini-button");
 	}
 
 	//--------------------------------------------------------------------
