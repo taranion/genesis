@@ -48,7 +48,7 @@ class PDFPrintElementListCell extends ListCell<PDFPrintElement> {
 //			setText(String.valueOf(item));
 			Image img = new Image(new ByteArrayInputStream(item.render(new RenderingParameter())));
 			ImageView iview = new ImageView(img);
-			iview.setFitWidth(img.getWidth()*0.70);
+			iview.setFitWidth(img.getWidth()*0.50);
 			iview.setPreserveRatio(true);
 			VBox imgBox = new VBox(iview);
 			imgBox.setPadding(new Insets(2));
