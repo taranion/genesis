@@ -46,6 +46,7 @@ import de.rpgframework.print.PDFPrintElement;
 import de.rpgframework.print.PrintManagerLoader;
 import de.rpgframework.print.PrintTemplate;
 import de.rpgframework.print.PrintType;
+import de.rpgframework.print.TemplateFactory;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
@@ -564,11 +565,13 @@ public class PrintHelper {
 
 	//-------------------------------------------------------------------
 	private static PrintTemplate openPrintTemplateEditor(ScreenManager manager, RuleSpecificCharacterObject charac, PrintTemplate template, List<PDFPrintElement> elements, RoleplayingSystem system) {
-		logger.debug("openPrintTemplateEditor");
+		logger.info("openPrintTemplateEditor for "+template);
 		/*
 		 * Verify and resolve all element identifier in the template
 		 */
-//		if (template!=null) {
+		if (template!=null) {
+			logger.warn("TODO: verify template");
+//			TemplateController ctrl = TemplateFactory.newTemplateController(page, elementMap)
 //			List<String> notFound = template.resolveIDs(elements);
 //			if (!notFound.isEmpty()) {
 //				logger.warn("PrintTemplate "+template.getName()+" has unknown element references: "+notFound);
@@ -577,12 +580,12 @@ public class PrintHelper {
 //						ResourceI18N.format(RES, "error.printtemplate.unknown_ids.desc", notFound));
 //			} else
 //				logger.warn("All references resolved");
-//		}
+		}
 
 		PrintTemplateEditorScreen screen = new PrintTemplateEditorScreen(elements,system);
-		if (template!=null)
+		if (template!=null) {
 			screen.setData(charac, template);
-		else
+		} else
 			screen.setCharacter(charac);
 		CloseType ret = (CloseType) manager.showAndWait(screen);
 		logger.warn("Dialog returned "+ret);

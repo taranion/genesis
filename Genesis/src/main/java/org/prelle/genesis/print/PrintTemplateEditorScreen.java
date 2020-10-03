@@ -29,10 +29,14 @@ import de.rpgframework.print.PrintTemplate;
 import de.rpgframework.print.TemplateController;
 import de.rpgframework.print.TemplateFactory;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tooltip;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
@@ -54,6 +58,8 @@ public class PrintTemplateEditorScreen extends ManagedDialog {
 
 	private Label noWYSIWYG;
 	private CommandBar command;
+	private ScrollPane scroll;
+	
 	private AppBarButton btnAdd;
 	private AppBarButton btnDel;
 	private AppBarButton btnImg;
@@ -124,27 +130,32 @@ public class PrintTemplateEditorScreen extends ManagedDialog {
 	//--------------------------------------------------------------------
 	private void initLayout() {
 		lgPage.setMaxHeight(Double.MAX_VALUE);
-		lgPage.setPrefHeight(PrintTemplateConstants.PAGE_HEIGHT);
-		lgPage.setPrefWidth(PrintTemplateConstants.PAGE_WIDTH);
-		StackPane greyParent = new StackPane();
-		greyParent.setStyle("-fx-background-color: #d0d0d0; -fx-padding: 20px");
-		greyParent.getChildren().add(lgPage);
+//		lgPage.setPrefHeight(PrintTemplateConstants.PAGE_HEIGHT);
+//		lgPage.setPrefWidth(PrintTemplateConstants.PAGE_WIDTH);
 
-//		ScrollPane scroll = new ScrollPane(lgPage);
-//		scroll.setStyle("-fx-min-height: 700px");
-//		scroll.setFitToWidth(true);
-//		scroll.setMaxHeight(Double.MAX_VALUE);
-//		scroll.setPrefWidth(PrintTemplateConstants.PAGE_WIDTH+150);
-		VBox boxPage = new VBox(command, greyParent);
+		scroll = new ScrollPane(lgPage);
+		scroll.setFitToHeight(true);
+		scroll.setMaxHeight(Double.MAX_VALUE);
+		scroll.setStyle("-fx-background-color: #d0d0d0; -fx-min-height: 600px"); 
+		VBox boxPage = new VBox(command, scroll);
+		VBox.setVgrow(scroll, Priority.ALWAYS);
 
 		lvElements.setMaxHeight(Double.MAX_VALUE);
 		lvElements.setStyle("-fx-pref-width: 720px");
 
-		HBox content = new HBox(20);
-//		HBox.setHgrow(lvPages, Priority.SOMETIMES);
+		// Side by side
+//		HBox content = new HBox(20);
+//		HBox.setHgrow(boxPage, Priority.SOMETIMES);
 //		HBox.setHgrow(lvElements, Priority.SOMETIMES);
-		content.getChildren().addAll(boxPage, lvElements);
-		content.setMaxHeight(Double.MAX_VALUE);
+//		content.getChildren().addAll(boxPage, lvElements);
+//		content.setMaxHeight(Double.MAX_VALUE);
+		GridPane content = new GridPane();
+		content.setHgap(20);
+		content.add(boxPage, 0, 0);
+		content.add(lvElements, 1, 0);
+		ColumnConstraints cs = new ColumnConstraints();
+		cs.setPercentWidth(50);
+		content.getColumnConstraints().add(cs);
 
 		VBox metaContent = new VBox(20);
 //		VBox.setVgrow(content, Priority.ALWAYS);
@@ -154,14 +165,22 @@ public class PrintTemplateEditorScreen extends ManagedDialog {
 
 	//--------------------------------------------------------------------
 	private void initInteractivity() {
+		sceneProperty().addListener( (ov2,o2,n2) -> {
+			getScene().heightProperty().addListener( (ov,o,n) -> {
+				logger.info("    lgPage size is "+lgPage.getWidth()+"x"+lgPage.getHeight());
+				logger.info("    scroll size is "+scroll.getWidth()+"x"+scroll.getHeight());
+				float scale = (float)(scroll.getHeight()/(PrintTemplateConstants.PAGE_HEIGHT));
+				if (scale<0.03) scale=0.5f;
+				logger.info("Scale is "+scale+"   page size is "+lgPage.getWidth()+"x"+lgPage.getHeight());
+				logger.info("    pref size is "+lgPage.getPrefWidth()+"x"+lgPage.getPrefHeight());
 
-		lgPage.heightProperty().addListener( (ov,o,n) -> {
-			float scale = (float)(getHeight()/(PrintTemplateConstants.PAGE_HEIGHT-20));
-			logger.info("Scale is "+scale+"   page size is "+lgPage.getWidth()+"x"+lgPage.getHeight());
-			logger.info("   pref size is "+lgPage.getPrefWidth()+"x"+lgPage.getPrefHeight());
-			lgPage.setScaleX(scale);
-			lgPage.setScaleY(scale);
-			this.updateBounds();
+				scroll.setContent(new Label("Hallo"));
+				lgPage.setScaleX(scale);
+				lgPage.setScaleY(scale);
+				scroll.setContent(lgPage);
+				scroll.autosize();
+				this.updateBounds();
+			});			
 		});
 
 		btnDel.setOnAction(ev -> {
@@ -246,6 +265,7 @@ public class PrintTemplateEditorScreen extends ManagedDialog {
 	//--------------------------------------------------------------------
 	public void setCharacter(RuleSpecificCharacterObject charac) {
 		this.charac = charac;
+		lgPage.setCharacter(charac);
 	}
 
 	//--------------------------------------------------------------------
@@ -257,6 +277,7 @@ public class PrintTemplateEditorScreen extends ManagedDialog {
 
 		logger.debug("setData");
 		lgPage.setCharacter(charac);
+		lgPage.setInput(template.get(0));
 	}
 
 
