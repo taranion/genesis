@@ -28,8 +28,8 @@ import de.rpgframework.print.PDFPrintElement;
 import de.rpgframework.print.PrintTemplate;
 import de.rpgframework.print.TemplateController;
 import de.rpgframework.print.TemplateFactory;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
-import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -39,7 +39,6 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 
@@ -66,6 +65,7 @@ public class PrintTemplateEditorScreen extends ManagedDialog {
 	private Button btnPrev;
 	private Label lbPage;
 	private Button btnNext;
+	private ListView<LayoutGridElement> lvLayouts;
 	private ListView<PDFPrintElement> lvElements;
 	private LayoutGridPane lgPage;
 
@@ -121,6 +121,13 @@ public class PrintTemplateEditorScreen extends ManagedDialog {
 		lgPage = new LayoutGridPane(page, ctrl, 
 				(int)PrintTemplateConstants.COLUMN_WIDTH, 
 				PrintTemplateConstants.COLUMN_GAP, elementMap);
+		
+		lvLayouts = new ListView<>();
+		lvLayouts.setOrientation(Orientation.HORIZONTAL);
+		lvLayouts.setCellFactory(lv -> new LayoutGridElementListCell());
+		for (int x=0; x<5; x++) {
+			lvLayouts.getItems().add( new LayoutGridElement(x,0) );
+		}
 
 		lvElements = new ListView<>();
 		lvElements.getItems().addAll(elements);
@@ -140,9 +147,14 @@ public class PrintTemplateEditorScreen extends ManagedDialog {
 		VBox boxPage = new VBox(command, scroll);
 		VBox.setVgrow(scroll, Priority.ALWAYS);
 
+		lvLayouts.setStyle("-fx-pref-width: 720px; -fx-pref-height: 80px;");
+
 		lvElements.setMaxHeight(Double.MAX_VALUE);
 		lvElements.setStyle("-fx-pref-width: 720px");
 
+		VBox rightSide = new VBox(20, lvLayouts, lvElements);
+		VBox.setVgrow(lvElements, Priority.ALWAYS);
+		
 		// Side by side
 //		HBox content = new HBox(20);
 //		HBox.setHgrow(boxPage, Priority.SOMETIMES);
@@ -152,7 +164,7 @@ public class PrintTemplateEditorScreen extends ManagedDialog {
 		GridPane content = new GridPane();
 		content.setHgap(20);
 		content.add(boxPage, 0, 0);
-		content.add(lvElements, 1, 0);
+		content.add(rightSide, 1, 0);
 		ColumnConstraints cs = new ColumnConstraints();
 		cs.setPercentWidth(50);
 		content.getColumnConstraints().add(cs);
@@ -281,21 +293,21 @@ public class PrintTemplateEditorScreen extends ManagedDialog {
 	}
 
 
-	//--------------------------------------------------------------------
-	public void deletePage(LayoutGrid page) {
-		logger.debug("delete page "+page);
-//		lvPages.getItems().remove(page);
-//		if (lvPages.getItems().isEmpty()) {
-//			lvPages.getItems().add(PrintManagerLoader.getInstance().createLayoutGrid(PrintTemplateConstants.MAX_COLUMNS));
-//		}
-	}
-
-
-	//--------------------------------------------------------------------
-	public void addPage() {
-		logger.debug("add page");
-//		lvPages.getItems().add(PrintManagerLoader.getInstance().createLayoutGrid(PrintTemplateConstants.MAX_COLUMNS));
-	}
+//	//--------------------------------------------------------------------
+//	public void deletePage(LayoutGrid page) {
+//		logger.debug("delete page "+page);
+////		lvPages.getItems().remove(page);
+////		if (lvPages.getItems().isEmpty()) {
+////			lvPages.getItems().add(PrintManagerLoader.getInstance().createLayoutGrid(PrintTemplateConstants.MAX_COLUMNS));
+////		}
+//	}
+//
+//
+//	//--------------------------------------------------------------------
+//	public void addPage() {
+//		logger.debug("add page");
+////		lvPages.getItems().add(PrintManagerLoader.getInstance().createLayoutGrid(PrintTemplateConstants.MAX_COLUMNS));
+//	}
 
 
 	//--------------------------------------------------------------------
