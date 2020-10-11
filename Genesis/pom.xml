@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.prelle.rpgframework</groupId>
 		<artifactId>genesis-master</artifactId>
-		<version>6.0.0-SNAPSHOT</version>
+		<version>6.1.0-SNAPSHOT</version>
 	</parent> 
 
 	<artifactId>genesis</artifactId>
@@ -64,6 +64,10 @@
 		</dependency>
 		<dependency>
 			<groupId>de.rpgframework</groupId>
+			<artifactId>rpgframework-print</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>de.rpgframework</groupId>
 			<artifactId>rpgframework-javafx</artifactId>
 		</dependency>
 		<dependency>
@@ -111,31 +115,31 @@
 			<artifactId>gson</artifactId>
 		</dependency>
 
-		<dependency>
-			<groupId>org.prelle.rpgframework</groupId>
-			<artifactId>splittermond-core</artifactId>
-			<version>4.0.1-SNAPSHOT</version> 
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.prelle.rpgframework</groupId>
-			<artifactId>splittermond-data</artifactId>
-			<version>4.0.1-SNAPSHOT</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.prelle.rpgframework</groupId>
-			<artifactId>splittermond-chargen</artifactId>
-			<version>4.0.1-SNAPSHOT</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.prelle.rpgframework</groupId>
-			<artifactId>splittermond-chargen-jfx</artifactId>
-			<version>4.0.1-SNAPSHOT</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.prelle.rpgframework</groupId> -->
+<!-- 			<artifactId>splittermond-core</artifactId> -->
+<!-- 			<version>4.0.1-SNAPSHOT</version>  -->
+<!-- 			<scope>runtime</scope> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.prelle.rpgframework</groupId> -->
+<!-- 			<artifactId>splittermond-data</artifactId> -->
+<!-- 			<version>4.0.1-SNAPSHOT</version> -->
+<!-- 			<scope>runtime</scope> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.prelle.rpgframework</groupId> -->
+<!-- 			<artifactId>splittermond-chargen</artifactId> -->
+<!-- 			<version>4.0.1-SNAPSHOT</version> -->
+<!-- 			<scope>runtime</scope> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.prelle.rpgframework</groupId> -->
+<!-- 			<artifactId>splittermond-chargen-jfx</artifactId> -->
+<!-- 			<version>4.0.1-SNAPSHOT</version> -->
+<!-- 			<scope>runtime</scope> -->
+<!-- 		</dependency> -->
+		<!--dependency>
 			<groupId>org.prelle.rpgframework</groupId>
 			<artifactId>splittermond-print</artifactId>
 			<version>3.0.1</version>
@@ -164,7 +168,7 @@
 			<artifactId>splittermond-json</artifactId>
 			<version>1.1.0</version>
 			<scope>runtime</scope>
-		</dependency>
+		</dependency-->
 
 <!-- 		<dependency> -->
 <!-- 			<groupId>org.prelle.rpgframework</groupId> -->
@@ -249,31 +253,31 @@
 		<dependency>
 			<groupId>org.prelle.rpgframework</groupId>
 			<artifactId>shadowrun6-core</artifactId>
-			<version>1.0.1-SNAPSHOT</version>
+			<version>1.1.0-SNAPSHOT</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.prelle.rpgframework</groupId>
 			<artifactId>shadowrun6-data</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
+			<version>1.1.0-SNAPSHOT</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.prelle.rpgframework</groupId>
 			<artifactId>shadowrun6-chargen</artifactId>
-			<version>1.0.1-SNAPSHOT</version>
+			<version>1.1.0-SNAPSHOT</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.prelle.rpgframework</groupId>
 			<artifactId>shadowrun6-chargen-jfx</artifactId>
-			<version>1.0.1-SNAPSHOT</version>
+			<version>1.1.0-SNAPSHOT</version>
 			<scope>runtime</scope>
 		</dependency>
         <dependency>
             <groupId>org.prelle.rpgframework</groupId>
             <artifactId>shadowrun6-print</artifactId>
-			<version>[1.2.0,)</version>
+			<version>[1.4.0-SNAPSHOT,1.99)</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
@@ -285,7 +289,7 @@
         <dependency>
             <groupId>org.prelle.rpgframework</groupId>
             <artifactId>shadowrun6-json</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>1.0.0-SNAPSHOT</version>
             <scope>runtime</scope>
         </dependency>
 

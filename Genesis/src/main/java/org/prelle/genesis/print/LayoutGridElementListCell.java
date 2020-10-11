@@ -15,6 +15,8 @@ import de.rpgframework.print.PDFPrintElementFeature;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.SnapshotParameters;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.image.Image;
@@ -25,16 +27,16 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
-class PDFPrintElementListCell extends ListCell<PDFPrintElement> {
+class LayoutGridElementListCell extends ListCell<LayoutGridElement> {
 
 	private final static Logger logger = LogManager.getLogger("genesis");
-	private final static ResourceBundle RES = ResourceBundle.getBundle(PDFPrintElementListCell.class.getName());
 
 	private PDFPrintElement data;
 
 	//--------------------------------------------------------------------
-	public PDFPrintElementListCell() {
+	public LayoutGridElementListCell() {
 		setOnDragDetected(event -> dragStarted(event));
 	}
 
@@ -43,7 +45,7 @@ class PDFPrintElementListCell extends ListCell<PDFPrintElement> {
 	 * @see javafx.scene.control.Cell#updateItem(java.lang.Object, boolean)
 	 */
 	@Override
-	public void updateItem(PDFPrintElement item, boolean empty) {
+	public void updateItem(LayoutGridElement item, boolean empty) {
 		super.updateItem(item, empty);
 		this.data = item;
 
@@ -51,47 +53,21 @@ class PDFPrintElementListCell extends ListCell<PDFPrintElement> {
 			setGraphic(null);
 			setText(null);
 		} else {
-//			setText(String.valueOf(item));
-			Image img = new Image(new ByteArrayInputStream(item.render(new RenderingParameter())));
-			ImageView iview = new ImageView(img);
-			iview.setFitWidth(img.getWidth()*0.50);
-			iview.setPreserveRatio(true);
-			VBox imgBox = new VBox(iview);
-			imgBox.setPadding(new Insets(2));
-
-			// Build a list of features
-			List<String> features = new ArrayList<String>();
-			for (PDFPrintElementFeature feat : PDFPrintElementFeature.values()) {
-				if (item.hasFeature(feat)) {
-					switch (feat) {
-					case EXPAND_HORIZONTAL:
-						features.add(ResourceI18N.get(RES, "feature.horizontal")); break;
-					case EXPAND_VERTICAL:
-						features.add(ResourceI18N.get(RES, "feature.vertical")); break;
-					case FILTER:
-						features.add(ResourceI18N.get(RES, "feature.filter")); break;
-					case INDEXABLE:
-						features.add(ResourceI18N.get(RES, "feature.index")); break;
-					case ORIENTATION:
-						features.add(ResourceI18N.get(RES, "feature.orientation")); break;
-					}
-				}
+			int width = item.getRequiredColumns()*20 + (item.getRequiredColumns()-1)*5;
+			Canvas canvas = new Canvas(width, 62);
+			GraphicsContext ctx = canvas.getGraphicsContext2D();
+			ctx.setFill(Color.WHITE);
+			ctx.setStroke(Color.BLACK);
+			ctx.fill();
+			for (int i=0; i<item.getRequiredColumns(); i++) {
+				int x = i*25;
+				ctx.strokeRect(x,  0, 20, 20);
+				ctx.strokeRect(x, 25, 20, 20);
+				ctx.strokeLine(x, 58,  x, 50);
+				ctx.strokeLine(x, 50, x+20, 50);
+				ctx.strokeLine(x+20, 50, x+20, 62);
 			}
-			String featText = "";
-			if (!features.isEmpty())
-				featText = " ("+String.join(",", features)+")";
-			
-			Label label = new Label(item.getDescription()+featText);
-//			label.setPrefWidth(Double.MAX_VALUE);
-			label.setStyle("-fx-background-color: rgba(0,0,0,0.5); -fx-text-fill: white; -fx-min-width: 25em");
-
-			VBox box = new VBox();
-			box.getChildren().addAll(label, imgBox);
-			box.setPrefWidth(700);
-			box.setStyle("-fx-border-color: rgba(0,0,0,0.5); -fx-border-width: 2px; -fx-border-style: solid;");
-			label.prefWidthProperty().bind(box.widthProperty());
-			box.prefWidthProperty().bind(img.widthProperty().multiply(0.7));
-			setGraphic(box);
+			setGraphic(canvas);
 		}
 	}
 
@@ -107,7 +83,7 @@ class PDFPrintElementListCell extends ListCell<PDFPrintElement> {
 
 		/* Put a string on a dragboard */
 		ClipboardContent content = new ClipboardContent();
-		String id = "element:"+data.getId();
+		String id = "grid:"+data.getId();
 		content.putString(id);
 		db.setContent(content);
 

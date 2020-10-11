@@ -41,11 +41,12 @@ import de.rpgframework.core.CommandBus;
 import de.rpgframework.core.CommandResult;
 import de.rpgframework.core.CommandType;
 import de.rpgframework.core.RoleplayingSystem;
+import de.rpgframework.print.LayoutGrid;
 import de.rpgframework.print.PDFPrintElement;
-import de.rpgframework.print.PageDefinition;
 import de.rpgframework.print.PrintManagerLoader;
 import de.rpgframework.print.PrintTemplate;
 import de.rpgframework.print.PrintType;
+import de.rpgframework.print.TemplateFactory;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
@@ -390,7 +391,7 @@ public class PrintHelper {
 							} else {
 								// Add as new template
 								logger.info("Save "+newName+" as new template");
-								List<PageDefinition> pages = new ArrayList<>();
+								List<LayoutGrid> pages = new ArrayList<>();
 								templ.forEach(e -> pages.add(e));
 								templ = PrintManagerLoader.getInstance().createTemplate(pages);
 								templ.setName(newName);
@@ -564,25 +565,27 @@ public class PrintHelper {
 
 	//-------------------------------------------------------------------
 	private static PrintTemplate openPrintTemplateEditor(ScreenManager manager, RuleSpecificCharacterObject charac, PrintTemplate template, List<PDFPrintElement> elements, RoleplayingSystem system) {
-		logger.debug("openPrintTemplateEditor");
+		logger.info("openPrintTemplateEditor for "+template);
 		/*
 		 * Verify and resolve all element identifier in the template
 		 */
 		if (template!=null) {
-			List<String> notFound = template.resolveIDs(elements);
-			if (!notFound.isEmpty()) {
-				logger.warn("PrintTemplate "+template.getName()+" has unknown element references: "+notFound);
-				manager.showAlertAndCall(AlertType.ERROR,
-						ResourceI18N.get(RES, "error.printtemplate.unknown_ids.title"),
-						ResourceI18N.format(RES, "error.printtemplate.unknown_ids.desc", notFound));
-			} else
-				logger.warn("All references resolved");
+			logger.warn("TODO: verify template");
+//			TemplateController ctrl = TemplateFactory.newTemplateController(page, elementMap)
+//			List<String> notFound = template.resolveIDs(elements);
+//			if (!notFound.isEmpty()) {
+//				logger.warn("PrintTemplate "+template.getName()+" has unknown element references: "+notFound);
+//				manager.showAlertAndCall(AlertType.ERROR,
+//						ResourceI18N.get(RES, "error.printtemplate.unknown_ids.title"),
+//						ResourceI18N.format(RES, "error.printtemplate.unknown_ids.desc", notFound));
+//			} else
+//				logger.warn("All references resolved");
 		}
 
 		PrintTemplateEditorScreen screen = new PrintTemplateEditorScreen(elements,system);
-		if (template!=null)
+		if (template!=null) {
 			screen.setData(charac, template);
-		else
+		} else
 			screen.setCharacter(charac);
 		CloseType ret = (CloseType) manager.showAndWait(screen);
 		logger.warn("Dialog returned "+ret);

@@ -26,11 +26,12 @@ repositories {
 dependencies {
     implementation "org.apache.logging.log4j:log4j-api:2.13.3"
     implementation "org.apache.logging.log4j:log4j-core:2.13.3"
-    implementation "org.prelle:javafx-extensions:4.1.2"
-    implementation "de.rpgframework:rpgframework-core:4.0.0-SNAPSHOT"
-    implementation "de.rpgframework:rpgframework-chars:4.0.0-SNAPSHOT"
-    implementation "de.rpgframework:rpgframework-javafx:4.0.0-SNAPSHOT"
-    implementation "de.rpgframework:rpgframework-products:4.0.0-SNAPSHOT"
+    implementation "org.prelle:javafx-extensions:4.2.0-SNAPSHOT"
+    implementation "de.rpgframework:rpgframework-core:4.1.0-SNAPSHOT"
+    implementation "de.rpgframework:rpgframework-chars:4.1.0-SNAPSHOT"
+    implementation "de.rpgframework:rpgframework-javafx:4.1.0-SNAPSHOT"
+    implementation "de.rpgframework:rpgframework-print:4.1.0-SNAPSHOT"
+    implementation "de.rpgframework:rpgframework-products:4.1.0-SNAPSHOT"
     runtimeOnly "org.prelle:simple-persist:3.2.0-SNAPSHOT"
     runtimeOnly "com.sun.mail:javax.mail:1.6.0"
     runtimeOnly "org.prelle.rpgframework:babylon-licensecheck:3.0.0-SNAPSHOT"
@@ -42,7 +43,7 @@ dependencies {
 }
 
 javafx {
-    version = '14.0.1'
+    version = '15'
     modules = ['javafx.controls', 'javafx.media', 'javafx.web', 'javafx.fxml']
 }
 

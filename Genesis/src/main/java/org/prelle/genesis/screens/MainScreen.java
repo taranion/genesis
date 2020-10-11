@@ -61,7 +61,7 @@ import javafx.util.StringConverter;
  */
 public class MainScreen extends ManagedScreen implements BabylonEventListener {
 
-	private final static int RECOMMENDED_WIDTH =1680;
+	private final static int RECOMMENDED_WIDTH =1620;
 	private final static int RECOMMENDED_HEIGHT=1050;
 
 	private final static Logger logger = LogManager.getLogger("genesis");
