@@ -46,7 +46,6 @@ import de.rpgframework.print.PDFPrintElement;
 import de.rpgframework.print.PrintManagerLoader;
 import de.rpgframework.print.PrintTemplate;
 import de.rpgframework.print.PrintType;
-import de.rpgframework.print.TemplateFactory;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
@@ -421,8 +420,11 @@ public class PrintHelper {
 				}
 
 			});
+			Label beta = new Label("Alpha Test - Work in Progress");
+			beta.setStyle("-fx-text-fill: red; -fx-font-weight: bold;");
+			
 			HBox tempLine = new HBox(5);
-			tempLine.getChildren().addAll(cbTemplates, btnEditTemp);
+			tempLine.getChildren().addAll(cbTemplates, btnEditTemp, beta);
 			i++;
 			grid.add(new Label(ResourceI18N.get(RES,"label.template")), 0, i);
 			grid.add(tempLine, 1, i);
