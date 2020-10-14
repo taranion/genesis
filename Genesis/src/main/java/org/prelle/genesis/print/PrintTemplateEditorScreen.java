@@ -152,7 +152,8 @@ public class PrintTemplateEditorScreen extends ManagedDialog {
 		lvElements.setMaxHeight(Double.MAX_VALUE);
 		lvElements.setStyle("-fx-pref-width: 720px");
 
-		VBox rightSide = new VBox(20, lvLayouts, lvElements);
+//		VBox rightSide = new VBox(20, lvLayouts, lvElements);
+		VBox rightSide = new VBox(20, lvElements);
 		VBox.setVgrow(lvElements, Priority.ALWAYS);
 		
 		// Side by side
