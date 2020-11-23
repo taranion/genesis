@@ -2,7 +2,7 @@ plugins {
     id 'application'
     id 'eclipse'
     id 'org.openjfx.javafxplugin' version '0.0.9'
-    id 'org.beryx.jlink' version '2.21.0'
+    id 'org.beryx.jlink' version '2.22.3'
     id "de.undercouch.download" version "4.0.0"
 }
 
@@ -115,7 +115,7 @@ jlink {
         //
         // explicitly configure the below property:
         //jpackageHome = '/opt/jdk-14'
-        jpackageHome = '/opt/hostedtoolcache/jdk/14.0.2'
+        jpackageHome = '/opt/hostedtoolcache/jdk/14.0.2/x64'
         //jpackageHome = "C:/Users/Stefan/workspaces/RPGFramework/Applications/Genesis/Genesis/build/download/jdk-14"
         //
         //   OR
