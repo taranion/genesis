@@ -126,7 +126,7 @@ jlink {
         //
         // explicitly configure the below property:
         //jpackageHome = '/opt/jdk-14'
-        jpackageHome = '/opt/hostedtoolcache/jdk/14.0.2'
+        jpackageHome = '/opt/hostedtoolcache/jdk/14.0.2/x64'
         //jpackageHome = "C:/Users/Stefan/workspaces/RPGFramework/Applications/Genesis/Genesis/build/download/jdk-14"
         //
         //   OR
