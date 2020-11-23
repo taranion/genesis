@@ -114,14 +114,15 @@ jlink {
         //   OR
         //
         // explicitly configure the below property:
-        jpackageHome = '/opt/jdk-14'
+        //jpackageHome = '/opt/jdk-14'
+        jpackageHome = '/opt/hostedtoolcache/jdk/14.0.2/x64'
         //jpackageHome = "C:/Users/Stefan/workspaces/RPGFramework/Applications/Genesis/Genesis/build/download/jdk-14"
         //
         //   OR
         //
         // download and extract a JDK that contains the jpackage tool by setting the system property 'download.jpackage':
         //if(Boolean.getBoolean('download.jpackage')) {
-            jpackageHome = downloadJPackage()
+        //    jpackageHome = downloadJPackage()
         //}
 
         if(os.macOsX) {
