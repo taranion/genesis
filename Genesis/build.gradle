@@ -183,17 +183,17 @@ jlink {
 /** @return  [url, extension, directory] */
 String[] getJPackageCoordinates() {
     if(os.macOsX) return [
-        'https://download.java.net/java/GA/jdk14.0.1/664493ef4a6946b186ff29eb326336a2/7/GPL/openjdk-14.0.1_osx-x64_bin.tar.gz',
+        'https://download.oracle.com/otn/java/jdk/14.0.2+12/205943a0976c4ed48cb16f1043c5c647/jdk-14.0.2_osx-x64_bin.tar.gz',
         'tar.gz',
         'jdk-14.jdk/Contents/Home'
     ]
     if(os.windows) return [
-        'https://download.java.net/java/GA/jdk14.0.1/664493ef4a6946b186ff29eb326336a2/7/GPL/openjdk-14.0.1_windows-x64_bin.zip',
+        'https://download.oracle.com/otn/java/jdk/14.0.2+12/205943a0976c4ed48cb16f1043c5c647/jdk-14.0.2_windows-x64_bin.zip',
         'zip',
         'jdk-14'
     ]
     return [
-        'https://download.java.net/java/GA/jdk14.0.1/664493ef4a6946b186ff29eb326336a2/7/GPL/openjdk-14.0.1_linux-x64_bin.tar.gz',
+        'https://download.oracle.com/otn/java/jdk/14.0.2+12/205943a0976c4ed48cb16f1043c5c647/jdk-14.0.2_linux-x64_bin.tar.gz',
         'tar.gz',
         'jdk-14'
     ]
