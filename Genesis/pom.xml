@@ -33,7 +33,7 @@
 					<include>packages/*</include>
 				</includes>
 			</resource>
-		</resources>
+		</resources> 
 	</build>
 
 	<dependencies>
