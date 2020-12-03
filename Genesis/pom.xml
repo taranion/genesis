@@ -107,7 +107,7 @@
 		<dependency>
 			<groupId>org.prelle.rpgframework</groupId>
 			<artifactId>babylon-licensecheck</artifactId>
-			<version>[3.0.0-SNAPSHOT, 3.99.99)</version>
+			<version>[3.1.0-SNAPSHOT, 3.99.99)</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
