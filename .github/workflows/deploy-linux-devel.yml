@@ -48,7 +48,7 @@ jobs:
     - name: Upload DEB
       uses: appleboy/scp-action@master
       with:
-        host: euve265084.serverprofi24.de
+        host: eden.rpgframework.de
         username: github
         password: ${{ secrets.DEPLOY_PASSWORD }}
         source: "Genesis/build/jpackage/*.deb"
