@@ -37,6 +37,23 @@ jobs:
         GCLOUD_PWD_TOKEN: ${{ secrets.GCLOUD_PWD_TOKEN }}
       run: cd Genesis ;  ./gradlew jpackage -b build-developer.gradle -Ddownload.jpackage=false --refresh-dependencies; ls build/jpackage
     - name: Upload RPM
+      uses: garygrossgarten/github-action-scp@release
+      with:
+        local: "Genesis/build/distributions/genesis-${{env.VERSION}}-1.x86_64.rpm"
+        remote: "/var/www/html/genesis-builds/linux/genesis-${{env.VERSION}}-1.x86_64.rpm"
+        host: eden.rpgframework.de
+        username: github
+        password: ${{ secrets.DEPLOY_PASSWORD }}
+    - name: Upload DEB
+      uses: garygrossgarten/github-action-scp@release
+      with:
+        local: "Genesis/build/distributions/genesis-${{env.VERSION}}-1_amd64.deb"
+        remote: "/var/www/html/genesis-builds/linux/genesis-${{env.VERSION}}-1_amd64.deb"
+        host: eden.rpgframework.de
+        username: github
+        password: ${{ secrets.DEPLOY_PASSWORD }}
+
+    - name: Upload RPM
       uses: appleboy/scp-action@master
       with:
         host: eden.rpgframework.de
