@@ -39,6 +39,10 @@ jobs:
         GCLOUD_PWD_TOKEN: ${{ secrets.GCLOUD_PWD_TOKEN }}
       run: cd Genesis ;  ./gradlew jlinkZip ; ls build/distributions
 
+        
+    - name: Set version
+      run: echo "::set-env name=VERSION::$(cat Genesis/version.txt)"
+
     - name: Upload JAR different
       uses: garygrossgarten/github-action-scp@release
       with:
