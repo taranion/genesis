@@ -36,6 +36,10 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GCLOUD_PWD_TOKEN: ${{ secrets.GCLOUD_PWD_TOKEN }}
       run: cd Genesis ;  ./gradlew jpackage -b build-developer.gradle -Ddownload.jpackage=false --refresh-dependencies; ls build/jpackage
+        
+    - name: Set version
+      run: echo "::set-env name=VERSION::$(cat Genesis/version.txt)"
+
     - name: Upload RPM
       uses: garygrossgarten/github-action-scp@release
       with:
@@ -44,6 +48,7 @@ jobs:
         host: eden.rpgframework.de
         username: github
         password: ${{ secrets.DEPLOY_PASSWORD }}
+
     - name: Upload DEB
       uses: garygrossgarten/github-action-scp@release
       with:

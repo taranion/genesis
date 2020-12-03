@@ -58,11 +58,23 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GCLOUD_PWD_TOKEN: ${{ secrets.GCLOUD_PWD_TOKEN }}
       run: cd Genesis ;  ./gradlew jpackage -Ddownload.jpackage=true --refresh-dependencies; ls build/jpackage
+        
+    - name: Set version
+      run: echo "::set-env name=VERSION::$(cat Genesis/version.txt)"
+
     - name: Upload RPM
       uses: garygrossgarten/github-action-scp@release
       with:
         local: "Genesis/build/distributions/genesis-${{env.VERSION}}-1.x86_64.rpm"
         remote: "/var/www/html/downloads/linux/genesis-${{env.VERSION}}-1.x86_64.rpm"
+        host: eden.rpgframework.de
+        username: github
+        password: ${{ secrets.DEPLOY_PASSWORD }}
+    - name: Upload DEB
+      uses: garygrossgarten/github-action-scp@release
+      with:
+        local: "Genesis/build/distributions/genesis-${{env.VERSION}}-1_amd64.deb"
+        remote: "/var/www/html/downloads/linux/genesis-${{env.VERSION}}-1_amd64.deb"
         host: eden.rpgframework.de
         username: github
         password: ${{ secrets.DEPLOY_PASSWORD }}
@@ -75,14 +87,6 @@ jobs:
 #        source: "Genesis/build/jpackage/*.rpm"
 #        target: "/var/www/html/downloads/linux"
 #        strip_components: 3
-    - name: Upload DEB
-      uses: garygrossgarten/github-action-scp@release
-      with:
-        local: "Genesis/build/distributions/genesis-${{env.VERSION}}-1_amd64.deb"
-        remote: "/var/www/html/downloads/linux/genesis-${{env.VERSION}}-1_amd64.deb"
-        host: eden.rpgframework.de
-        username: github
-        password: ${{ secrets.DEPLOY_PASSWORD }}
 #    - name: Upload DEB
 #      uses: appleboy/scp-action@master
 #      with:
