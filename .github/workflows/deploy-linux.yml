@@ -42,8 +42,8 @@ jobs:
     - name: Upload JAR different
       uses: garygrossgarten/github-action-scp@release
       with:
-        local: "Genesis/build/distributions/Genesis-${{env.VERSION}}.pkg"
-        remote: "/var/www/html/genesis-builds/linux/Genesis-${{env.VERSION}}.pkg"
+        local: "Genesis/build/distributions/Genesis-${{env.VERSION}}.zip"
+        remote: "/var/www/html/genesis-builds/linux/Genesis-${{env.VERSION}}.zip"
         host: eden.rpgframework.de
         username: github
         password: ${{ secrets.DEPLOY_PASSWORD }}
