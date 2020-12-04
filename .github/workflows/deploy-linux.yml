@@ -43,7 +43,7 @@ jobs:
     - name: Set version
       run: echo "::set-env name=VERSION::$(cat Genesis/version.txt)"
 
-    - name: Upload JAR 
+    - name: Upload ZIP 
       uses: garygrossgarten/github-action-scp@release
       with:
         local: "Genesis/build/distributions/Genesis-${{env.VERSION}}-linux.zip"
