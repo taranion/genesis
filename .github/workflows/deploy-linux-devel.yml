@@ -43,7 +43,7 @@ jobs:
     - name: Upload RPM
       uses: garygrossgarten/github-action-scp@release
       with:
-        local: "Genesis/build/distributions/genesis-${{env.VERSION}}-1.x86_64.rpm"
+        local: "Genesis/build/jpackage/genesis-${{env.VERSION}}-1.x86_64.rpm"
         remote: "/var/www/html/genesis-builds/linux/genesis-${{env.VERSION}}-1.x86_64.rpm"
         host: eden.rpgframework.de
         username: github
@@ -52,7 +52,7 @@ jobs:
     - name: Upload DEB
       uses: garygrossgarten/github-action-scp@release
       with:
-        local: "Genesis/build/distributions/genesis-${{env.VERSION}}-1_amd64.deb"
+        local: "Genesis/build/jpackage/genesis-${{env.VERSION}}-1_amd64.deb"
         remote: "/var/www/html/genesis-builds/linux/genesis-${{env.VERSION}}-1_amd64.deb"
         host: eden.rpgframework.de
         username: github
