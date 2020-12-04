@@ -52,7 +52,7 @@ jobs:
     - name: Upload DEB
       uses: garygrossgarten/github-action-scp@release
       with:
-        local: "Genesis/build/jpackage/genesis-devel-${{env.VERSION}}-1_amd64.deb"
+        local: "Genesis/build/jpackage/genesis-devel_${{env.VERSION}}-1_amd64.deb"
         remote: "/var/www/html/genesis-builds/linux/genesis-devel_${{env.VERSION}}-1_amd64.deb"
         host: eden.rpgframework.de
         username: github
