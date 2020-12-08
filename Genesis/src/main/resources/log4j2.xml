@@ -21,6 +21,7 @@
             <appender-ref ref="console" />
             <appender-ref ref="fileLogger" />
         </Root>
+        <Logger name="genesis.license" level="debug" />
         <Logger name="xml" level="warn" />
         <Logger name="prelle.jfx" level="warn" />
         <Logger name="rpgframework" level="debug" />

@@ -20,6 +20,7 @@ import de.rpgframework.core.CommandBus;
 import de.rpgframework.core.CommandResult;
 import de.rpgframework.core.CommandType;
 import de.rpgframework.core.License;
+import de.rpgframework.core.RoleplayingSystem;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
@@ -33,7 +34,7 @@ import javafx.scene.layout.VBox;
  */
 public class LicenseListSection extends ListSection<License> {
 
-	private final static Logger logger = LogManager.getLogger("gui");
+	private final static Logger logger = LogManager.getLogger("genesis.license");
 
 	private final static ResourceBundle RES = ResourceBundle.getBundle(LicensePage.class.getName());
 
@@ -42,6 +43,10 @@ public class LicenseListSection extends ListSection<License> {
 		super(title, provider, (PropertyResourceBundle) RES);
 		super.list.setCellFactory(lv -> new LicenseCell());
 		setAddButton(null);
+		
+		if (!CommandBus.canProcessCommand(this, CommandType.LICENSE_LIST, RoleplayingSystem.SHADOWRUN6)) {
+			list.setPlaceholder(new Label("Diese Genesis-Version hat kein Lizenzmodul"));
+		}
 	}
 
 	//-------------------------------------------------------------------
