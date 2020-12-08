@@ -31,7 +31,7 @@
         <Logger name="splittermond" level="info" />
         <Logger name="shadowrun6" level="info" />
         <Logger name="shadowrun6.items" level="warn" />
-        <Logger name="shadowrun6.proc.qual" level="debug" />
+        <Logger name="shadowrun6.proc.qual" level="info" />
 <!--         <Logger name="shadowrun6.lvl" level="debug" /> -->
 <!--         <Logger name="shadowrun6.proc" level="debug" /> -->
 <!--         <Logger name="shadowrun6.jfx" level="info" /> -->
