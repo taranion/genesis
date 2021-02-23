@@ -60,12 +60,12 @@ jobs:
       run: cd Genesis ;  ./gradlew jpackage -Ddownload.jpackage=true --refresh-dependencies; ls build/jpackage
         
     - name: Set version
-      run: echo "::set-env name=VERSION::$(cat Genesis/version.txt)"
+      run: echo "::set-env name=VERSION::$(cat Genesis/version.txt)" ; ls -l build
 
     - name: Upload RPM
       uses: garygrossgarten/github-action-scp@release
       with:
-        local: "Genesis/build/distributions/genesis-${{env.VERSION}}-1.x86_64.rpm"
+        local: "Genesis/build/jpackage/genesis-${{env.VERSION}}-1.x86_64.rpm"
         remote: "/var/www/html/downloads/linux/genesis-${{env.VERSION}}-1.x86_64.rpm"
         host: eden.rpgframework.de
         username: github
@@ -73,7 +73,7 @@ jobs:
     - name: Upload DEB
       uses: garygrossgarten/github-action-scp@release
       with:
-        local: "Genesis/build/distributions/genesis_${{env.VERSION}}-1_amd64.deb"
+        local: "Genesis/build/jpackage/genesis_${{env.VERSION}}-1_amd64.deb"
         remote: "/var/www/html/downloads/linux/genesis_${{env.VERSION}}-1_amd64.deb"
         host: eden.rpgframework.de
         username: github
