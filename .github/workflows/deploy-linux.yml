@@ -60,7 +60,7 @@ jobs:
       run: cd Genesis ;  ./gradlew jpackage -Ddownload.jpackage=true --refresh-dependencies; ls build/jpackage
         
     - name: Set version
-      run: echo "::set-env name=VERSION::$(cat Genesis/version.txt)" ; ls -l build
+      run: echo "::set-env name=VERSION::$(cat Genesis/version.txt)" ; ls -l Genesis/build
 
     - name: Upload RPM
       uses: garygrossgarten/github-action-scp@release
