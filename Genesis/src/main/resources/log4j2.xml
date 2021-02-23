@@ -31,12 +31,16 @@
         <Logger name="splittermond" level="info" />
         <Logger name="shadowrun6" level="info" />
         <Logger name="shadowrun6.items" level="warn" />
-        <Logger name="shadowrun6.proc.qual" level="info" />
-<!--         <Logger name="shadowrun6.lvl" level="debug" /> -->
+        <Logger name="shadowrun6.items.proc" level="info" />
+        <Logger name="shadowrun6.proc" level="info" />
+        <Logger name="shadowrun6.proc.power" level="debug" />
+        <Logger name="shadowrun6.proc.qual" level="debug" />
+        <Logger name="shadowrun6.lvl.spell" level="debug" />
 <!--         <Logger name="shadowrun6.proc" level="debug" /> -->
 <!--         <Logger name="shadowrun6.jfx" level="info" /> -->
         <Logger name="shadowrun6.jfx.items" level="warn" />
-        <Logger name="shadowrun6.gen" level="info" />
+        <Logger name="shadowrun6.gen" level="debug" />
+        <Logger name="shadowrun6.gen.items" level="warn" />
 <!--         <Logger name="shadowrun6.gen.attrib" level="info" /> -->
 <!--         <Logger name="shadowrun6.gen.skill" level="" /> -->
         <!-- Logger name="shadowrun6.items.proc" level="warn" /-->
