@@ -129,7 +129,7 @@ class GenesisConfigurationNode extends StackPane implements ResponsiveControl {
 	//-------------------------------------------------------------------
 	private void initComponents() {
 		cbLanguage = new ChoiceBox<>();
-		cbLanguage.getItems().addAll(Locale.GERMAN, Locale.ENGLISH);
+		cbLanguage.getItems().addAll(Locale.GERMAN, Locale.ENGLISH, Locale.FRENCH);
 		cbLanguage.setConverter(new StringConverter<Locale>() {
 			public String toString(Locale loc) {
 				return RES.getString("language."+loc.getLanguage());

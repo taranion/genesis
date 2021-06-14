@@ -47,7 +47,7 @@ jobs:
       uses: garygrossgarten/github-action-scp@release
       with:
         local: "Genesis/build/distributions/Genesis-${{env.VERSION}}-linux.zip"
-        remote: "/var/www/html/genesis-builds/linux/Genesis-${{env.VERSION}}-linux.zip"
+        remote: "/var/www/html/downloads/linux/Genesis-${{env.VERSION}}-linux.zip"
         host: eden.rpgframework.de
         username: github
         password: ${{ secrets.DEPLOY_PASSWORD }}
