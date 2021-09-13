@@ -1,18 +1,26 @@
 package org.prelle.genesis.page;
 
 import java.io.File;
+import java.nio.file.Paths;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.prefs.Preferences;
 
+import org.prelle.genesis.Genesis5Main;
 import org.prelle.javafx.ResponsiveControl;
 import org.prelle.javafx.WindowMode;
+
+import com.sun.javafx.application.HostServicesDelegate;
 
 import de.rpgframework.ConfigContainer;
 import de.rpgframework.ConfigOption;
 import de.rpgframework.RPGFramework;
 import de.rpgframework.RPGFrameworkLoader;
 import de.rpgframework.ResourceI18N;
+import de.rpgframework.core.CustomDataHandlerLoader;
+import de.rpgframework.core.RoleplayingSystem;
+import javafx.application.Application;
+import javafx.application.HostServices;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -48,6 +56,7 @@ public class BabylonConfigurationNode extends StackPane implements ResponsiveCon
 	private Label lbLanguage;
 	private Label lbDataDir;
 	private Button    btnDatadir;
+	private Button btnOpenChars, btnOpenCustom;
 	private HBox lineDirBt; 
 
 	private Label deGeneral;
@@ -103,8 +112,11 @@ public class BabylonConfigurationNode extends StackPane implements ResponsiveCon
 		tfDataDir  = new TextField();
 		tfDataDir.setStyle("-fx-max-width: 50em");
 		btnDatadir = new Button(ResourceI18N.get(GUICOMMON, "label.select"));
-		System.err.println("btnDatadir = "+btnDatadir.getStyleClass());
 		btnDatadir.getStyleClass().add("bordered");
+		btnOpenChars = new Button(ResourceI18N.get(GUICOMMON, "label.openChars"));
+		btnOpenChars.getStyleClass().add("bordered");
+		btnOpenCustom = new Button(ResourceI18N.get(GUICOMMON, "label.openCustom"));
+		btnOpenCustom.getStyleClass().add("bordered");
 		lineDirBt = new HBox(5, tfDataDir, btnDatadir);
 		lineDirBt.setMaxWidth(Double.MAX_VALUE);
 		HBox.setHgrow(tfDataDir, Priority.ALWAYS);
@@ -144,12 +156,13 @@ public class BabylonConfigurationNode extends StackPane implements ResponsiveCon
 		layoutWide.add(lbDataDir, 0, 4);
 		layoutWide.add(lineDirBt, 1, 4);
 		layoutWide.add(deDataDir, 1, 5);
+		layoutWide.add(new HBox(10,btnOpenChars, btnOpenCustom), 1, 6);
 		GridPane.setMargin(lbDataDir, new Insets(10, 0, 0, 0));
 		GridPane.setMargin(lineDirBt, new Insets(10, 0, 0, 0));
 		GridPane.setHgrow(lineDirBt, Priority.ALWAYS);
 
-		layoutWide.add(cbAskOnStartup, 0, 6, 2,1);
-		layoutWide.add(deAskOnStartup, 1, 7);
+		layoutWide.add(cbAskOnStartup, 0, 7, 2,1);
+		layoutWide.add(deAskOnStartup, 1, 8);
 		GridPane.setMargin(cbAskOnStartup, new Insets(10, 0, 0, 0));
 		
 		getChildren().clear();
@@ -166,6 +179,7 @@ public class BabylonConfigurationNode extends StackPane implements ResponsiveCon
 		layoutSmall.getChildren().addAll(headBabylon, deGeneral);
 		layoutSmall.getChildren().addAll(lbLanguage, cbLanguage, deLanguage);
 		layoutSmall.getChildren().addAll(lbDataDir , lineDirBt , deDataDir);
+		layoutSmall.getChildren().addAll(new HBox(10,btnOpenChars, btnOpenCustom));
 		layoutSmall.getChildren().addAll(cbAskOnStartup, deAskOnStartup);
 		VBox.setMargin(deGeneral, new Insets(10, 0, 0, 0));
 		VBox.setMargin(lbLanguage, new Insets(10, 0, 0, 0));
@@ -197,6 +211,20 @@ public class BabylonConfigurationNode extends StackPane implements ResponsiveCon
 		});
 		tfDataDir.textProperty().addListener( (ov,o,n) -> frameworkPrefs.put(RPGFramework.PROP_DATADIR, n));
 		cbAskOnStartup.selectedProperty().addListener( (ov,o,n) -> optAskOnStartup.set(n));
+		
+		btnOpenChars.setOnAction(ev -> {
+			String path = Paths.get(frameworkPrefs.get(RPGFramework.PROP_DATADIR, null), "player", "myself").toString();
+			Genesis5Main.host.showDocument("file://"+path);
+			
+		});
+		btnOpenCustom.setOnAction(ev -> {
+			try {
+				String path =CustomDataHandlerLoader.getInstance().getCustomDataPath(RoleplayingSystem.SHADOWRUN6).getParent().toString();
+				Genesis5Main.host.showDocument("file://"+path);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
 	}
 	
 	//--------------------------------------------------------------------

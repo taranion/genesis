@@ -87,7 +87,7 @@ public class Genesis5Main extends Application {
 	private ScreenManager manager;
 	private Path installDir;
 	
-	private static HostServices host;
+	public static HostServices host;
 
 	//-------------------------------------------------------------------
 	static {
