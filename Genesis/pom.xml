@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.prelle.rpgframework</groupId>
 		<artifactId>genesis-master</artifactId>
-		<version>6.2.0-SNAPSHOT</version>
+		<version>6.2.1-SNAPSHOT</version>
 	</parent> 
 
 	<artifactId>genesis</artifactId>
@@ -259,25 +259,25 @@
 		<dependency>
 			<groupId>org.prelle.rpgframework</groupId>
 			<artifactId>shadowrun6-core</artifactId>
-			<version>1.1.0-SNAPSHOT</version>
+			<version>1.2.0-SNAPSHOT</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.prelle.rpgframework</groupId>
 			<artifactId>shadowrun6-data</artifactId>
-			<version>1.1.0-SNAPSHOT</version>
+			<version>1.2.0-SNAPSHOT</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.prelle.rpgframework</groupId>
 			<artifactId>shadowrun6-chargen</artifactId>
-			<version>1.1.0-SNAPSHOT</version>
+			<version>1.2.0-SNAPSHOT</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.prelle.rpgframework</groupId>
 			<artifactId>shadowrun6-chargen-jfx</artifactId>
-			<version>1.1.0-SNAPSHOT</version>
+			<version>1.2.0-SNAPSHOT</version>
 			<scope>runtime</scope>
 		</dependency>
         <dependency>
@@ -289,7 +289,7 @@
         <dependency>
             <groupId>org.prelle.rpgframework</groupId>
 			<artifactId>shadowrun6-productdata</artifactId>
-			<version>1.1.0-SNAPSHOT</version>
+			<version>1.6.4</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
@@ -305,7 +305,7 @@
 			<scope>runtime</scope>
 		</dependency>
 
-		<dependency>
+		<!--dependency>
 			<groupId>org.prelle.rpgframework</groupId>
 			<artifactId>yearzeroengine-core</artifactId>
 			<version>3.0.0-SNAPSHOT</version>
@@ -352,7 +352,7 @@
 			<artifactId>coriolis-foundry-json</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<scope>runtime</scope>
-		</dependency>
+		</dependency-->
 
 	</dependencies>
 

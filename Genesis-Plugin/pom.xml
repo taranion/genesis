@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.prelle.rpgframework</groupId>
 		<artifactId>genesis-master</artifactId>
-		<version>6.2.0-SNAPSHOT</version>
+		<version>6.2.1-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>genesis-plugin</artifactId>
@@ -83,27 +83,27 @@
 			<dependency>
 				<groupId>de.rpgframework</groupId>
 				<artifactId>rpgframework-core</artifactId>
-				<version>4.2.0-SNAPSHOT</version>
+				<version>4.2.1-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>de.rpgframework</groupId>
 				<artifactId>rpgframework-chars</artifactId>
-				<version>4.2.0-SNAPSHOT</version>
+				<version>4.2.1-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>de.rpgframework</groupId>
 				<artifactId>rpgframework-products</artifactId>
-				<version>4.2.0-SNAPSHOT</version>
+				<version>4.2.1-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>de.rpgframework</groupId>
 				<artifactId>rpgframework-javafx</artifactId>
-				<version>4.2.0-SNAPSHOT</version>
+				<version>4.2.1-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>de.rpgframework</groupId>
 				<artifactId>rpgframework-print</artifactId>
-				<version>4.2.0-SNAPSHOT</version>
+				<version>4.2.1-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>de.rpgframework</groupId>

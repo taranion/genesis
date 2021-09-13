@@ -1,4 +1,4 @@
-module genesis {
+module Genesis {
 	exports org.prelle.genesis;
 	exports org.prelle.genesis.jfx.common;
 	exports org.prelle.genesis.jobs;
