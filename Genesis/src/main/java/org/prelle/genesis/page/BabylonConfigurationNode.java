@@ -10,8 +10,6 @@ import org.prelle.genesis.Genesis5Main;
 import org.prelle.javafx.ResponsiveControl;
 import org.prelle.javafx.WindowMode;
 
-import com.sun.javafx.application.HostServicesDelegate;
-
 import de.rpgframework.ConfigContainer;
 import de.rpgframework.ConfigOption;
 import de.rpgframework.RPGFramework;
@@ -19,8 +17,6 @@ import de.rpgframework.RPGFrameworkLoader;
 import de.rpgframework.ResourceI18N;
 import de.rpgframework.core.CustomDataHandlerLoader;
 import de.rpgframework.core.RoleplayingSystem;
-import javafx.application.Application;
-import javafx.application.HostServices;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
