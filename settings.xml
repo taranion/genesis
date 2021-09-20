@@ -25,6 +25,10 @@
 			</activation>
 			<repositories>
 				<repository>
+					<id>jfrog</id>
+					<url>https://rpgframework.jfrog.io/artifactory/RPGFramework/</url>
+				</repository>
+				<repository>
 					<id>ossrh</id>
 					<url>https://oss.sonatype.org/content/groups/public</url>
 				</repository>
