@@ -7,7 +7,7 @@
 		<groupId>org.prelle.rpgframework</groupId>
 		<artifactId>genesis-master</artifactId>
 		<version>6.2.1-SNAPSHOT</version>
-	</parent> 
+	</parent>
 
 	<artifactId>genesis</artifactId>
 	<name>Genesis</name>
@@ -115,66 +115,66 @@
 			<artifactId>gson</artifactId>
 		</dependency>
 
-		<dependency>
-			<groupId>org.prelle.rpgframework</groupId>
-			<artifactId>splittermond-core</artifactId>
-			<version>4.2.0-SNAPSHOT</version> 
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.prelle.rpgframework</groupId>
-			<artifactId>splittermond-data</artifactId>
-			<version>4.2.0-SNAPSHOT</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.prelle.rpgframework</groupId>
-			<artifactId>splittermond-chargen</artifactId>
-			<version>4.2.0-SNAPSHOT</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.prelle.rpgframework</groupId>
-			<artifactId>splittermond-chargen-jfx</artifactId>
-			<version>4.2.0-SNAPSHOT</version>
-			<scope>runtime</scope>
-		</dependency>
- 		<dependency>
-			<groupId>org.prelle.rpgframework</groupId>
-			<artifactId>splittermond-print</artifactId>
-			<version>3.2.0-SNAPSHOT</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.prelle.rpgframework</groupId>
-			<artifactId>splittermond-cardprint</artifactId>
-			<version>3.2.0-SNAPSHOT</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.prelle.rpgframework</groupId>
-			<artifactId>splittermond-bbcode</artifactId>
-			<version>4.2.0-SNAPSHOT</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.prelle.rpgframework</groupId>
-			<artifactId>splittermond-productdata</artifactId>
-			<version>4.0.3</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.prelle.rpgframework</groupId>
-			<artifactId>splittermond-json</artifactId>
-			<version>1.2.0-SNAPSHOT</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>de.rpgframework</groupId>
-			<artifactId>splittermond-foundry-export-old</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-			<scope>runtime</scope>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.prelle.rpgframework</groupId> -->
+<!-- 			<artifactId>splittermond-core</artifactId> -->
+<!-- 			<version>4.2.0-SNAPSHOT</version>  -->
+<!-- 			<scope>runtime</scope> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.prelle.rpgframework</groupId> -->
+<!-- 			<artifactId>splittermond-data</artifactId> -->
+<!-- 			<version>4.2.0-SNAPSHOT</version> -->
+<!-- 			<scope>runtime</scope> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.prelle.rpgframework</groupId> -->
+<!-- 			<artifactId>splittermond-chargen</artifactId> -->
+<!-- 			<version>4.2.0-SNAPSHOT</version> -->
+<!-- 			<scope>runtime</scope> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.prelle.rpgframework</groupId> -->
+<!-- 			<artifactId>splittermond-chargen-jfx</artifactId> -->
+<!-- 			<version>4.2.0-SNAPSHOT</version> -->
+<!-- 			<scope>runtime</scope> -->
+<!-- 		</dependency> -->
+<!--  		<dependency> -->
+<!-- 			<groupId>org.prelle.rpgframework</groupId> -->
+<!-- 			<artifactId>splittermond-print</artifactId> -->
+<!-- 			<version>3.2.0-SNAPSHOT</version> -->
+<!-- 			<scope>runtime</scope> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.prelle.rpgframework</groupId> -->
+<!-- 			<artifactId>splittermond-cardprint</artifactId> -->
+<!-- 			<version>3.2.0-SNAPSHOT</version> -->
+<!-- 			<scope>runtime</scope> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.prelle.rpgframework</groupId> -->
+<!-- 			<artifactId>splittermond-bbcode</artifactId> -->
+<!-- 			<version>4.2.0-SNAPSHOT</version> -->
+<!-- 			<scope>runtime</scope> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.prelle.rpgframework</groupId> -->
+<!-- 			<artifactId>splittermond-productdata</artifactId> -->
+<!-- 			<version>4.0.3</version> -->
+<!-- 			<scope>runtime</scope> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.prelle.rpgframework</groupId> -->
+<!-- 			<artifactId>splittermond-json</artifactId> -->
+<!-- 			<version>1.5.0</version> -->
+<!-- 			<scope>runtime</scope> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>de.rpgframework</groupId> -->
+<!-- 			<artifactId>splittermond-foundry-export-old</artifactId> -->
+<!-- 			<version>0.0.1-SNAPSHOT</version> -->
+<!-- 			<scope>runtime</scope> -->
+<!-- 		</dependency> -->
 
 <!-- 		<dependency> -->
 <!-- 			<groupId>org.prelle.rpgframework</groupId> -->
@@ -273,7 +273,7 @@
 			<artifactId>shadowrun6-chargen</artifactId>
 			<version>1.2.0-SNAPSHOT</version>
 			<scope>runtime</scope>
-		</dependency>
+		</dependency> 
 		<dependency>
 			<groupId>org.prelle.rpgframework</groupId>
 			<artifactId>shadowrun6-chargen-jfx</artifactId>
@@ -283,7 +283,7 @@
         <dependency>
             <groupId>org.prelle.rpgframework</groupId>
             <artifactId>shadowrun6-print</artifactId>
-			<version>[1.4.0-SNAPSHOT,1.99)</version>
+			<version>[1.6.4,1.99)</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
@@ -305,54 +305,54 @@
 			<scope>runtime</scope>
 		</dependency>
 
-		<!--dependency>
-			<groupId>org.prelle.rpgframework</groupId>
-			<artifactId>yearzeroengine-core</artifactId>
-			<version>3.0.0-SNAPSHOT</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.prelle.rpgframework</groupId>
-			<artifactId>yearzeroengine-chargen</artifactId>
-			<version>3.0.0-SNAPSHOT</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.prelle.rpgframework</groupId>
-			<artifactId>coriolis-core</artifactId>
-			<version>3.0.0</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.prelle.rpgframework</groupId>
-			<artifactId>coriolis-chargen</artifactId>
-			<version>3.0.0</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.prelle.rpgframework</groupId>
-			<artifactId>coriolis-chargen-jfx</artifactId>
-			<version>3.0.0</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.prelle.rpgframework</groupId>
-			<artifactId>coriolis-productdata</artifactId>
-			<version>3.2.0</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.prelle.rpgframework</groupId>
-			<artifactId>coriolis-print</artifactId>
-			<version>3.0.2</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.prelle.rpgframework</groupId>
-			<artifactId>coriolis-foundry-json</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-			<scope>runtime</scope>
-		</dependency-->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.prelle.rpgframework</groupId> -->
+<!-- 			<artifactId>yearzeroengine-core</artifactId> -->
+<!-- 			<version>3.0.0-SNAPSHOT</version> -->
+<!-- 			<scope>runtime</scope> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.prelle.rpgframework</groupId> -->
+<!-- 			<artifactId>yearzeroengine-chargen</artifactId> -->
+<!-- 			<version>3.0.0-SNAPSHOT</version> -->
+<!-- 			<scope>runtime</scope> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.prelle.rpgframework</groupId> -->
+<!-- 			<artifactId>coriolis-core</artifactId> -->
+<!-- 			<version>3.0.0</version> -->
+<!-- 			<scope>runtime</scope> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.prelle.rpgframework</groupId> -->
+<!-- 			<artifactId>coriolis-chargen</artifactId> -->
+<!-- 			<version>3.0.0</version> -->
+<!-- 			<scope>runtime</scope> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.prelle.rpgframework</groupId> -->
+<!-- 			<artifactId>coriolis-chargen-jfx</artifactId> -->
+<!-- 			<version>3.0.0</version> -->
+<!-- 			<scope>runtime</scope> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.prelle.rpgframework</groupId> -->
+<!-- 			<artifactId>coriolis-productdata</artifactId> -->
+<!-- 			<version>3.2.0</version> -->
+<!-- 			<scope>runtime</scope> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.prelle.rpgframework</groupId> -->
+<!-- 			<artifactId>coriolis-print</artifactId> -->
+<!-- 			<version>3.0.2</version> -->
+<!-- 			<scope>runtime</scope> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.prelle.rpgframework</groupId> -->
+<!-- 			<artifactId>coriolis-foundry-json</artifactId> -->
+<!-- 			<version>0.0.1-SNAPSHOT</version> -->
+<!-- 			<scope>runtime</scope> -->
+<!-- 		</dependency> -->
 
 	</dependencies>
 
