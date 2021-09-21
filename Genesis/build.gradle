@@ -1,7 +1,7 @@
 plugins {
     id 'application'
     id 'eclipse'
-    id 'org.openjfx.javafxplugin' version '0.0.9'
+    id 'org.openjfx.javafxplugin' version '0.0.10'
     id 'org.beryx.jlink' version '2.21.0'
     id "de.undercouch.download" version "4.0.0"
 }
@@ -26,7 +26,7 @@ repositories {
 dependencies {
     implementation "org.apache.logging.log4j:log4j-api:2.14.1"
     implementation "org.apache.logging.log4j:log4j-core:2.14.1"
-    implementation "org.prelle:javafx-extensions:4.2.0-SNAPSHOT"
+    implementation "org.prelle:javafx-extensions:4.3.0"
     implementation "de.rpgframework:rpgframework-core:4.2.1-SNAPSHOT"
     implementation "de.rpgframework:rpgframework-chars:4.2.1-SNAPSHOT"
     implementation "de.rpgframework:rpgframework-javafx:4.2.1-SNAPSHOT"
@@ -37,13 +37,13 @@ dependencies {
     runtimeOnly "org.prelle.rpgframework:babylon-licensecheck:3.1.0-SNAPSHOT"
     runtimeOnly "de.rpgframework:itextpdf:4.2.0"
     runtimeOnly "org.apache.pdfbox:pdfbox:2.0.21"
-    runtimeOnly "org.apache.pdfbox:fontbox:2.0.21"
+    runtimeOnly "org.apache.pdfbox:fontbox:2.0.2"
     runtimeOnly "commons-logging:commons-logging:1.2" 
     runtimeOnly "com.google.code.gson:gson:2.8.6"
 }
 
 javafx {
-    version = '14.0.2.1'
+    version = '17.0.0.1'
     modules = ['javafx.controls', 'javafx.media', 'javafx.web', 'javafx.fxml']
 }
 

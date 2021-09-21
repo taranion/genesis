@@ -283,7 +283,7 @@
         <dependency>
             <groupId>org.prelle.rpgframework</groupId>
             <artifactId>shadowrun6-print</artifactId>
-			<version>[1.6.4,1.99)</version>
+			<version>[1.7.0,1.99)</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
