@@ -97,8 +97,6 @@ class PDFPrintElementListCell extends ListCell<PDFPrintElement> {
 
 	//--------------------------------------------------------------------
 	public void dragStarted(MouseEvent event) {
-		logger.debug("drag");
-
 		Node source = (Node) event.getSource();
 
 		/* drag was detected, start a drag-and-drop gesture*/
