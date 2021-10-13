@@ -30,6 +30,7 @@ import de.rpgframework.print.TemplateController;
 import de.rpgframework.print.TemplateFactory;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -178,23 +179,39 @@ public class PrintTemplateEditorScreen extends ManagedDialog {
 
 	//--------------------------------------------------------------------
 	private void initInteractivity() {
-		sceneProperty().addListener( (ov2,o2,n2) -> {
-			getScene().heightProperty().addListener( (ov,o,n) -> {
-				logger.info("    lgPage size is "+lgPage.getWidth()+"x"+lgPage.getHeight());
-				logger.info("    scroll size is "+scroll.getWidth()+"x"+scroll.getHeight());
-				float scale = (float)(scroll.getHeight()/(PrintTemplateConstants.PAGE_HEIGHT));
-				if (scale<0.03) scale=0.5f;
-				logger.info("Scale is "+scale+"   page size is "+lgPage.getWidth()+"x"+lgPage.getHeight());
-				logger.info("    pref size is "+lgPage.getPrefWidth()+"x"+lgPage.getPrefHeight());
-
-				scroll.setContent(new Label("Hallo"));
-				lgPage.setScaleX(scale);
-				lgPage.setScaleY(scale);
-				scroll.setContent(lgPage);
-				scroll.autosize();
-				this.updateBounds();
-			});			
-		});
+//		sceneProperty().addListener( (ov2,o2,n2) -> {
+//			getScene().heightProperty().addListener( (ov,o,n) -> {
+//				logger.info("    lgPage size is "+lgPage.getWidth()+"x"+lgPage.getHeight());
+//				logger.info("    scroll size is "+scroll.getWidth()+"x"+scroll.getHeight());
+//				float scale = (float)(scroll.getHeight()/(PrintTemplateConstants.PAGE_HEIGHT));
+//				if (scale<0.03) scale=0.5f;
+//				logger.info("Scale is "+scale+"   page size is "+lgPage.getWidth()+"x"+lgPage.getHeight());
+//				logger.info("    pref size is "+lgPage.getPrefWidth()+"x"+lgPage.getPrefHeight());
+//
+//				scroll.setContent(new Label("Hallo"));
+//				lgPage.setScaleX(scale);
+//				lgPage.setScaleY(scale);
+//				scroll.setContent(lgPage);
+//				scroll.autosize();
+//				this.updateBounds();
+//			});	
+//			getScene().widthProperty().addListener( (ov,o,n) -> {
+//				logger.info("    lgPage size is "+lgPage.getWidth()+"x"+lgPage.getHeight());
+//				logger.info("    scroll size is "+scroll.getWidth()+"x"+scroll.getHeight());
+//				float scale = (float)(scroll.getWidth()/(PrintTemplateConstants.PAGE_WIDTH));
+//				if (scale<0.03) scale=0.5f;
+//				logger.info("Scale is "+scale+"   page size is "+lgPage.getWidth()+"x"+lgPage.getHeight());
+//				logger.info("    pref size is "+lgPage.getPrefWidth()+"x"+lgPage.getPrefHeight());
+//				lgPage.setScaleX(scale);
+//				lgPage.setScaleY(scale);
+//				scroll.setContent(lgPage);
+//				scroll.autosize();
+//				this.updateBounds();
+//			});
+//		});
+		
+		scroll.viewportBoundsProperty().addListener( (ov,o,n) -> scrollPaneResized());
+//		scroll.heightProperty().addListener( (ov,o,n) -> scrollPaneResized());
 
 		btnDel.setOnAction(ev -> {
 			CloseType result = getScreenManager().showAlertAndCall(
@@ -262,6 +279,25 @@ public class PrintTemplateEditorScreen extends ManagedDialog {
 			}
 		});
 	}
+
+	//--------------------------------------------------------------------
+	private void scrollPaneResized() {
+//		logger.info("Scrollpane resized to "+scroll.getWidth()+"x"+scroll.getHeight());
+		logger.info("Scrollpane viewport resized to "+scroll.getViewportBounds().getWidth()+"x"+scroll.getViewportBounds().getHeight());
+		float scale = (float)(scroll.getViewportBounds().getWidth()/lgPage.getWidth());
+		if (scale<0.03) scale=0.5f;
+		logger.info("Scale is "+scale+"   page size is "+lgPage.getWidth()+"x"+lgPage.getHeight());
+//		logger.info("    pref size is "+lgPage.getPrefWidth()+"x"+lgPage.getPrefHeight());
+		Group grp = new Group(lgPage);
+		lgPage.setScaleX(scale);
+		lgPage.setScaleY(scale);
+		scroll.setContent(grp);
+//		scroll.autosize();
+//		scroll.setVvalue(0.5);
+//		scroll.setHvalue(0.5);
+		this.updateBounds();
+	}
+
 
 	//--------------------------------------------------------------------
 	public PrintTemplate getTemplate() {
