@@ -97,22 +97,22 @@ jlink {
     options = ['--compress', '2', '--no-header-files', '--no-man-pages']
     launcher {
         name = "${appLauncher}"
-        jvmArgs = ["-Dapplication.version=$version","-Dprofile=release"]
+        jvmArgs = ["-Dapplication.version=$version","-Dprofile=release","-Djdk.gtk.version=2"]
     }
 	secondaryLauncher {
         name = 'Genesis-HiDPI'
         mainClass = "org.prelle.genesis.Genesis5Main"
-        jvmArgs = ["-Dapplication.version=$version","-Dglass.win.uiScale=112dpi","-Dprofile=release"]
+        jvmArgs = ["-Dapplication.version=$version","-Dglass.win.uiScale=112dpi","-Dprofile=release","-Djdk.gtk.version=2"]
     }
 	secondaryLauncher {
         name = 'Genesis-Staging'
         mainClass = "org.prelle.genesis.Genesis5Main"
-        jvmArgs = ["-Dapplication.version=$version","-Dprofile=staging"]
+        jvmArgs = ["-Dapplication.version=$version","-Dprofile=staging","-Djdk.gtk.version=2"]
     }
 	secondaryLauncher {
         name = 'Genesis-Staging-HiDPI'
         mainClass = "org.prelle.genesis.Genesis5Main"
-        jvmArgs = ["-Dapplication.version=$version","-Dglass.win.uiScale=112dpi","-Dprofile=staging"]
+        jvmArgs = ["-Dapplication.version=$version","-Dglass.win.uiScale=112dpi","-Dprofile=staging","-Djdk.gtk.version=2"]
     }
     forceMerge('log4j-api','itextpdf','org.apache.pdfbox','gson','babylon.license')
     jpackage {
