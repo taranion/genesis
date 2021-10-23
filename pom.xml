@@ -102,7 +102,7 @@
 			<dependency>
 				<groupId>org.prelle</groupId>
 				<artifactId>javafx-extensions</artifactId>
-				<version>[4.4.0,4.99)</version>
+				<version>[4.4.1,4.99)</version>
 			</dependency>
 			<dependency>
 				<groupId>org.prelle</groupId>
