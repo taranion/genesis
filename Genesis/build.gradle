@@ -26,7 +26,7 @@ repositories {
 dependencies {
     implementation "org.apache.logging.log4j:log4j-api:2.14.1"
     implementation "org.apache.logging.log4j:log4j-core:2.14.1"
-    implementation "org.prelle:javafx-extensions:4.4.0"
+    implementation "org.prelle:javafx-extensions:4.4.1"
     implementation "de.rpgframework:rpgframework-core:4.2.1-SNAPSHOT"
     implementation "de.rpgframework:rpgframework-chars:4.2.1-SNAPSHOT"
     implementation "de.rpgframework:rpgframework-javafx:4.2.1-SNAPSHOT"
@@ -102,7 +102,7 @@ jlink {
 	secondaryLauncher {
         name = 'Genesis-HiDPI'
         mainClass = "org.prelle.genesis.Genesis5Main"
-        jvmArgs = ["-Dapplication.version=$version","-Dglass.win.uiScale=112dpi","-Dprofile=release","-Djdk.gtk.version=2"]
+        jvmArgs = ["-Dapplication.version=$version","-Dglass.win.uiScale=130dpi","-Dprofile=release","-Djdk.gtk.version=2"]
     }
 	secondaryLauncher {
         name = 'Genesis-Staging'
@@ -112,7 +112,7 @@ jlink {
 	secondaryLauncher {
         name = 'Genesis-Staging-HiDPI'
         mainClass = "org.prelle.genesis.Genesis5Main"
-        jvmArgs = ["-Dapplication.version=$version","-Dglass.win.uiScale=112dpi","-Dprofile=staging","-Djdk.gtk.version=2"]
+        jvmArgs = ["-Dapplication.version=$version","-Dglass.win.uiScale=130dpi","-Dprofile=staging","-Djdk.gtk.version=2"]
     }
     forceMerge('log4j-api','itextpdf','org.apache.pdfbox','gson','babylon.license')
     jpackage {
