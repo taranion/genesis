@@ -36,10 +36,10 @@ dependencies {
     runtimeOnly "com.sun.mail:javax.mail:1.6.0"
     runtimeOnly "org.prelle.rpgframework:babylon-licensecheck:3.1.0-SNAPSHOT"
     runtimeOnly "de.rpgframework:itextpdf:4.2.0"
-    runtimeOnly "org.apache.pdfbox:pdfbox:2.0.21"
-    runtimeOnly "org.apache.pdfbox:fontbox:2.0.2"
+    runtimeOnly "org.apache.pdfbox:pdfbox:2.0.22"
+    runtimeOnly "org.apache.pdfbox:fontbox:2.0.22"
     runtimeOnly "commons-logging:commons-logging:1.2" 
-    runtimeOnly "com.google.code.gson:gson:2.8.6"
+    runtimeOnly "com.google.code.gson:gson:2.8.9"
 }
 
 javafx {
