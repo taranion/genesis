@@ -2,6 +2,7 @@ package org.prelle.genesis.page;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
@@ -132,8 +133,12 @@ class LicenseCell extends ListCell<License> {
 				stateText = ResourceI18N.get(RES,"label.license.validUntil")+" "+FORMAT.format(new Date(item.getUntil()));
 			else
 				stateText = ResourceI18N.get(RES,"label.license.validSince")+" "+FORMAT.format(new Date(item.getFrom()));
-			if (!valid)
-				stateText = ResourceI18N.get(RES,"label.license.invalid");
+			if (!valid) {
+				if (item.getLanguage().equals(Locale.getDefault().getLanguage()))
+					stateText = ResourceI18N.get(RES,"label.license.invalid");
+				else
+					stateText = ResourceI18N.get(RES,"label.license.invalidLanguage");
+			}
 
 			String flag = null;
 			if ("de".equals(item.getLanguage()) || item.getLanguage()==null) {
