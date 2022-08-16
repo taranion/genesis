@@ -1,6 +1,11 @@
 package org.prelle.genesis.page;
 
 import java.io.File;
+import java.io.IOException;
+import java.lang.System.Logger.Level;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -12,7 +17,9 @@ import org.prelle.javafx.WindowMode;
 
 import de.rpgframework.ConfigContainer;
 import de.rpgframework.ConfigOption;
+import de.rpgframework.ExitCodes;
 import de.rpgframework.RPGFramework;
+import de.rpgframework.RPGFrameworkConstants;
 import de.rpgframework.RPGFrameworkLoader;
 import de.rpgframework.ResourceI18N;
 import de.rpgframework.core.CustomDataHandlerLoader;
@@ -47,17 +54,19 @@ public class BabylonConfigurationNode extends StackPane implements ResponsiveCon
 	
 	private ChoiceBox<Locale> cbLanguage;
 	private TextField tfDataDir;
+	private TextField tfPluginDir;
 	private CheckBox  cbAskOnStartup;
 	
 	private Label lbLanguage;
-	private Label lbDataDir;
+	private Label lbDataDir, lbPluginDir;
 	private Button    btnDatadir;
 	private Button btnOpenChars, btnOpenCustom;
-	private HBox lineDirBt; 
+	private Button btnClearPlugins;
+	private HBox lineDirBt, lineDirBt2; 
 
 	private Label deGeneral;
 	private Label deLanguage;
-	private Label deDataDir;
+	private Label deDataDir, dePluginDir;
 	private Label deAskOnStartup;
 	
 	private VBox layoutSmall;
@@ -120,6 +129,25 @@ public class BabylonConfigurationNode extends StackPane implements ResponsiveCon
 		lbDataDir.getStyleClass().add("base");
 		deDataDir  = new Label(ResourceI18N.get(GUICOMMON, "configdesc.babylon.dataDir"));
 		
+		/*
+		 * Plugin Dir
+		 */
+		tfPluginDir  = new TextField();
+		tfPluginDir.setStyle("-fx-max-width: 40em");
+		tfPluginDir.setEditable(false);
+		btnClearPlugins = new Button(ResourceI18N.get(GUICOMMON, "button.clearPlugins"));
+		btnClearPlugins.getStyleClass().add("bordered");
+//		btnOpenChars = new Button(ResourceI18N.get(GUICOMMON, "label.openChars"));
+//		btnOpenChars.getStyleClass().add("bordered");
+//		btnOpenCustom = new Button(ResourceI18N.get(GUICOMMON, "label.openCustom"));
+//		btnOpenCustom.getStyleClass().add("bordered");
+		lineDirBt2 = new HBox(5, tfPluginDir, btnClearPlugins);
+		lineDirBt2.setMaxWidth(Double.MAX_VALUE);
+		HBox.setHgrow(tfPluginDir, Priority.ALWAYS);
+		lbPluginDir  = new Label(ResourceI18N.get(GUICOMMON, "label.pluginDir"));
+		lbPluginDir.getStyleClass().add("base");
+		dePluginDir  = new Label(ResourceI18N.get(GUICOMMON, "configdesc.babylon.pluginDir"));
+		
 		/**
 		 * Ask (for rules) on startup?
 		 */
@@ -156,9 +184,17 @@ public class BabylonConfigurationNode extends StackPane implements ResponsiveCon
 		GridPane.setMargin(lbDataDir, new Insets(10, 0, 0, 0));
 		GridPane.setMargin(lineDirBt, new Insets(10, 0, 0, 0));
 		GridPane.setHgrow(lineDirBt, Priority.ALWAYS);
+		
+		layoutWide.add(lbPluginDir, 0, 7);
+		layoutWide.add(lineDirBt2 , 1, 7);
+		layoutWide.add(dePluginDir, 1, 8);
+//		layoutWide.add(new HBox(10,btnOpenChars, btnOpenCustom), 1, 9);
+		GridPane.setMargin(lbPluginDir, new Insets(10, 0, 0, 0));
+//		GridPane.setMargin(lineDirBt, new Insets(10, 0, 0, 0));
+//		GridPane.setHgrow(lineDirBt, Priority.ALWAYS);
 
-		layoutWide.add(cbAskOnStartup, 0, 7, 2,1);
-		layoutWide.add(deAskOnStartup, 1, 8);
+		layoutWide.add(cbAskOnStartup, 0, 10, 2,1);
+		layoutWide.add(deAskOnStartup, 1, 11);
 		GridPane.setMargin(cbAskOnStartup, new Insets(10, 0, 0, 0));
 		
 		getChildren().clear();
@@ -206,6 +242,25 @@ public class BabylonConfigurationNode extends StackPane implements ResponsiveCon
 			 }
 		});
 		tfDataDir.textProperty().addListener( (ov,o,n) -> frameworkPrefs.put(RPGFramework.PROP_DATADIR, n));
+		
+		btnClearPlugins.setOnAction(event -> {
+			Path dir = getInstallationDirectory();
+			try {
+				DirectoryStream<Path> stream = Files.newDirectoryStream(dir, new DirectoryStream.Filter<Path>() {
+					public boolean accept(Path entry) {
+						return entry.toString().toLowerCase().endsWith(".jar");
+					}
+				});
+				stream.forEach(file -> {
+					try { Files.delete(file); } catch (IOException e) {
+						System.getLogger("babylon").log(Level.ERROR, "Failed deleting {0}: {1}", file, e.toString());
+					}
+				});
+			} catch (IOException e) {
+				System.getLogger("babylon").log(Level.ERROR, "Failed getting directory stream",e);
+			}
+		});
+		
 		cbAskOnStartup.selectedProperty().addListener( (ov,o,n) -> optAskOnStartup.set(n));
 		
 		btnOpenChars.setOnAction(ev -> {
@@ -227,7 +282,19 @@ public class BabylonConfigurationNode extends StackPane implements ResponsiveCon
 	private void setData() {
 		cbLanguage.setValue((Locale)optLanguage.getValue());
 		tfDataDir.setText(optDataDir.getStringValue());
+		tfPluginDir.setText(getInstallationDirectory().toString());
+		btnClearPlugins.setDisable(!Files.exists(getInstallationDirectory()));
 		cbAskOnStartup.selectedProperty().set((boolean) optAskOnStartup.getValue());
+	}
+	
+	//-------------------------------------------------------------------
+	private Path getInstallationDirectory() {
+		if (System.getProperty(RPGFrameworkConstants.PROPERTY_INSTALLATION_DIRECTORY)==null) {
+			//logger.fatal("System Property '"+RPGFrameworkConstants.PROPERTY_INSTALLATION_DIRECTORY+"' not set by main application");
+			System.exit(ExitCodes.ERROR_INIT_PHASE);
+		}
+		
+		return Paths.get(System.getProperty(RPGFrameworkConstants.PROPERTY_INSTALLATION_DIRECTORY)).resolve("plugins");
 	}
 
 	//-------------------------------------------------------------------

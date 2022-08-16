@@ -33,7 +33,10 @@
         <Logger name="shadowrun6.items" level="warn" />
         <Logger name="shadowrun6.items.proc" level="warn" />
         <Logger name="shadowrun6.proc" level="info" />
+        <Logger name="shadowrun6.proc.power" level="debug" />
         <Logger name="shadowrun6.jfx.items" level="info" />
+        <Logger name="shadowrun6.jfx" level="debug" />
+        <Logger name="shadowrun6.jfx.focus" level="debug" />
         <Logger name="shadowrun6.gen" level="info" />
 <!--         <Logger name="shadowrun6.gen.attrib" level="info" /> -->
 <!--         <Logger name="shadowrun6.gen.skill" level="" /> -->
