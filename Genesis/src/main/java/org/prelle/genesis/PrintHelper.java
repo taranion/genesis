@@ -470,7 +470,12 @@ public class PrintHelper {
 				grid.add(choice, 1,i);
 				break;
 			case DIRECTORY:
-				Path oldPath = Paths.get(String.valueOf(option.getValue()));
+				Path oldPath = Paths.get(System.getProperty("user.home"));
+				try {
+					oldPath = Paths.get(String.valueOf(option.getValue()));
+				} catch (Exception e1) {
+					logger.warn("Non-parseable path for output directory: "+option.getValue());
+				}
 				if (!Files.exists(oldPath)) {
 					String newVal = System.getProperties().getProperty("user.home");
 					logger.warn("Correct invalid path "+oldPath+" to "+newVal);
