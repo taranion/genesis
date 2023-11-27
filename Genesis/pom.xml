@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.prelle.rpgframework</groupId>
 		<artifactId>genesis-master</artifactId>
-		<version>6.2.2-SNAPSHOT</version>
+		<version>6.3.0-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>genesis</artifactId>
@@ -33,8 +33,8 @@
 					<include>packages/*</include>
 				</includes>
 			</resource>
-		</resources> 
-		
+		</resources>
+
 		<plugins>
 		<plugin>
   <groupId>org.codehaus.mojo</groupId>
@@ -44,7 +44,7 @@
     <mainClass>org.prelle.genesis.GenesisLauncherNoJFX</mainClass>
   </configuration>
 </plugin>
-		
+
 		</plugins>
 	</build>
 
@@ -78,7 +78,7 @@
 			<groupId>de.rpgframework</groupId>
 			<artifactId>rpgframework-print</artifactId>
 		</dependency>
-		<dependency> 
+		<dependency>
 			<groupId>de.rpgframework</groupId>
 			<artifactId>rpgframework-javafx</artifactId>
 		</dependency>
@@ -130,7 +130,7 @@
 		<dependency>
 			<groupId>org.prelle.rpgframework</groupId>
 			<artifactId>splittermond-core</artifactId>
-			<version>4.2.0-SNAPSHOT</version> 
+			<version>4.2.0-SNAPSHOT</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
@@ -285,7 +285,7 @@
 			<artifactId>shadowrun6-chargen</artifactId>
 			<version>1.2.0-SNAPSHOT</version>
 			<scope>runtime</scope>
-		</dependency> 
+		</dependency>
 		<dependency>
 			<groupId>org.prelle.rpgframework</groupId>
 			<artifactId>shadowrun6-chargen-jfx</artifactId>
