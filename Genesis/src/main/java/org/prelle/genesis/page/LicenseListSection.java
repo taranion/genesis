@@ -134,7 +134,9 @@ class LicenseCell extends ListCell<License> {
 			else
 				stateText = ResourceI18N.get(RES,"label.license.validSince")+" "+FORMAT.format(new Date(item.getFrom()));
 			if (!valid) {
-				if (item.getLanguage().equals(Locale.getDefault().getLanguage()))
+				if (item.getLanguage()==null)
+					stateText = ResourceI18N.get(RES,"label.license.invalidNoLanguage");
+				else if (item.getLanguage().equals(Locale.getDefault().getLanguage()))
 					stateText = ResourceI18N.get(RES,"label.license.invalid");
 				else
 					stateText = ResourceI18N.get(RES,"label.license.invalidLanguage");
