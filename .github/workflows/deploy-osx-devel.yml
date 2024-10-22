@@ -1,7 +1,5 @@
 name: Deploy to Mac OS Devel
 on: [push]
-env:
-  ACTIONS_ALLOW_UNSECURE_COMMANDS: true
 
 jobs:
   deploy:
@@ -13,6 +11,7 @@ jobs:
       uses: actions/setup-java@v4
       with:
         java-version: 14
+        distribution: temurin
         
     - name: Set version
       run: echo "::set-env name=VERSION::$(cat Genesis/version.txt)"

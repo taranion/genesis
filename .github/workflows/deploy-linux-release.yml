@@ -16,6 +16,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: 14
+          distribution: temurin
       - name: Build project # This would actually build your project, using zip for an example artifact
         run: cd Genesis ;  ./gradlew jpackage -Ddownload.jpackage=true; ls build/jpackage
       - name: Create Release
