@@ -42,6 +42,8 @@ jobs:
         
     - name: Set version
       run: echo "::set-env name=VERSION::$(cat Genesis/version.txt)"
+      env: 
+        ACTIONS_ALLOW_UNSECURE_COMMANDS: "true"
 
     - name: Upload ZIP 
       uses: garygrossgarten/github-action-scp@release
