@@ -25,14 +25,14 @@ repositories {
 }
 
 dependencies {
-    implementation "org.apache.logging.log4j:log4j-api:2.19.0"
-    implementation "org.apache.logging.log4j:log4j-core:2.19.0"
+    implementation "org.apache.logging.log4j:log4j-api:2.17.2"
+    implementation "org.apache.logging.log4j:log4j-core:2.17.2"
     implementation "org.prelle:javafx-extensions:4.4.2"
-    implementation "de.rpgframework:rpgframework-core:4.2.1-SNAPSHOT"
-    implementation "de.rpgframework:rpgframework-chars:4.2.1-SNAPSHOT"
-    implementation "de.rpgframework:rpgframework-javafx:4.2.1-SNAPSHOT"
-    implementation "de.rpgframework:rpgframework-print:4.2.1-SNAPSHOT"
-    implementation "de.rpgframework:rpgframework-products:4.2.1-SNAPSHOT"
+    implementation "de.rpgframework:rpgframework-core:4.2.2-SNAPSHOT"
+    implementation "de.rpgframework:rpgframework-chars:4.2.2-SNAPSHOT"
+    implementation "de.rpgframework:rpgframework-javafx:4.2.2-SNAPSHOT"
+    implementation "de.rpgframework:rpgframework-print:4.2.2-SNAPSHOT"
+    implementation "de.rpgframework:rpgframework-products:4.2.2-SNAPSHOT"
     runtimeOnly "org.prelle:simple-persist:3.3.0"
     runtimeOnly "com.sun.mail:javax.mail:1.6.0"
     runtimeOnly "org.prelle.rpgframework:babylon-licensecheck:3.2.1-SNAPSHOT"
@@ -41,6 +41,7 @@ dependencies {
     runtimeOnly "org.apache.pdfbox:fontbox:2.0.22"
     runtimeOnly "commons-logging:commons-logging:1.2" 
     runtimeOnly "com.google.code.gson:gson:2.8.9"
+    runtimeOnly "javax.annotation:javax.annotation-api:1.3.2"
 }
 
 javafx {
@@ -72,6 +73,7 @@ jar {
 ext.os = org.gradle.internal.os.OperatingSystem.current()
 
 application {
+    mainModule = "Genesis"
     executableDir = ""
     applicationDefaultJvmArgs = [ "-Dprism.allowhidpi=false",
                                   "-Dglass.win.uiScale=96dpi"]
@@ -177,49 +179,6 @@ jlink {
             "--name", "Genesis"
         ]
     }
-}
-
-
-// #### The code below is needed only if you use the downloadJPackage() method to install the jpackage tool ####
-
-/** @return  [url, extension, directory] */
-String[] getJPackageCoordinates() {
-    if(os.macOsX) return [
-        'https://download.oracle.com/otn/java/jdk/14.0.2+12/205943a0976c4ed48cb16f1043c5c647/jdk-14.0.2_osx-x64_bin.tar.gz',
-        'tar.gz',
-        'jdk-14.jdk/Contents/Home'
-    ]
-    if(os.windows) return [
-        'https://download.oracle.com/otn/java/jdk/14.0.2+12/205943a0976c4ed48cb16f1043c5c647/jdk-14.0.2_windows-x64_bin.zip',
-        'zip',
-        'jdk-14'
-    ]
-    return [
-        'https://download.oracle.com/otn/java/jdk/14.0.2+12/205943a0976c4ed48cb16f1043c5c647/jdk-14.0.2_linux-x64_bin.tar.gz',
-        'tar.gz',
-        'jdk-14'
-    ]
-}
-
-String downloadJPackage() {
-    def (url, extension, directory) = getJPackageCoordinates()
-    def downloadDir = "$buildDir/download"
-    tasks.jpackageImage.doFirst {
-        def execExt = os.windows ? '.exe' : ''
-        if(!file("$downloadDir/$directory/bin/jpackage$execExt").file) {
-            def jdkArchivePath = "$downloadDir/jdk-jpackage.$extension"
-            download {
-                src url
-                dest jdkArchivePath
-                overwrite false
-            }
-            copy {
-                from ((extension == 'tar.gz') ? tarTree(resources.gzip(jdkArchivePath)) : zipTree(jdkArchivePath))
-                into downloadDir
-            }
-        }
-    }
-    return "$downloadDir/$directory"
 }
 
 eclipse {

@@ -310,12 +310,12 @@
 			<version>3.1.0</version>
             <scope>runtime</scope>
         </dependency>
-		<dependency>
+		<!--<dependency>
 			<groupId>de.rpgframework</groupId>
 			<artifactId>shadowrun6-foundry-export-old</artifactId>
 			<version>0.7.1</version>
 			<scope>runtime</scope>
-		</dependency>
+		</dependency>-->
 
  		<dependency>
  			<groupId>org.prelle.rpgframework</groupId>

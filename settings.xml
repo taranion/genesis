@@ -24,21 +24,16 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<repositories>
-				<repository>
-					<id>jfrog</id>
-					<url>https://rpgframework.jfrog.io/artifactory/RPGFramework/</url>
-				</repository>
-				<repository>
-					<id>ossrh</id>
-					<url>https://oss.sonatype.org/content/groups/public</url>
-				</repository>
-<!-- 				<repository> -->
-<!-- 					<id>google</id> -->
-<!-- 					<name>Maven Packages at Google Cloud</name> -->
-<!-- 					<url>https://rpgframework-maven-repository.appspot.com/</url> -->
-<!-- 					<releases><enabled>true</enabled></releases> -->
-<!-- 					<snapshots><enabled>true</enabled></snapshots> -->
-<!-- 				</repository> -->
+			<repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
 			</repositories>
 		</profile>
 	</profiles>
